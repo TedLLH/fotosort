@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +12,12 @@ export class AppComponent implements OnInit{
 
   constructor(){
     firebase.initializeApp({
-            apiKey: process.env.APIKEY,
-            authDomain: process.env.AUTHDOMAIN,
-            databaseURL: process.env.DATABASEURL,
-            projectId: process.env.PROJECTID,
-            storageBucket: process.env.STORAGEBUCKET,
-            messagingSenderId: process.env.MESSAGINGSENDERID
+            apiKey: environment.APIKEY,
+            authDomain: environment.AUTHDOMAIN,
+            databaseURL: environment.DATABASEURL,
+            projectId: environment.PROJECTID,
+            storageBucket: environment.STORAGEBUCKET,
+            messagingSenderId: environment.MESSAGINGSENDERID
         });
   }
 

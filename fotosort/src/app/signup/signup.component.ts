@@ -17,7 +17,6 @@ export class SignupComponent implements OnInit {
 
   signUp(){
     this.tokenService.onSignUp();
-    this.router.navigateByUrl('/login')
   };
 
 }

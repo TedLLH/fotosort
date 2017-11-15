@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PhotosService } from '../photos.service'
+import { PhotosService } from '../photos.service';
+import { Http, HttpModule } from '@angular/http';
+import { TokenService } from '../token.service'
 
 @Component({
   selector: 'app-login',
@@ -8,9 +10,12 @@ import { PhotosService } from '../photos.service'
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private photosService:PhotosService) { }
+  token:string;
+
+  constructor(private photosService:PhotosService, private http:Http, private tokenService:TokenService) { }
 
   ngOnInit() {
+    
   }
 
   getPhoto(){

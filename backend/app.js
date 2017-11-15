@@ -5,7 +5,7 @@ const app = express();
 const bodyParser = require("body-parser");  
 
 app.post('/user/login',(req,res)=>{
-    console.log(req);
+    console.log(req );
     // res.json({"key":"Hello World!"});
 });
 

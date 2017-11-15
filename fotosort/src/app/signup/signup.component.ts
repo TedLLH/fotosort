@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import * as firebase from 'firebase';
+import { ActivatedRoute, Router, Params, RouterModule, Routes } from "@angular/router";
+import { TokenService } from '../token.service'
 
 @Component({
   selector: 'app-signup',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignupComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router, private tokenService:TokenService) { }
 
   ngOnInit() {
   }
+
+  signUp(){
+    this.tokenService.onSignUp();
+    this.router.navigateByUrl('/login')
+  };
 
 }

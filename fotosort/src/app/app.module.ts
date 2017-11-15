@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { Http, HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { PhotosService } from './photos.service';
@@ -36,9 +37,10 @@ import { AppRoutingModule } from './app-routing.module'
     }), 
     AngularFireDatabaseModule, 
     AngularFireAuthModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpModule
   ],
-  providers: [PhotosService, TokenService],
+  providers: [PhotosService, TokenService, HttpModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,9 +2,11 @@ const express = require('express');
 const reload = require('reload');
 const watch = require('watch');
 const app = express();
+const bodyParser = require("body-parser");  
 
-app.get('/login',(req,res)=>{
-    res.json({"key":"Hello World!"});
+app.post('/user/login',(req,res)=>{
+    console.log(req);
+    // res.json({"key":"Hello World!"});
 });
 
 reloadServer = reload(app);

@@ -334,7 +334,10 @@ var LoginComponent = (function () {
     LoginComponent.prototype.ngOnInit = function () {
     };
     LoginComponent.prototype.getPhoto = function () {
-        this.photosService.onGetPhoto();
+        this.token = localStorage.getItem('token');
+        console.log(this.token);
+        this.http.get('https://picasaweb.google.com/data/feed/api/user/userID', this.token).subscribe(function (res) { console.log(res); }, function (err) { });
+        // this.photosService.onGetPhoto();
     };
     return LoginComponent;
 }());
@@ -572,23 +575,27 @@ var TokenService = (function () {
             .then(function (result) {
             // This gives you a Google Access Token.
             var token = result.credential.accessToken;
+            localStorage.clear();
             localStorage.setItem('token', JSON.stringify(token));
             // The signed-in user info.
             var user = result.user;
             // This checks the token
             // console.log(token)
             // console.log(this.photosService.token);
+            // }).then(()=>{
+            //     this.token = (localStorage.getItem('token'));
+            //     // console.log(this.token);
+            //     this.http.post('/user/login', JSON.parse(this.token)).subscribe((res)=>{
+            //       console.log(this.token);
+            //       // console.log(res.json())
+            //     },(err)=>{
+            //           alert("You are not logged in. Dude!");
+            //     });
         }).then(function () {
-            // this.router.navigate(['/login'])
-            _this.token = JSON.parse(localStorage.getItem('token'));
-            _this.http.post('/user/login', _this.token).subscribe(function (res) {
-                _this.router.navigate(['/login']);
-            }, function (err) {
-                alert("You are not logged in. Dude!");
-            });
-            ;
+            _this.router.navigateByUrl('/login');
         }).catch(function (err) {
             console.log(err);
+            _this.router.navigateByUrl('');
         });
     };
     return TokenService;

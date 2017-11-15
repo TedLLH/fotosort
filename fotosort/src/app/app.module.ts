@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { PhotosService } from './photos.service';
+import { TokenService } from './token.service';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -11,6 +12,8 @@ import { LoginComponent } from './login/login.component';
 import { EmailComponent } from './email/email.component';
 import { SignupComponent } from './signup/signup.component';
 import { MembersComponent } from './members/members.component';
+
+import { AppRoutingModule } from './app-routing.module'
 
 
 @NgModule({
@@ -32,9 +35,10 @@ import { MembersComponent } from './members/members.component';
       messagingSenderId: "276231888981"
     }), 
     AngularFireDatabaseModule, 
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AppRoutingModule
   ],
-  providers: [PhotosService],
+  providers: [PhotosService, TokenService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

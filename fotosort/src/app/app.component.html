@@ -3,7 +3,14 @@
   <h1>
     Welcome to {{title}}!
   </h1>
+  {{token}}
 </div>
 
-<button type='button' class='btn btn-primary' (click)='signUp()'>Sign Up with Google</button>
+<!-- <button type='button' class='btn btn-primary' (click)='signUp()'>Sign Up with Google</button> -->
 
+<!-- <app-signup></app-signup> -->
+
+<nav>
+  <a routerLink="/" routerLinkActive="inactive">signUp</a>
+</nav>
+<router-outlet></router-outlet> 

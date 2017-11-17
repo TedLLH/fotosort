@@ -5,9 +5,13 @@ import { Http, HttpModule} from '@angular/http';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component'
 
+import { AuthGuard } from './authguard.service';
+
 const routes: Routes = [
-    {path: '', component: SignupComponent },
-    {path: 'login', component: LoginComponent}
+    {path: '', redirectTo:'/signup', pathMatch:'full'},
+    {path: 'signup', component: SignupComponent },
+    {path: 'login',  component: LoginComponent},
+    {path: 'oauth2callback', redirectTo:'/login'}
 ]
 
 @NgModule({

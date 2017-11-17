@@ -5,6 +5,7 @@ import { Http, HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { PhotosService } from './photos.service';
 import { TokenService } from './token.service';
+import { AuthGuard } from './authguard.service'
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -40,7 +41,7 @@ import { AppRoutingModule } from './app-routing.module'
     AppRoutingModule,
     HttpModule
   ],
-  providers: [PhotosService, TokenService, HttpModule],
+  providers: [PhotosService, TokenService, HttpModule, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,7 +12,7 @@ export class PhotosService implements OnInit{
 
   constructor(private tokenService:TokenService) { 
     // console.log(this.tokenService.token);
-    this.token = JSON.parse(localStorage.getItem('token'));
+    // this.token = JSON.parse(localStorage.getItem('token'));
   }
 
   ngOnInit(){

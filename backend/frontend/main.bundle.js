@@ -38,8 +38,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 var routes = [
-    { path: '', component: __WEBPACK_IMPORTED_MODULE_3__signup_signup_component__["a" /* SignupComponent */] },
-    { path: 'login', component: __WEBPACK_IMPORTED_MODULE_2__login_login_component__["a" /* LoginComponent */] }
+    { path: '', redirectTo: '/signup', pathMatch: 'full' },
+    { path: 'signup', component: __WEBPACK_IMPORTED_MODULE_3__signup_signup_component__["a" /* SignupComponent */] },
+    { path: 'login', component: __WEBPACK_IMPORTED_MODULE_2__login_login_component__["a" /* LoginComponent */] },
+    { path: 'oauth2callback', redirectTo: '/login' }
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {
@@ -151,20 +153,22 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__photos_service__ = __webpack_require__("../../../../../src/app/photos.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__token_service__ = __webpack_require__("../../../../../src/app/token.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2__ = __webpack_require__("../../../../angularfire2/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2_database__ = __webpack_require__("../../../../angularfire2/database/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_auth__ = __webpack_require__("../../../../angularfire2/auth/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__email_email_component__ = __webpack_require__("../../../../../src/app/email/email.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__signup_signup_component__ = __webpack_require__("../../../../../src/app/signup/signup.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__members_members_component__ = __webpack_require__("../../../../../src/app/members/members.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__app_routing_module__ = __webpack_require__("../../../../../src/app/app-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__authguard_service__ = __webpack_require__("../../../../../src/app/authguard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2__ = __webpack_require__("../../../../angularfire2/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__ = __webpack_require__("../../../../angularfire2/database/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__ = __webpack_require__("../../../../angularfire2/auth/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__email_email_component__ = __webpack_require__("../../../../../src/app/email/email.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__signup_signup_component__ = __webpack_require__("../../../../../src/app/signup/signup.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__members_members_component__ = __webpack_require__("../../../../../src/app/members/members.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__app_routing_module__ = __webpack_require__("../../../../../src/app/app-routing.module.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -188,14 +192,14 @@ AppModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["M" /* NgModule */])({
         declarations: [
             __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */],
-            __WEBPACK_IMPORTED_MODULE_9__login_login_component__["a" /* LoginComponent */],
-            __WEBPACK_IMPORTED_MODULE_10__email_email_component__["a" /* EmailComponent */],
-            __WEBPACK_IMPORTED_MODULE_11__signup_signup_component__["a" /* SignupComponent */],
-            __WEBPACK_IMPORTED_MODULE_12__members_members_component__["a" /* MembersComponent */]
+            __WEBPACK_IMPORTED_MODULE_10__login_login_component__["a" /* LoginComponent */],
+            __WEBPACK_IMPORTED_MODULE_11__email_email_component__["a" /* EmailComponent */],
+            __WEBPACK_IMPORTED_MODULE_12__signup_signup_component__["a" /* SignupComponent */],
+            __WEBPACK_IMPORTED_MODULE_13__members_members_component__["a" /* MembersComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-            __WEBPACK_IMPORTED_MODULE_6_angularfire2__["a" /* AngularFireModule */].initializeApp({
+            __WEBPACK_IMPORTED_MODULE_7_angularfire2__["a" /* AngularFireModule */].initializeApp({
                 apiKey: "AIzaSyDnwljBbcXSBNz_SgqTICaZ6B6Rg5PJr0g",
                 authDomain: "noonewillnotice-2e8e6.firebaseapp.com",
                 databaseURL: "https://noonewillnotice-2e8e6.firebaseio.com",
@@ -203,17 +207,48 @@ AppModule = __decorate([
                 storageBucket: "noonewillnotice-2e8e6.appspot.com",
                 messagingSenderId: "276231888981"
             }),
-            __WEBPACK_IMPORTED_MODULE_7_angularfire2_database__["a" /* AngularFireDatabaseModule */],
-            __WEBPACK_IMPORTED_MODULE_8_angularfire2_auth__["a" /* AngularFireAuthModule */],
-            __WEBPACK_IMPORTED_MODULE_13__app_routing_module__["a" /* AppRoutingModule */],
+            __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__["a" /* AngularFireDatabaseModule */],
+            __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__["a" /* AngularFireAuthModule */],
+            __WEBPACK_IMPORTED_MODULE_14__app_routing_module__["a" /* AppRoutingModule */],
             __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* HttpModule */]
         ],
-        providers: [__WEBPACK_IMPORTED_MODULE_4__photos_service__["a" /* PhotosService */], __WEBPACK_IMPORTED_MODULE_5__token_service__["a" /* TokenService */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* HttpModule */]],
+        providers: [__WEBPACK_IMPORTED_MODULE_4__photos_service__["a" /* PhotosService */], __WEBPACK_IMPORTED_MODULE_5__token_service__["a" /* TokenService */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* HttpModule */], __WEBPACK_IMPORTED_MODULE_6__authguard_service__["a" /* AuthGuard */]],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
 
 //# sourceMappingURL=app.module.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/authguard.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthGuard; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var AuthGuard = (function () {
+    function AuthGuard() {
+    }
+    AuthGuard.prototype.canActivate = function () {
+        console.log('AuthGuard#canActivate called');
+        // Authentication logic here.
+        return true;
+    };
+    return AuthGuard;
+}());
+AuthGuard = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])()
+], AuthGuard);
+
+//# sourceMappingURL=authguard.service.js.map
 
 /***/ }),
 
@@ -299,7 +334,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  login works!\n</p>\n<button type='button' class='btn btn-primary' (click)='getPhoto()'>Get Photos</button>\n"
+module.exports = "<p>\n  login works!\n</p>\n<button type='button' class='btn btn-primary' (click)='getPhoto()'>Get Photos</button>\n<input type=\"file\" name=\"upload\" multiple>\n\n<div class=\"panel panel-default\" *ngFor=\"let link of photolinks\">\n  <img src= {{link}}>\n  \n</div>   "
 
 /***/ }),
 
@@ -330,14 +365,19 @@ var LoginComponent = (function () {
         this.photosService = photosService;
         this.http = http;
         this.tokenService = tokenService;
+        this.photolinks = [];
     }
     LoginComponent.prototype.ngOnInit = function () {
     };
     LoginComponent.prototype.getPhoto = function () {
+        var _this = this;
         this.token = localStorage.getItem('token');
-        console.log(this.token);
-        this.http.get('https://picasaweb.google.com/data/feed/api/user/userID', this.token).subscribe(function (res) { console.log(res); }, function (err) { });
+        // console.log(this.token);
+        // this.http.get('https://picasaweb.google.com/data/feed/api/user/userID', this.token).subscribe((res)=>{console.log(res)}, (err)=>{})
         // this.photosService.onGetPhoto();
+        this.http.get('/getphoto').subscribe(function (res) {
+            _this.photolinks = res.json()['links'];
+        }, function (err) { });
     };
     return LoginComponent;
 }());
@@ -441,7 +481,7 @@ var PhotosService = (function () {
     function PhotosService(tokenService) {
         this.tokenService = tokenService;
         // console.log(this.tokenService.token);
-        this.token = JSON.parse(localStorage.getItem('token'));
+        // this.token = JSON.parse(localStorage.getItem('token'));
     }
     PhotosService.prototype.ngOnInit = function () {
     };
@@ -547,6 +587,8 @@ var _a, _b;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_picasa__ = __webpack_require__("../../../../picasa/src/picasa.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_picasa___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_picasa__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -560,12 +602,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var TokenService = (function () {
     function TokenService(/*private photosService:PhotosService,*/ http, router) {
         this.http = http;
         this.router = router;
     }
     TokenService.prototype.onSignUp = function () {
+        var picasa = new __WEBPACK_IMPORTED_MODULE_4_picasa__();
+        var config = {
+            clientId: '37970128122-78lisq0ssc0i18jk2b49stl9m89d1mv5.apps.googleusercontent.com',
+            redirectURI: 'http://localhost:8080/oauth2callback'
+        };
+        var authURL = picasa.getAuthURL(config);
+        window.location.href = authURL;
+    };
+    TokenService.prototype.oonSignUp = function () {
         var _this = this;
         var provider = new __WEBPACK_IMPORTED_MODULE_1_firebase__["auth"].GoogleAuthProvider();
         provider.addScope('profile');

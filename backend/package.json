@@ -17,8 +17,12 @@
   },
   "homepage": "https://github.com/TedLLH/fotosort#readme",
   "dependencies": {
+    "axios": "^0.17.1",
     "body-parser": "^1.18.2",
+    "dotenv": "^4.0.0",
     "express": "^4.16.2",
+    "picasa": "^1.0.6",
+    "redis": "^2.8.0",
     "reload": "^2.2.2",
     "watch": "^1.0.2"
   }

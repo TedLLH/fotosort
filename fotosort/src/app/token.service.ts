@@ -4,6 +4,7 @@ import * as firebase from 'firebase';
 import { SignupComponent } from './signup/signup.component'
 import { Http, HttpModule } from '@angular/http';
 import { ActivatedRoute, Router, Params, RouterModule, Routes } from "@angular/router";
+import * as Picasa from 'picasa';
 
 @Injectable()
 export class TokenService {
@@ -13,6 +14,17 @@ export class TokenService {
   constructor(/*private photosService:PhotosService,*/ private http:Http, private router:Router) { }
 
   onSignUp(){
+    const picasa = new Picasa();
+    const config = {
+      clientId     : '37970128122-78lisq0ssc0i18jk2b49stl9m89d1mv5.apps.googleusercontent.com',
+      redirectURI  : 'http://localhost:8080/oauth2callback'
+    }
+  
+    const authURL = picasa.getAuthURL(config)
+    window.location.href = authURL
+    }
+
+  oonSignUp(){
     var provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('profile');
     provider.addScope('email');

@@ -15,7 +15,11 @@ import { EmailComponent } from './email/email.component';
 import { SignupComponent } from './signup/signup.component';
 import { MembersComponent } from './members/members.component';
 
-import { AppRoutingModule } from './app-routing.module'
+import { AppRoutingModule } from './app-routing.module';
+import { PhotosComponent } from './photos/photos.component';
+// import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+// import { OverlayModule } from '@angular/cdk/overlay'
+
 
 
 @NgModule({
@@ -24,10 +28,13 @@ import { AppRoutingModule } from './app-routing.module'
     LoginComponent,
     EmailComponent,
     SignupComponent,
-    MembersComponent
+    MembersComponent,
+    PhotosComponent
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
+    HttpModule,
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyDnwljBbcXSBNz_SgqTICaZ6B6Rg5PJr0g",
       authDomain: "noonewillnotice-2e8e6.firebaseapp.com",
@@ -38,10 +45,8 @@ import { AppRoutingModule } from './app-routing.module'
     }), 
     AngularFireDatabaseModule, 
     AngularFireAuthModule,
-    AppRoutingModule,
-    HttpModule
   ],
-  providers: [PhotosService, TokenService, HttpModule, AuthGuard],
+  providers: [PhotosService, TokenService, HttpModule, AuthGuard/*, OverlayModule, MatDialog*/],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

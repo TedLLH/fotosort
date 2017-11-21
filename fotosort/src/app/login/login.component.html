@@ -1,10 +1,9 @@
-<p>
-  login works!
-</p>
-<button type='button' class='btn btn-primary' (click)='getPhoto()'>Get Photos</button>
-<input type="file" name="upload" multiple>
 
-<div class="panel panel-default" *ngFor="let link of photolinks">
+<button type='button' class='btn btn-primary' (click)='getPhoto()'>Get Photos</button>
+<!-- <input type="file" name="upload" multiple> -->
+
+<!-- <div class="panel panel-default" *ngFor="let link of photolinks">
   <img src= {{link}}>
-  
-</div>   
+</div>    -->
+
+<app-photos [photolinks]="photolinks"></app-photos>

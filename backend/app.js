@@ -5,13 +5,56 @@ const app = express();
 const bodyParser = require("body-parser"); 
 const Picasa = require('picasa');
 const redis = require('redis');
+const Clarifai = require('clarifai');
+const passport = require('passport');
+const session = require('express-session');
 require ('dotenv').config();
+
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
-app.use(bodyParser.json())
+// let json = app.use(bodyParser.json({limit: "50mb"}))
+
+// function extractProfile (profile) {
+//   let imageUrl = '';
+//   if (profile.photos && profile.photos.length) {
+//     imageUrl = profile.photos[0].value;
+//   }
+//   return {
+//     id: profile.id,
+//     displayName: profile.displayName,
+//     image: imageUrl
+//   };
+// }
+
+// passport.use(new GoogleStrategy({
+//   clientID: config.get(process.env.CLIENT_ID),
+//   clientSecret: config.get(process.env.CLIENT_SECRET),
+//   callbackURL: config.get('http://localhost:8080/oauth2callback'),
+//   accessType: 'offline'
+// }, (accessToken, refreshToken, profile, cb) => {
+//     cb(null, extractProfile(profile));
+// }));
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+app.use(session({
+    secret: 'cookie_secret',
+    proxy: true,
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 const client = redis.createClient({
     host: 'localhost',
@@ -24,91 +67,84 @@ client.on('error', function(err){
 
 const picasa = new Picasa();
 
- 
+const clarifai = new Clarifai.App({
+    apiKey: process.env.CLARIFAI
+});
+
 
 app.get('/getphoto',(req,res)=>{
-    // client.get('photoslink', (err,data)=>{
-    //     if(err){
-    //         console.log('errr in geting photo links')
-    //     }
-    //     res.json({
-    //         'links': JSON.parse(data)
-    //     })
-    // })
-    client.get('code', (err,code)=>{
+    var photosArray = [];
+
+    var clarifaiUrl = [];
+
+    client.get('albums', (err, albums)=>{
         if(err){
             console.log('Error in getting code');
         }
+        var albumsID = JSON.parse(albums);
+        var token = localStorage.getItem('accessToken')
+        // client.get('accessToken', (err, accessToken)=>{
+            albumsID.map((albumid)=>{
+                const options = {
+                    maxResults : 10, // by default get all 
+                    albumId: albumid 
+                }
+                picasa.getPhotos(token, options, (error, photos) => {
+                    if(photos){
+                        photosArray.push(photos.map((b)=>{return b.content.src}))
 
-    var photosArray = [];
+                        photos.forEach((nnn)=>{
+                            clarifaiUrl.push({url: nnn.content.src})
+                        })
+
+                        if(photosArray.length === albumsID.length-1){
+                            console.log('for clarifai'+ clarifaiUrl[0].url)
+                            clarifai.inputs.create(clarifaiUrl).then(
+                                function(response) {
+                                    console.log(response)
+                                },
+                                function(err) {
+                                    console.log('err in clarifaing photos');
+                                }
+                            );
+                            res.json({
+                                'links': photosArray
+                            })
+                        }
+                    }
+                })
+            })
+        // })
+    })
+    
+});
+
+app.get('/oauth2callback', (req,res)=>{
     const config = {
         clientId     : process.env.CLIENT_ID,
         redirectURI  : 'http://localhost:8080/oauth2callback',
         clientSecret : process.env.CLIENT_SECRET
     }
-    picasa.getAccessToken(config, code, (error, accessToken, refreshToken) => {
+    console.log(req.body)
+    picasa.getAccessToken(config, req.query.code, (error, accessToken, refreshToken) => {
+        client.setex('accessToken', 60*60, accessToken, (err)=>{
+            if(err){
+                console.log('eRro')
+            }
+        })
         const optionsAlbums = {}
         picasa.getAlbums(accessToken, optionsAlbums,  (error, albums) => {
-            albums.map((album)=>{
-                var optionsPhotos = {
-                    maxResults: 10,
-                    albumId: album.id
+            var albumtosave = albums.map((n)=>{return n.id})
+            client.setex('albums', 60*60, JSON.stringify(albumtosave), (err)=>{
+                if(err){
+                    console.log('eRR in saving code');
                 }
-                picasa.getPhotos(accessToken, optionsPhotos, (error, photos) => {
-                    if(photos){
-                        res.json({
-                            'links': photos.map((n)=>{return n.content.src}) ,
-                        })
-                    }
-                })
             })
-            
-        })  
+        })
     })
-    
-    })
-});
-
-app.get('/oauth2callback', (req,res)=>{
-    client.setex('code', 60*60, req.query.code, (err)=>{
-        if(err){
-            console.log('eRR in saving code');
-        }
-    })
-    // var photosArray = [];
-    // const config = {
-    //     clientId     : process.env.CLIENT_ID,
-    //     redirectURI  : 'http://localhost:8080/oauth2callback',
-    //     clientSecret : process.env.CLIENT_SECRET
-    // }
-    // picasa.getAccessToken(config, req.query.code, (error, accessToken, refreshToken) => {
-    //     const optionsAlbums = {}
-    //     picasa.getAlbums(accessToken, optionsAlbums,  (error, albums) => {
-    //         if(albums.length>0){
-    //         albums.map((album)=>{
-    //             var optionsPhotos = {
-    //                 maxResults: 10,
-    //                 albumId: album.id
-    //             }
-    //             picasa.getPhotos(accessToken, optionsPhotos, (error, photos) => {
-    //                 if(photos){
-    //                     photos.forEach((photo)=>{
-    //                         photosArray.push(photo.content.src);
-    //                         // console.log(photosArray)
-    //                         client.setex('photoslink', 60*60, JSON.stringify(photosArray), (err)=>{
-    //                             if(err){
-    //                                 console.log('Error in saving the photolinks')
-    //                             }
-    //                         })
-    //                     })
-    //                 }
-    //             })
-    //         })
-    //         }
-    //     })  
-    // })
     res.redirect('/login')
 })
+
 
 reloadServer = reload(app);
 watch.watchTree(__dirname + "/frontend", function (f, curr, prev) {

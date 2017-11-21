@@ -13,7 +13,7 @@ export class TokenService {
 
   constructor(/*private photosService:PhotosService,*/ private http:Http, private router:Router) { }
 
-  onSignUp(){
+  oonSignUp(){
     const picasa = new Picasa();
     const config = {
       clientId     : '37970128122-78lisq0ssc0i18jk2b49stl9m89d1mv5.apps.googleusercontent.com',
@@ -24,7 +24,7 @@ export class TokenService {
     window.location.href = authURL
     }
 
-  oonSignUp(){
+  onSignUp(){
     var provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('profile');
     provider.addScope('email');
@@ -34,9 +34,10 @@ export class TokenService {
             // This gives you a Google Access Token.
             var token = result.credential.accessToken;
             localStorage.clear();
-            localStorage.setItem('token', JSON.stringify(token));
+            localStorage.setItem('accessToken', token);
             // The signed-in user info.
-            var user = result.user;
+            var user = result.user.email;
+            console.log(user);
             // This checks the token
             // console.log(token)
             // console.log(this.photosService.token);

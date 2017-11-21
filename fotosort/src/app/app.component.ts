@@ -11,10 +11,9 @@ import { PhotosService } from './photos.service'
 })
 export class AppComponent implements OnInit{
   title = 'FotoNize';
-  token:string;
 
   constructor(private photosService:PhotosService){
-    firebase.initializeApp({
+     firebase.initializeApp({
             apiKey: "AIzaSyDnwljBbcXSBNz_SgqTICaZ6B6Rg5PJr0g",
             authDomain: "noonewillnotice-2e8e6.firebaseapp.com",
             databaseURL: "https://noonewillnotice-2e8e6.firebaseio.com",
@@ -22,13 +21,9 @@ export class AppComponent implements OnInit{
             storageBucket: "noonewillnotice-2e8e6.appspot.com",
             messagingSenderId: "276231888981"
         });
-
   }
 
   ngOnInit(){
-    this.token = this.photosService.token;
-  }
-
-  
+  }  
 
 }

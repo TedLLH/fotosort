@@ -1,5 +1,6 @@
-import { Component, OnInit, Inject, Input } from '@angular/core';
+import { Component, OnInit, Inject, Input, NgModule } from '@angular/core';
 import { PhotosService } from '../photos.service';
+import { FilterPipe } from '../filter.pipe'
 // import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 // import { OverlayModule } from '@angular/cdk/overlay'
 
@@ -14,10 +15,16 @@ export class PhotosComponent implements OnInit {
   
   @Input() photolinks
 
+  term:string = '';
+
   constructor(private photosService:PhotosService/*, public dialog: MatDialog*/) { }
 
   ngOnInit() {
    
+  }
+
+  onSearch(e){
+    this.term = e.target.value;
   }
 
   // openDialog(): void {

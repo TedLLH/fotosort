@@ -1,4 +1,8 @@
-<div class="panel panel-default" *ngFor="let link of photolinks">
+<form>
+  Search Box: <input type='text' placeholder="search" name="term" (input)="onSearch($event)">
+</form>
+
+<div class="panel panel-default" *ngFor="let link of photolinks | filter:term">
   <img src= {{link.image}}>
   <p>{{link.tags}}</p>
 </div> 

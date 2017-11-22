@@ -17,6 +17,7 @@ import { MembersComponent } from './members/members.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { PhotosComponent } from './photos/photos.component';
+import { FilterPipe } from './filter.pipe';
 // import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 // import { OverlayModule } from '@angular/cdk/overlay'
 
@@ -29,7 +30,8 @@ import { PhotosComponent } from './photos/photos.component';
     EmailComponent,
     SignupComponent,
     MembersComponent,
-    PhotosComponent
+    PhotosComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

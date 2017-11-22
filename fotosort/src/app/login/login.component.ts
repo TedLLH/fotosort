@@ -14,8 +14,6 @@ export class LoginComponent implements OnInit {
 
   photolinks: string[] = [];
 
-  tags:string[] = []
-
   constructor(private photosService:PhotosService, private http:Http, private tokenService:TokenService) { }
 
   ngOnInit() {
@@ -31,7 +29,6 @@ export class LoginComponent implements OnInit {
   getPhoto(){
     console.log('clciked')
     this.photosService.onGetPhoto().subscribe((res)=>{
-      this.photolinks = [];
       this.photolinks = res.json()['links'];
     }, (err)=>{});
   }

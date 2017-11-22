@@ -379,14 +379,10 @@ var LoginComponent = (function () {
     };
     LoginComponent.prototype.getPhoto = function () {
         var _this = this;
+        console.log('clciked');
         this.photosService.onGetPhoto().subscribe(function (res) {
             _this.photolinks = [];
-            res.json()['links'].forEach(function (data) {
-                console.log(data);
-                data.forEach(function (data) {
-                    _this.photolinks.push(data);
-                });
-            });
+            _this.photolinks = res.json()['links'];
         }, function (err) { });
     };
     return LoginComponent;

@@ -150,12 +150,12 @@ app.get('/getphoto',authRequired, (req,res)=>{
                             clarifaiUrl.push({url: nnn.content.src})
                         })
 
-                        if(photosArray.length === albumsID.length-noPhotoAlbum){
+                        if(photosArray.length === albumsID.length-1){
                             console.log('for clarifai')
                             // console.log( clarifaiUrl)
                             clarifai.models.predict(Clarifai.GENERAL_MODEL, clarifaiUrl).then(
                                 function(response) {
-                                    console.log(response.outputs[0].input.data.image.url)
+                                    // console.log(response.outputs[0].input.data.image.url)
                                     response.outputs.forEach((data)=>{
                                         let obj = {
                                             'image': data.input.data.image.url,
@@ -176,10 +176,12 @@ app.get('/getphoto',authRequired, (req,res)=>{
                                 function(err){
                                     console.log('fafds'+err)
                                 }
-                            );
-                            res.json({
+                            ).then(()=>{res.json({
                                 'links': dataArray
-                            })
+                            })}, (err)=>{});
+                            // res.json({
+                            //     'links': dataArray
+                            // })
                             // clarifai.inputs.create(clarifaiUrl).then(
                             //     function(response) {
                             //         console.log('create photos successfully')

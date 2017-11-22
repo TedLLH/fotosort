@@ -29,14 +29,10 @@ export class LoginComponent implements OnInit {
   }
 
   getPhoto(){
+    console.log('clciked')
     this.photosService.onGetPhoto().subscribe((res)=>{
       this.photolinks = [];
-      res.json()['links'].forEach((data)=>{
-        console.log(data)
-        data.forEach((data)=>{
-          this.photolinks.push(data)
-        })
-      })
+      this.photolinks = res.json()['links'];
     }, (err)=>{});
   }
 

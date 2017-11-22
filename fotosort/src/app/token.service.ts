@@ -13,6 +13,14 @@ export class TokenService {
 
   constructor(/*private photosService:PhotosService,*/ private http:Http, private router:Router) { }
 
+  onCheckToken(){
+    return this.http.get('/checktoken')
+  }
+
+  onSignUp(){
+    window.location.href = '/auth/google';
+  }
+
   oonSignUp(){
     const picasa = new Picasa();
     const config = {
@@ -24,7 +32,7 @@ export class TokenService {
     window.location.href = authURL
     }
 
-  onSignUp(){
+  ooonSignUp(){
     var provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('profile');
     provider.addScope('email');

@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/TedLLH/fotosort#readme",
   "dependencies": {
-    "axios": "^0.17.1",
     "body-parser": "^1.18.2",
     "clarifai": "^2.5.0",
     "dotenv": "^4.0.0",

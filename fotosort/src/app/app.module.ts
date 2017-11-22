@@ -44,7 +44,7 @@ import { PhotosComponent } from './photos/photos.component';
       messagingSenderId: "276231888981"
     }), 
     AngularFireDatabaseModule, 
-    AngularFireAuthModule,
+    AngularFireAuthModule
   ],
   providers: [PhotosService, TokenService, HttpModule, AuthGuard/*, OverlayModule, MatDialog*/],
   bootstrap: [AppComponent]

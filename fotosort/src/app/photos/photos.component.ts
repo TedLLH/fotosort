@@ -4,6 +4,7 @@ import { PhotosService } from '../photos.service';
 // import { OverlayModule } from '@angular/cdk/overlay'
 
 
+
 @Component({
   selector: 'app-photos',
   templateUrl: './photos.component.html',
@@ -11,7 +12,6 @@ import { PhotosService } from '../photos.service';
 })
 export class PhotosComponent implements OnInit {
   
-
   @Input() photolinks
 
   constructor(private photosService:PhotosService/*, public dialog: MatDialog*/) { }

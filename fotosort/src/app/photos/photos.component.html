@@ -1,4 +1,5 @@
 <div class="panel panel-default" *ngFor="let link of photolinks">
-  <img src= {{link}}>
+  <img src= {{link.image}}>
+  <p>{{link.tags}}</p>
 </div> 
  <button (click)="openDialog()">Click here laaa</button>

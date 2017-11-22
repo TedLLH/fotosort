@@ -85,7 +85,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <h1>\n    Welcome to {{title}}!\n  </h1>\n</div>\n\n<!-- <button type='button' class='btn btn-primary' (click)='signUp()'>Sign Up with Google</button> -->\n\n<!-- <app-signup></app-signup> -->\n\n<!-- <nav>\n  <a routerLink=\"/\" routerLinkActive=\"inactive\">signUp</a>\n</nav> -->\n <router-outlet ></router-outlet>  \n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <h1>\n    Welcome to {{title}}!\n  </h1>\n</div>\n\n <!-- <button type='button' class='btn btn-primary' (click)='signLog()'>Start with Google</button>  -->\n\n<!-- <app-signup></app-signup> -->\n\n<!-- <nav>\n  <a routerLink=\"/\" routerLinkActive=\"inactive\">signUp</a>\n</nav> -->\n  <router-outlet ></router-outlet>   \n"
 
 /***/ }),
 
@@ -95,9 +95,7 @@ module.exports = "<!--The content below is only a placeholder and can be replace
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_firebase__ = __webpack_require__("../../../../firebase/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__photos_service__ = __webpack_require__("../../../../../src/app/photos.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__photos_service__ = __webpack_require__("../../../../../src/app/photos.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -109,19 +107,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
 var AppComponent = (function () {
     function AppComponent(photosService) {
         this.photosService = photosService;
         this.title = 'FotoNize';
-        __WEBPACK_IMPORTED_MODULE_1_firebase__["initializeApp"]({
-            apiKey: "AIzaSyDnwljBbcXSBNz_SgqTICaZ6B6Rg5PJr0g",
-            authDomain: "noonewillnotice-2e8e6.firebaseapp.com",
-            databaseURL: "https://noonewillnotice-2e8e6.firebaseio.com",
-            projectId: "noonewillnotice-2e8e6",
-            storageBucket: "noonewillnotice-2e8e6.appspot.com",
-            messagingSenderId: "276231888981"
-        });
+        //  firebase.initializeApp({
+        //         apiKey: "AIzaSyDnwljBbcXSBNz_SgqTICaZ6B6Rg5PJr0g",
+        //         authDomain: "noonewillnotice-2e8e6.firebaseapp.com",
+        //         databaseURL: "https://noonewillnotice-2e8e6.firebaseio.com",
+        //         projectId: "noonewillnotice-2e8e6",
+        //         storageBucket: "noonewillnotice-2e8e6.appspot.com",
+        //         messagingSenderId: "276231888981"
+        //     });
     }
     AppComponent.prototype.ngOnInit = function () {
     };
@@ -133,7 +130,7 @@ AppComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/app.component.html"),
         styles: [__webpack_require__("../../../../../src/app/app.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__photos_service__["a" /* PhotosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__photos_service__["a" /* PhotosService */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__photos_service__["a" /* PhotosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__photos_service__["a" /* PhotosService */]) === "function" && _a || Object])
 ], AppComponent);
 
 var _a;
@@ -214,7 +211,7 @@ AppModule = __decorate([
                 messagingSenderId: "276231888981"
             }),
             __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__["a" /* AngularFireDatabaseModule */],
-            __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__["a" /* AngularFireAuthModule */],
+            __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__["a" /* AngularFireAuthModule */]
         ],
         providers: [__WEBPACK_IMPORTED_MODULE_4__photos_service__["a" /* PhotosService */], __WEBPACK_IMPORTED_MODULE_5__token_service__["a" /* TokenService */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* HttpModule */], __WEBPACK_IMPORTED_MODULE_6__authguard_service__["a" /* AuthGuard */] /*, OverlayModule, MatDialog*/],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]]
@@ -325,7 +322,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "button{\n    width: 300px;\n    height: 100px;\n    color: grey;\n    background-color: lightcyan; \n    margin: 0px 0px 0px 0px;\n    font-size: 50px\n}", ""]);
+exports.push([module.i, "button{\n    width: 300px;\n    height: 100px;\n    color: grey;\n    background-color: lightcyan; \n    margin: 0px 0px 0px 0px;\n    font-size: 40px\n}\n.example-container {\n  width: 500px;\n  height: 300px;\n  border: 1px solid rgba(0, 0, 0, 0.5);\n}\n\n.example-sidenav-content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 100%;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n\n.example-sidenav {\n  padding: 20px;\n}", ""]);
 
 // exports
 
@@ -338,7 +335,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<button type='button' class='btn btn-primary' (click)='getPhoto()'>Get Photos</button>\n<!-- <input type=\"file\" name=\"upload\" multiple> -->\n\n<!-- <div class=\"panel panel-default\" *ngFor=\"let link of photolinks\">\n  <img src= {{link}}>\n</div>    -->\n\n<app-photos [photolinks]=\"photolinks\"></app-photos>"
+module.exports = "\n<!-- <mat-sidenav-container class=\"example-container\">\n  <mat-sidenav #sidenav class=\"example-sidenav\">\n    Jolly good!\n  </mat-sidenav>\n\n  <div class=\"example-sidenav-content\">\n    <button type=\"button\" mat-button (click)=\"sidenav.open()\">\n      Open sidenav\n    </button>\n  </div>\n\n</mat-sidenav-container> -->\n\n<button type='button' class='btn btn-primary' (click)='getPhoto()'>Get Photos</button>\n<button type='button' class='btn btn-primary' (click)='clearPhoto()'>Clear Clarifai Photos</button>\n\n<!-- <input type=\"file\" name=\"upload\" multiple> -->\n\n<!-- <div class=\"panel panel-default\" *ngFor=\"let link of photolinks\">\n  <img src= {{link}}>\n</div>    -->\n\n<app-photos [photolinks]=\"photolinks\"></app-photos>\n\n"
 
 /***/ }),
 
@@ -364,22 +361,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+// import { MatSidenavModule } from '@angular/material/sidenav';
 var LoginComponent = (function () {
     function LoginComponent(photosService, http, tokenService) {
         this.photosService = photosService;
         this.http = http;
         this.tokenService = tokenService;
         this.photolinks = [];
+        this.tags = [];
     }
     LoginComponent.prototype.ngOnInit = function () {
+    };
+    LoginComponent.prototype.clearPhoto = function () {
+        this.http.get('/clearClarifai').subscribe(function (res) {
+            console.log(res.json());
+        }, function (err) { });
     };
     LoginComponent.prototype.getPhoto = function () {
         var _this = this;
         this.photosService.onGetPhoto().subscribe(function (res) {
             _this.photolinks = [];
-            res.json()['links'].forEach(function (album) {
-                album.forEach(function (link) {
-                    _this.photolinks.push(link);
+            res.json()['links'].forEach(function (data) {
+                console.log(data);
+                data.forEach(function (data) {
+                    _this.photolinks.push(data);
                 });
             });
         }, function (err) { });
@@ -535,7 +540,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/photos/photos.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-default\" *ngFor=\"let link of photolinks\">\n  <img src= {{link}}>\n</div> \n <button (click)=\"openDialog()\">Click here laaa</button>"
+module.exports = "<div class=\"panel panel-default\" *ngFor=\"let link of photolinks\">\n  <img src= {{link.image}}>\n  <p>{{link.tags}}</p>\n</div> \n <button (click)=\"openDialog()\">Click here laaa</button>"
 
 /***/ }),
 
@@ -630,6 +635,7 @@ module.exports = "<button type='button' class='btn btn-primary' (click)='signUp(
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__token_service__ = __webpack_require__("../../../../../src/app/token.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -642,15 +648,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var SignupComponent = (function () {
-    function SignupComponent(router, tokenService) {
+    function SignupComponent(router, tokenService, http) {
         this.router = router;
         this.tokenService = tokenService;
+        this.http = http;
     }
     SignupComponent.prototype.ngOnInit = function () {
     };
     SignupComponent.prototype.signUp = function () {
-        this.tokenService.onSignUp();
+        var _this = this;
+        this.tokenService.onCheckToken().subscribe(function (res) {
+            if (res.json()) {
+                _this.router.navigateByUrl('/login');
+            }
+            else {
+                _this.tokenService.onSignUp();
+            }
+        }, function (err) {
+            console.log(err);
+        });
+        // this.http.get('/checktoken').subscribe((res)=>{
+        //   if(res.json()){
+        //     console.log(res.json())
+        //   } else {
+        //   }
+        // }, (err)=>{
+        //   this.tokenService.onSignUp();
+        // })
     };
     ;
     return SignupComponent;
@@ -661,10 +687,10 @@ SignupComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/signup/signup.component.html"),
         styles: [__webpack_require__("../../../../../src/app/signup/signup.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__token_service__["a" /* TokenService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__token_service__["a" /* TokenService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__token_service__["a" /* TokenService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__token_service__["a" /* TokenService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* Http */]) === "function" && _c || Object])
 ], SignupComponent);
 
-var _a, _b;
+var _a, _b, _c;
 //# sourceMappingURL=signup.component.js.map
 
 /***/ }),
@@ -700,6 +726,12 @@ var TokenService = (function () {
         this.http = http;
         this.router = router;
     }
+    TokenService.prototype.onCheckToken = function () {
+        return this.http.get('/checktoken');
+    };
+    TokenService.prototype.onSignUp = function () {
+        window.location.href = '/auth/google';
+    };
     TokenService.prototype.oonSignUp = function () {
         var picasa = new __WEBPACK_IMPORTED_MODULE_4_picasa__();
         var config = {
@@ -709,7 +741,7 @@ var TokenService = (function () {
         var authURL = picasa.getAuthURL(config);
         window.location.href = authURL;
     };
-    TokenService.prototype.onSignUp = function () {
+    TokenService.prototype.ooonSignUp = function () {
         var _this = this;
         var provider = new __WEBPACK_IMPORTED_MODULE_1_firebase__["auth"].GoogleAuthProvider();
         provider.addScope('profile');

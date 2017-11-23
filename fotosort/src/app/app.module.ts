@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { Http, HttpModule } from '@angular/http'; 
+import { Http, HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms'; 
 
 import { AppComponent } from './app.component';
 import { PhotosService } from './photos.service';
@@ -49,6 +50,7 @@ import { FilterPipe } from './filter.pipe';
     }), 
     AngularFireDatabaseModule, 
     AngularFireAuthModule,
+    FormsModule
     // BrowserAnimationsModule,
     // NoopAnimationsModule,
     // MatDialogModule

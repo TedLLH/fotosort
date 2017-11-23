@@ -146,26 +146,28 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__("../../../platform-browser/@angular/platform-browser.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__photos_service__ = __webpack_require__("../../../../../src/app/photos.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__token_service__ = __webpack_require__("../../../../../src/app/token.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__authguard_service__ = __webpack_require__("../../../../../src/app/authguard.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2__ = __webpack_require__("../../../../angularfire2/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__ = __webpack_require__("../../../../angularfire2/database/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__ = __webpack_require__("../../../../angularfire2/auth/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__email_email_component__ = __webpack_require__("../../../../../src/app/email/email.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__signup_signup_component__ = __webpack_require__("../../../../../src/app/signup/signup.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__members_members_component__ = __webpack_require__("../../../../../src/app/members/members.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__app_routing_module__ = __webpack_require__("../../../../../src/app/app-routing.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__photos_photos_component__ = __webpack_require__("../../../../../src/app/photos/photos.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__filter_pipe__ = __webpack_require__("../../../../../src/app/filter.pipe.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__photos_service__ = __webpack_require__("../../../../../src/app/photos.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__token_service__ = __webpack_require__("../../../../../src/app/token.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__authguard_service__ = __webpack_require__("../../../../../src/app/authguard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2__ = __webpack_require__("../../../../angularfire2/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_database__ = __webpack_require__("../../../../angularfire2/database/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_angularfire2_auth__ = __webpack_require__("../../../../angularfire2/auth/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__email_email_component__ = __webpack_require__("../../../../../src/app/email/email.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__signup_signup_component__ = __webpack_require__("../../../../../src/app/signup/signup.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__members_members_component__ = __webpack_require__("../../../../../src/app/members/members.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__app_routing_module__ = __webpack_require__("../../../../../src/app/app-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__photos_photos_component__ = __webpack_require__("../../../../../src/app/photos/photos.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__filter_pipe__ = __webpack_require__("../../../../../src/app/filter.pipe.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -193,19 +195,19 @@ var AppModule = (function () {
 AppModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["M" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */],
-            __WEBPACK_IMPORTED_MODULE_10__login_login_component__["a" /* LoginComponent */],
-            __WEBPACK_IMPORTED_MODULE_11__email_email_component__["a" /* EmailComponent */],
-            __WEBPACK_IMPORTED_MODULE_12__signup_signup_component__["a" /* SignupComponent */],
-            __WEBPACK_IMPORTED_MODULE_13__members_members_component__["a" /* MembersComponent */],
-            __WEBPACK_IMPORTED_MODULE_15__photos_photos_component__["a" /* PhotosComponent */],
-            __WEBPACK_IMPORTED_MODULE_16__filter_pipe__["a" /* FilterPipe */]
+            __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
+            __WEBPACK_IMPORTED_MODULE_11__login_login_component__["a" /* LoginComponent */],
+            __WEBPACK_IMPORTED_MODULE_12__email_email_component__["a" /* EmailComponent */],
+            __WEBPACK_IMPORTED_MODULE_13__signup_signup_component__["a" /* SignupComponent */],
+            __WEBPACK_IMPORTED_MODULE_14__members_members_component__["a" /* MembersComponent */],
+            __WEBPACK_IMPORTED_MODULE_16__photos_photos_component__["a" /* PhotosComponent */],
+            __WEBPACK_IMPORTED_MODULE_17__filter_pipe__["a" /* FilterPipe */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-            __WEBPACK_IMPORTED_MODULE_14__app_routing_module__["a" /* AppRoutingModule */],
+            __WEBPACK_IMPORTED_MODULE_15__app_routing_module__["a" /* AppRoutingModule */],
             __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* HttpModule */],
-            __WEBPACK_IMPORTED_MODULE_7_angularfire2__["a" /* AngularFireModule */].initializeApp({
+            __WEBPACK_IMPORTED_MODULE_8_angularfire2__["a" /* AngularFireModule */].initializeApp({
                 apiKey: "AIzaSyDnwljBbcXSBNz_SgqTICaZ6B6Rg5PJr0g",
                 authDomain: "noonewillnotice-2e8e6.firebaseapp.com",
                 databaseURL: "https://noonewillnotice-2e8e6.firebaseio.com",
@@ -213,11 +215,16 @@ AppModule = __decorate([
                 storageBucket: "noonewillnotice-2e8e6.appspot.com",
                 messagingSenderId: "276231888981"
             }),
-            __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__["a" /* AngularFireDatabaseModule */],
-            __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__["a" /* AngularFireAuthModule */],
+            __WEBPACK_IMPORTED_MODULE_9_angularfire2_database__["a" /* AngularFireDatabaseModule */],
+            __WEBPACK_IMPORTED_MODULE_10_angularfire2_auth__["a" /* AngularFireAuthModule */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */]
+            // BrowserAnimationsModule,
+            // NoopAnimationsModule,
+            // MatDialogModule
+            // MatDialog, MatDialogRef
         ],
-        providers: [__WEBPACK_IMPORTED_MODULE_4__photos_service__["a" /* PhotosService */], __WEBPACK_IMPORTED_MODULE_5__token_service__["a" /* TokenService */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* HttpModule */], __WEBPACK_IMPORTED_MODULE_6__authguard_service__["a" /* AuthGuard */] /*, Overlay ,MatDialogModule*/],
-        bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]]
+        providers: [__WEBPACK_IMPORTED_MODULE_5__photos_service__["a" /* PhotosService */], __WEBPACK_IMPORTED_MODULE_6__token_service__["a" /* TokenService */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* HttpModule */], __WEBPACK_IMPORTED_MODULE_7__authguard_service__["a" /* AuthGuard */] /*, Overlay ,MatDialogModule*/],
+        bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
 
@@ -372,7 +379,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<!-- <mat-sidenav-container class=\"example-container\">\n  <mat-sidenav #sidenav class=\"example-sidenav\">\n    Jolly good!\n  </mat-sidenav>\n\n  <div class=\"example-sidenav-content\">\n    <button type=\"button\" mat-button (click)=\"sidenav.open()\">\n      Open sidenav\n    </button>\n  </div>\n\n</mat-sidenav-container> -->\n\n<button type='button' class='btn btn-primary' (click)='getPhoto()'>Get Photos</button>\n<button type='button' class='btn btn-primary' (click)='clearPhoto()'>Clear Clarifai Photos</button>\n\n<!-- <input type=\"file\" name=\"upload\" multiple> -->\n\n<!-- <div class=\"panel panel-default\" *ngFor=\"let link of photolinks\">\n  <img src= {{link}}>\n</div>    -->\n\n<app-photos></app-photos>\n<!-- <app-photos [photolinks]=\"photolinks\"></app-photos> -->\n\n"
+module.exports = "\n<!-- <mat-sidenav-container class=\"example-container\">\n  <mat-sidenav #sidenav class=\"example-sidenav\">\n    Jolly good!\n  </mat-sidenav>\n\n  <div class=\"example-sidenav-content\">\n    <button type=\"button\" mat-button (click)=\"sidenav.open()\">\n      Open sidenav\n    </button>\n  </div>\n\n</mat-sidenav-container> -->\n\n<button type='button' class='btn btn-primary' (click)='getPhoto()'>Get Photos</button>\n<button type='button' class='btn btn-primary' (click)='clearPhoto()'>Clear Clarifai Photos</button>\n\n<!-- <input type=\"file\" name=\"upload\" multiple> -->\n\n<!-- <div class=\"panel panel-default\" *ngFor=\"let link of photolinks\">\n  <img src= {{link}}>\n</div>    -->\n\n<!-- <app-photos></app-photos> -->\n <app-photos [photolinks]=\"photolinks\"></app-photos> \n\n"
 
 /***/ }),
 
@@ -558,7 +565,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "img{\n    width: 100px;\n    height: 100px\n}", ""]);
+exports.push([module.i, "img{\n    width: 300px;\n    height: 300px\n}", ""]);
 
 // exports
 
@@ -571,7 +578,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/photos/photos.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form method=\"POST\" action=\"/createalbum\" id=\"createForm\">\n  Create Album: <input type='text' placeholder=\"albumName\" name=\"albumName\" >\n  <button type=\"submit\" form=\"createForm\" value=\"Submit\">Submit</button>\n</form>  \n\n <form>\n  Search Box: <input type='text' placeholder=\"search\" name=\"term\" (input)=\"onSearch($event)\">\n</form> \n\n <div class=\"panel panel-default\" *ngFor=\"let link of photolinks | filter:term\" (click)=\"addLink(link.image)\">\n  <img src= {{link.image}}>\n  <!-- <p>{{link.tags}}</p> -->\n</div>\n <button (click)=\"openDialog()\">Click here laaa</button> "
+module.exports = "<!-- <form method=\"POST\" action=\"/createalbum\" id=\"createForm\">\n  Create Album: <input type='text' placeholder=\"albumName\" name=\"albumName\" >\n  <button type=\"submit\" form=\"createForm\" value=\"Submit\">Submit</button>\n</form>   -->\n\n<input [(ngModel)]=\"albumName\" placeholder=\"Album Name\">\n<button (click)=\"createAlbum()\">Create Album</button>\n\n <form>\n  Search Box: <input type='text' placeholder=\"search\" name=\"term\" (input)=\"onSearch($event)\">\n</form> \n\n <div class=\"panel panel-default\" *ngFor=\"let link of photolinks | filter:term\" (click)=\"addLink(link.image)\">\n  <img src= {{link.image}}>\n   <p>{{link.tags}}</p> \n</div>\n <button (click)=\"openDialog()\">Click here laaa</button> "
 
 /***/ }),
 
@@ -582,6 +589,7 @@ module.exports = "<form method=\"POST\" action=\"/createalbum\" id=\"createForm\
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PhotosComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__photos_service__ = __webpack_require__("../../../../../src/app/photos.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -593,6 +601,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 // import { BrowserModule } from '@angular/platform-browser';
 // import { ReactiveFormsModule } from '@angular/forms'; 
 // import { FormControl,FormGroup, Validators } from '@angular/forms';
@@ -600,10 +609,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 // import { MatDialogModule } from '@angular/material/dialog';
 // import { OverlayModule } from '@angular/cdk/overlay'
 var PhotosComponent = (function () {
-    function PhotosComponent(photosService /*, public dialog: MatDialog*/) {
+    function PhotosComponent(http, photosService /*, public dialog: MatDialog*/) {
+        this.http = http;
         this.photosService = photosService; /*, public dialog: MatDialog*/
-        // @Input() photolinks
-        this.photolinks = [{ 'image': 'http://icons.iconarchive.com/icons/martz90/circle/512/camera-icon.png' }, { 'image': 'http://icons.iconarchive.com/icons/pelfusion/long-shadow-media/512/Camera-icon.png' }, { 'image': 'https://image.freepik.com/free-icon/whatsapp-logo_318-49685.jpg' }];
+        // photolinks = [{'image': 'http://icons.iconarchive.com/icons/martz90/circle/512/camera-icon.png'}, {'image':'http://icons.iconarchive.com/icons/pelfusion/long-shadow-media/512/Camera-icon.png'}, {'image': 'https://image.freepik.com/free-icon/whatsapp-logo_318-49685.jpg'}];
         this.term = '';
         this.photoURLyouwanttoadd = [];
         this.albumName = '';
@@ -613,12 +622,9 @@ var PhotosComponent = (function () {
     PhotosComponent.prototype.onSearch = function (e) {
         this.term = e.target.value;
     };
-    PhotosComponent.prototype.onName = function (e) {
-        this.albumName = e.target.value;
+    PhotosComponent.prototype.createAlbum = function () {
         console.log(this.albumName);
-    };
-    PhotosComponent.prototype.onCreate = function (e) {
-        console.log(e);
+        this.http.post('/createalbum', { albumName: this.albumName, url: this.photoURLyouwanttoadd }).subscribe(function (res) { }, function (err) { });
     };
     PhotosComponent.prototype.addLink = function (link) {
         if (!this.photoURLyouwanttoadd.includes(link)) {
@@ -633,16 +639,20 @@ var PhotosComponent = (function () {
     };
     return PhotosComponent;
 }());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+    __metadata("design:type", Object)
+], PhotosComponent.prototype, "photolinks", void 0);
 PhotosComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
         selector: 'app-photos',
         template: __webpack_require__("../../../../../src/app/photos/photos.component.html"),
         styles: [__webpack_require__("../../../../../src/app/photos/photos.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__photos_service__["a" /* PhotosService */] /*, public dialog: MatDialog*/ !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__photos_service__["a" /* PhotosService */] /*, public dialog: MatDialog*/) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__photos_service__["a" /* PhotosService */] /*, public dialog: MatDialog*/ !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__photos_service__["a" /* PhotosService */] /*, public dialog: MatDialog*/) === "function" && _b || Object])
 ], PhotosComponent);
 
-var _a;
+var _a, _b;
 // @Component({
 //   selector: 'photo-dialog',
 //   templateUrl: 'photo-dialog.html',

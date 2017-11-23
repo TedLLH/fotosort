@@ -228,15 +228,25 @@ app.get('/getphoto',authRequired, (req,res)=>{
 });
 
 app.post('/createalbum', (req,res)=>{
+    console.log(req.body)
     console.log(req.body.albumName)
-    res.redirect('/login')
-    // client.get(req.user.id, (err,data)=>{
-    //     User.findOrCreate({
-    //         email: data,
-    //         albumName: req.query.name,
-    //         url: req
-    //     })
-    // })
+    client.get(req.user.id, (err,data)=>{
+        User.findOrCreate({where:{
+            email: data,
+            albumName: req.body.albumName,
+            url: req.body.url.toString()
+        }}).spread((users, create)=>{
+            console.log(user.get({
+                plain: true
+            }))
+            console.log(create)
+        }).then(()=>{
+            console.log('add success')
+        }).catch((err)=>{
+            console.log(err)
+        })
+    })
+    // res.redirect('/login')
 })
 
 // app.get('/clearClarifai', (req,res)=>{

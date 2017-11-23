@@ -21,6 +21,7 @@ import { PhotosComponent } from './photos/photos.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FilterPipe } from './filter.pipe';
+import { AlbumComponent } from './album/album.component';
 // import { MatDialogModule } from '@angular/material/dialog';
 // import { Overlay } from '@angular/cdk/overlay'
 
@@ -34,7 +35,8 @@ import { FilterPipe } from './filter.pipe';
     SignupComponent,
     MembersComponent,
     PhotosComponent,
-    FilterPipe
+    FilterPipe,
+    AlbumComponent
   ],
   imports: [
     BrowserModule,

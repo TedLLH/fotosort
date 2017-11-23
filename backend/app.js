@@ -242,11 +242,18 @@ app.post('/createalbum', (req,res)=>{
             console.log(create)
         }).then(()=>{
             console.log('add success')
+            res.redirect('/login')
         }).catch((err)=>{
             console.log(err)
         })
     })
     // res.redirect('/login')
+})
+
+app.get('/album', (req,res)=>{
+    User.findAll().then((users)=>{
+        res.json(users)
+    })
 })
 
 // app.get('/clearClarifai', (req,res)=>{

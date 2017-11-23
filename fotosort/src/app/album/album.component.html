@@ -1,0 +1,9 @@
+<button (click)="getAlbum()">Get Album</button> 
+
+<div class="panel panel-default" *ngFor="let album of albums">
+  <p>{{album.albumName}}</p>
+  <div class="panel panel-default" *ngFor="let image of album.images">
+    <img src= {{image}}>
+  </div>
+  <!-- <img src= {{album}}> -->
+</div>

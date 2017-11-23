@@ -17,6 +17,85 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_gendir lazy recursive";
 
 /***/ }),
 
+/***/ "../../../../../src/app/album/album.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "img{\n    width: 100px;\n    height: 100px\n}", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/album/album.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<button (click)=\"getAlbum()\">Get Album</button> \n\n<div class=\"panel panel-default\" *ngFor=\"let album of albums\">\n  <p>{{album.albumName}}</p>\n  <div class=\"panel panel-default\" *ngFor=\"let image of album.images\">\n    <img src= {{image}}>\n  </div>\n  <!-- <img src= {{album}}> -->\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/album/album.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AlbumComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var AlbumComponent = (function () {
+    function AlbumComponent(http) {
+        this.http = http;
+        this.albums = [];
+    }
+    AlbumComponent.prototype.ngOnInit = function () {
+    };
+    AlbumComponent.prototype.getAlbum = function () {
+        var _this = this;
+        this.http.get('/album').subscribe(function (res) {
+            res.json().forEach(function (album) {
+                console.log(album.url.split(','));
+                var obj = {
+                    albumName: album.albumName,
+                    images: album.url.split(',')
+                };
+                _this.albums.push(obj);
+            });
+        }, function (err) { });
+    };
+    return AlbumComponent;
+}());
+AlbumComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-album',
+        template: __webpack_require__("../../../../../src/app/album/album.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/album/album.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]) === "function" && _a || Object])
+], AlbumComponent);
+
+var _a;
+//# sourceMappingURL=album.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/app-routing.module.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -161,12 +240,14 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__app_routing_module__ = __webpack_require__("../../../../../src/app/app-routing.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__photos_photos_component__ = __webpack_require__("../../../../../src/app/photos/photos.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__filter_pipe__ = __webpack_require__("../../../../../src/app/filter.pipe.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__album_album_component__ = __webpack_require__("../../../../../src/app/album/album.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -201,7 +282,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_13__signup_signup_component__["a" /* SignupComponent */],
             __WEBPACK_IMPORTED_MODULE_14__members_members_component__["a" /* MembersComponent */],
             __WEBPACK_IMPORTED_MODULE_16__photos_photos_component__["a" /* PhotosComponent */],
-            __WEBPACK_IMPORTED_MODULE_17__filter_pipe__["a" /* FilterPipe */]
+            __WEBPACK_IMPORTED_MODULE_17__filter_pipe__["a" /* FilterPipe */],
+            __WEBPACK_IMPORTED_MODULE_18__album_album_component__["a" /* AlbumComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -379,7 +461,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<!-- <mat-sidenav-container class=\"example-container\">\n  <mat-sidenav #sidenav class=\"example-sidenav\">\n    Jolly good!\n  </mat-sidenav>\n\n  <div class=\"example-sidenav-content\">\n    <button type=\"button\" mat-button (click)=\"sidenav.open()\">\n      Open sidenav\n    </button>\n  </div>\n\n</mat-sidenav-container> -->\n\n<button type='button' class='btn btn-primary' (click)='getPhoto()'>Get Photos</button>\n<button type='button' class='btn btn-primary' (click)='clearPhoto()'>Clear Clarifai Photos</button>\n\n<!-- <input type=\"file\" name=\"upload\" multiple> -->\n\n<!-- <div class=\"panel panel-default\" *ngFor=\"let link of photolinks\">\n  <img src= {{link}}>\n</div>    -->\n\n<!-- <app-photos></app-photos> -->\n <app-photos [photolinks]=\"photolinks\"></app-photos> \n\n"
+module.exports = "\n<!-- <mat-sidenav-container class=\"example-container\">\n  <mat-sidenav #sidenav class=\"example-sidenav\">\n    Jolly good!\n  </mat-sidenav>\n\n  <div class=\"example-sidenav-content\">\n    <button type=\"button\" mat-button (click)=\"sidenav.open()\">\n      Open sidenav\n    </button>\n  </div>\n\n</mat-sidenav-container> -->\n\n<button type='button' class='btn btn-primary' (click)='getPhoto()'>Get Photos</button>\n<button type='button' class='btn btn-primary' (click)='clearPhoto()'>Clear Clarifai Photos</button>\n\n<app-album></app-album>\n\n<!-- <input type=\"file\" name=\"upload\" multiple> -->\n\n<!-- <div class=\"panel panel-default\" *ngFor=\"let link of photolinks\">\n  <img src= {{link}}>\n</div>    -->\n\n<!-- <app-photos></app-photos> -->\n <app-photos [photolinks]=\"photolinks\"></app-photos> \n\n"
 
 /***/ }),
 

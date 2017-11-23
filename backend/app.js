@@ -236,7 +236,7 @@ app.post('/createalbum', (req,res)=>{
             albumName: req.body.albumName,
             url: req.body.url.toString()
         }}).spread((users, create)=>{
-            console.log(user.get({
+            console.log(users.get({
                 plain: true
             }))
             console.log(create)

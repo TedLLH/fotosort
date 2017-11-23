@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { Http, HttpModule } from '@angular/http';
+import { Http, HttpModule } from '@angular/http'; 
 
 import { AppComponent } from './app.component';
 import { PhotosService } from './photos.service';
@@ -17,9 +17,11 @@ import { MembersComponent } from './members/members.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { PhotosComponent } from './photos/photos.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FilterPipe } from './filter.pipe';
-// import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-// import { OverlayModule } from '@angular/cdk/overlay'
+// import { MatDialogModule } from '@angular/material/dialog';
+// import { Overlay } from '@angular/cdk/overlay'
 
 
 
@@ -46,9 +48,13 @@ import { FilterPipe } from './filter.pipe';
       messagingSenderId: "276231888981"
     }), 
     AngularFireDatabaseModule, 
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    // BrowserAnimationsModule,
+    // NoopAnimationsModule,
+    // MatDialogModule
+    // MatDialog, MatDialogRef
   ],
-  providers: [PhotosService, TokenService, HttpModule, AuthGuard/*, OverlayModule, MatDialog*/],
+  providers: [PhotosService, TokenService, HttpModule, AuthGuard/*, Overlay ,MatDialogModule*/],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -8,6 +8,8 @@ const redis = require('redis');
 const Clarifai = require('clarifai');
 const passport = require('passport');
 const session = require('express-session');
+const model = require('./models');
+const User = model.user
 require ('dotenv').config();
 
 // http://localhost:8080/oauth2callback 
@@ -40,6 +42,11 @@ passport.use(new GoogleStrategy({
 }, (accessToken, refreshToken, profile, done) => {
     console.log(profile.id + profile.emails[0].value);
      process.nextTick(function () {
+        client.set(profile.id, profile.emails[0].value, (err)=>{
+            if(err){
+                console.log('can;t save email');
+            }
+        })
         client.set('accessT', accessToken, (err)=>{
             if(err){console.log('eerrr in saving accessToken from google auth')}
         })
@@ -219,6 +226,18 @@ app.get('/getphoto',authRequired, (req,res)=>{
     })
     
 });
+
+app.post('/createalbum', (req,res)=>{
+    console.log(req.body.albumName)
+    res.redirect('/login')
+    // client.get(req.user.id, (err,data)=>{
+    //     User.findOrCreate({
+    //         email: data,
+    //         albumName: req.query.name,
+    //         url: req
+    //     })
+    // })
+})
 
 // app.get('/clearClarifai', (req,res)=>{
 //     clarifai.inputs.delete().then(

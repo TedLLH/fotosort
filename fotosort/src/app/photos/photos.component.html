@@ -1,9 +1,14 @@
-<form>
-  Search Box: <input type='text' placeholder="search" name="term" (input)="onSearch($event)">
-</form>
+<form method="POST" action="/createalbum" id="createForm">
+  Create Album: <input type='text' placeholder="albumName" name="albumName" >
+  <button type="submit" form="createForm" value="Submit">Submit</button>
+</form>  
 
-<div class="panel panel-default" *ngFor="let link of photolinks | filter:term">
+ <form>
+  Search Box: <input type='text' placeholder="search" name="term" (input)="onSearch($event)">
+</form> 
+
+ <div class="panel panel-default" *ngFor="let link of photolinks | filter:term" (click)="addLink(link.image)">
   <img src= {{link.image}}>
-  <p>{{link.tags}}</p>
-</div> 
- <button (click)="openDialog()">Click here laaa</button>
+  <!-- <p>{{link.tags}}</p> -->
+</div>
+ <button (click)="openDialog()">Click here laaa</button> 

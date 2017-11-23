@@ -69,7 +69,7 @@ var routingComponents = [__WEBPACK_IMPORTED_MODULE_3__signup_signup_component__[
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
 // imports
-
+exports.i(__webpack_require__("../../../../css-loader/index.js?{\"sourceMap\":false,\"importLoaders\":1}!../../../../postcss-loader/index.js?{\"ident\":\"postcss\"}!../../../material/prebuilt-themes/indigo-pink.css"), "");
 
 // module
 exports.push([module.i, "", ""]);
@@ -159,6 +159,7 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__members_members_component__ = __webpack_require__("../../../../../src/app/members/members.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__app_routing_module__ = __webpack_require__("../../../../../src/app/app-routing.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__photos_photos_component__ = __webpack_require__("../../../../../src/app/photos/photos.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__filter_pipe__ = __webpack_require__("../../../../../src/app/filter.pipe.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -181,8 +182,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-// import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-// import { OverlayModule } from '@angular/cdk/overlay'
+
+// import { MatDialogModule } from '@angular/material/dialog';
+// import { Overlay } from '@angular/cdk/overlay'
 var AppModule = (function () {
     function AppModule() {
     }
@@ -196,7 +198,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_11__email_email_component__["a" /* EmailComponent */],
             __WEBPACK_IMPORTED_MODULE_12__signup_signup_component__["a" /* SignupComponent */],
             __WEBPACK_IMPORTED_MODULE_13__members_members_component__["a" /* MembersComponent */],
-            __WEBPACK_IMPORTED_MODULE_15__photos_photos_component__["a" /* PhotosComponent */]
+            __WEBPACK_IMPORTED_MODULE_15__photos_photos_component__["a" /* PhotosComponent */],
+            __WEBPACK_IMPORTED_MODULE_16__filter_pipe__["a" /* FilterPipe */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -211,9 +214,9 @@ AppModule = __decorate([
                 messagingSenderId: "276231888981"
             }),
             __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__["a" /* AngularFireDatabaseModule */],
-            __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__["a" /* AngularFireAuthModule */]
+            __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__["a" /* AngularFireAuthModule */],
         ],
-        providers: [__WEBPACK_IMPORTED_MODULE_4__photos_service__["a" /* PhotosService */], __WEBPACK_IMPORTED_MODULE_5__token_service__["a" /* TokenService */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* HttpModule */], __WEBPACK_IMPORTED_MODULE_6__authguard_service__["a" /* AuthGuard */] /*, OverlayModule, MatDialog*/],
+        providers: [__WEBPACK_IMPORTED_MODULE_4__photos_service__["a" /* PhotosService */], __WEBPACK_IMPORTED_MODULE_5__token_service__["a" /* TokenService */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* HttpModule */], __WEBPACK_IMPORTED_MODULE_6__authguard_service__["a" /* AuthGuard */] /*, Overlay ,MatDialogModule*/],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
@@ -314,6 +317,40 @@ EmailComponent = __decorate([
 
 /***/ }),
 
+/***/ "../../../../../src/app/filter.pipe.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FilterPipe; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var FilterPipe = (function () {
+    function FilterPipe() {
+    }
+    FilterPipe.prototype.transform = function (photolinks, term) {
+        console.log(Array.isArray(term));
+        if (!term)
+            return photolinks;
+        return photolinks.filter(function (link) { return link.tags.toString().toLowerCase().includes(term.toLowerCase()); });
+    };
+    return FilterPipe;
+}());
+FilterPipe = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["X" /* Pipe */])({
+        name: 'filter'
+    })
+], FilterPipe);
+
+//# sourceMappingURL=filter.pipe.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/login/login.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -335,7 +372,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<!-- <mat-sidenav-container class=\"example-container\">\n  <mat-sidenav #sidenav class=\"example-sidenav\">\n    Jolly good!\n  </mat-sidenav>\n\n  <div class=\"example-sidenav-content\">\n    <button type=\"button\" mat-button (click)=\"sidenav.open()\">\n      Open sidenav\n    </button>\n  </div>\n\n</mat-sidenav-container> -->\n\n<button type='button' class='btn btn-primary' (click)='getPhoto()'>Get Photos</button>\n<button type='button' class='btn btn-primary' (click)='clearPhoto()'>Clear Clarifai Photos</button>\n\n<!-- <input type=\"file\" name=\"upload\" multiple> -->\n\n<!-- <div class=\"panel panel-default\" *ngFor=\"let link of photolinks\">\n  <img src= {{link}}>\n</div>    -->\n\n<app-photos [photolinks]=\"photolinks\"></app-photos>\n\n"
+module.exports = "\n<!-- <mat-sidenav-container class=\"example-container\">\n  <mat-sidenav #sidenav class=\"example-sidenav\">\n    Jolly good!\n  </mat-sidenav>\n\n  <div class=\"example-sidenav-content\">\n    <button type=\"button\" mat-button (click)=\"sidenav.open()\">\n      Open sidenav\n    </button>\n  </div>\n\n</mat-sidenav-container> -->\n\n<button type='button' class='btn btn-primary' (click)='getPhoto()'>Get Photos</button>\n<button type='button' class='btn btn-primary' (click)='clearPhoto()'>Clear Clarifai Photos</button>\n\n<!-- <input type=\"file\" name=\"upload\" multiple> -->\n\n<!-- <div class=\"panel panel-default\" *ngFor=\"let link of photolinks\">\n  <img src= {{link}}>\n</div>    -->\n\n<app-photos></app-photos>\n<!-- <app-photos [photolinks]=\"photolinks\"></app-photos> -->\n\n"
 
 /***/ }),
 
@@ -368,7 +405,6 @@ var LoginComponent = (function () {
         this.http = http;
         this.tokenService = tokenService;
         this.photolinks = [];
-        this.tags = [];
     }
     LoginComponent.prototype.ngOnInit = function () {
     };
@@ -381,7 +417,6 @@ var LoginComponent = (function () {
         var _this = this;
         console.log('clciked');
         this.photosService.onGetPhoto().subscribe(function (res) {
-            _this.photolinks = [];
             _this.photolinks = res.json()['links'];
         }, function (err) { });
     };
@@ -523,7 +558,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "img{\n    width: 100px;\n    height: 100px\n}", ""]);
 
 // exports
 
@@ -536,7 +571,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/photos/photos.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-default\" *ngFor=\"let link of photolinks\">\n  <img src= {{link.image}}>\n  <p>{{link.tags}}</p>\n</div> \n <button (click)=\"openDialog()\">Click here laaa</button>"
+module.exports = "<form method=\"POST\" action=\"/createalbum\" id=\"createForm\">\n  Create Album: <input type='text' placeholder=\"albumName\" name=\"albumName\" >\n  <button type=\"submit\" form=\"createForm\" value=\"Submit\">Submit</button>\n</form>  \n\n <form>\n  Search Box: <input type='text' placeholder=\"search\" name=\"term\" (input)=\"onSearch($event)\">\n</form> \n\n <div class=\"panel panel-default\" *ngFor=\"let link of photolinks | filter:term\" (click)=\"addLink(link.image)\">\n  <img src= {{link.image}}>\n  <!-- <p>{{link.tags}}</p> -->\n</div>\n <button (click)=\"openDialog()\">Click here laaa</button> "
 
 /***/ }),
 
@@ -558,20 +593,46 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-// import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+// import { BrowserModule } from '@angular/platform-browser';
+// import { ReactiveFormsModule } from '@angular/forms'; 
+// import { FormControl,FormGroup, Validators } from '@angular/forms';
+// import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'; 
+// import { MatDialogModule } from '@angular/material/dialog';
 // import { OverlayModule } from '@angular/cdk/overlay'
 var PhotosComponent = (function () {
     function PhotosComponent(photosService /*, public dialog: MatDialog*/) {
         this.photosService = photosService; /*, public dialog: MatDialog*/
+        // @Input() photolinks
+        this.photolinks = [{ 'image': 'http://icons.iconarchive.com/icons/martz90/circle/512/camera-icon.png' }, { 'image': 'http://icons.iconarchive.com/icons/pelfusion/long-shadow-media/512/Camera-icon.png' }, { 'image': 'https://image.freepik.com/free-icon/whatsapp-logo_318-49685.jpg' }];
+        this.term = '';
+        this.photoURLyouwanttoadd = [];
+        this.albumName = '';
     }
     PhotosComponent.prototype.ngOnInit = function () {
     };
+    PhotosComponent.prototype.onSearch = function (e) {
+        this.term = e.target.value;
+    };
+    PhotosComponent.prototype.onName = function (e) {
+        this.albumName = e.target.value;
+        console.log(this.albumName);
+    };
+    PhotosComponent.prototype.onCreate = function (e) {
+        console.log(e);
+    };
+    PhotosComponent.prototype.addLink = function (link) {
+        if (!this.photoURLyouwanttoadd.includes(link)) {
+            this.photoURLyouwanttoadd.push(link);
+        }
+        else {
+            this.photoURLyouwanttoadd = this.photoURLyouwanttoadd.filter(function (n) {
+                return n != link;
+            });
+        }
+        console.log(this.photoURLyouwanttoadd);
+    };
     return PhotosComponent;
 }());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
-    __metadata("design:type", Object)
-], PhotosComponent.prototype, "photolinks", void 0);
 PhotosComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
         selector: 'app-photos',
@@ -806,20 +867,96 @@ var environment = {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__("../../../platform-browser-dynamic/@angular/platform-browser-dynamic.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__("../../../../../src/app/app.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__polyfills__ = __webpack_require__("../../../../../src/polyfills.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser_dynamic__ = __webpack_require__("../../../platform-browser-dynamic/@angular/platform-browser-dynamic.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_app_module__ = __webpack_require__("../../../../../src/app/app.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
 
 
 
 
-if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production) {
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_23" /* enableProdMode */])();
+
+if (__WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].production) {
+    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["_23" /* enableProdMode */])();
 }
-Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */])
+Object(__WEBPACK_IMPORTED_MODULE_2__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_3__app_app_module__["a" /* AppModule */])
     .catch(function (err) { return console.log(err); });
 //# sourceMappingURL=main.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/polyfills.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_core_js_es7_reflect__ = __webpack_require__("../../../../core-js/es7/reflect.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_core_js_es7_reflect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_core_js_es7_reflect__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_zone_js_dist_zone__ = __webpack_require__("../../../../zone.js/dist/zone.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_zone_js_dist_zone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_zone_js_dist_zone__);
+/**
+ * This file includes polyfills needed by Angular and is loaded before the app.
+ * You can add your own extra polyfills to this file.
+ *
+ * This file is divided into 2 sections:
+ *   1. Browser polyfills. These are applied before loading ZoneJS and are sorted by browsers.
+ *   2. Application imports. Files imported after ZoneJS that should be loaded before your main
+ *      file.
+ *
+ * The current setup is for so-called "evergreen" browsers; the last versions of browsers that
+ * automatically update themselves. This includes Safari >= 10, Chrome >= 55 (including Opera),
+ * Edge >= 13 on the desktop, and iOS 10 and Chrome on mobile.
+ *
+ * Learn more in https://angular.io/docs/ts/latest/guide/browser-support.html
+ */
+/***************************************************************************************************
+ * BROWSER POLYFILLS
+ */
+/** IE9, IE10 and IE11 requires all of the following polyfills. **/
+// import 'core-js/es6/symbol';
+// import 'core-js/es6/object';
+// import 'core-js/es6/function';
+// import 'core-js/es6/parse-int';
+// import 'core-js/es6/parse-float';
+// import 'core-js/es6/number';
+// import 'core-js/es6/math';
+// import 'core-js/es6/string';
+// import 'core-js/es6/date';
+// import 'core-js/es6/array';
+// import 'core-js/es6/regexp';
+// import 'core-js/es6/map';
+// import 'core-js/es6/weak-map';
+// import 'core-js/es6/set';
+/** IE10 and IE11 requires the following for NgClass support on SVG elements */
+// import 'classlist.js';  // Run `npm install --save classlist.js`.
+/** IE10 and IE11 requires the following for the Reflect API. */
+// import 'core-js/es6/reflect';
+/** Evergreen browsers require these. **/
+// Used for reflect-metadata in JIT. If you use AOT (and only Angular decorators), you can remove.
+
+/**
+ * Required to support Web Animations `@angular/platform-browser/animations`.
+ * Needed for: All but Chrome, Firefox and Opera. http://caniuse.com/#feat=web-animation
+ **/
+// import 'web-animations-js';  // Run `npm install --save web-animations-js`.
+/***************************************************************************************************
+ * Zone JS is required by Angular itself.
+ */
+ // Included with Angular CLI.
+/***************************************************************************************************
+ * APPLICATION IMPORTS
+ */
+/**
+ * Date, currency, decimal and percent pipes.
+ * Needed for: All but Chrome, Firefox, Edge, IE11 and Safari 10
+ */
+// import 'intl';  // Run `npm install --save intl`.
+/**
+ * Need to import at least one locale-data with intl.
+ */
+// import 'intl/locale-data/jsonp/en';
+//# sourceMappingURL=polyfills.js.map
 
 /***/ }),
 

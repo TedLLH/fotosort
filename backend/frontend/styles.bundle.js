@@ -35,7 +35,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n", ""]);
+exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n/* @import \"/fotosort/node_modules/@angular/material/prebuilt-themes/indigo-pink.css\" */\n\n", ""]);
 
 // exports
 

@@ -38,7 +38,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/album/album.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<button (click)=\"getAlbum()\">Get Album</button> \n\n<div class=\"panel panel-default\" *ngFor=\"let album of albums\">\n  <p>{{album.albumName}}</p>\n  <div class=\"panel panel-default\" *ngFor=\"let image of album.images\">\n    <img src= {{image}}>\n  </div>\n  <!-- <img src= {{album}}> -->\n</div>"
+module.exports = "<div> \n  <button (click)=\"getAlbum()\">Get Album</button>\n</div>\n\n<div class=\"panel panel-default\" *ngFor=\"let album of albums\">\n  <p>{{album.albumName}} <button (click)=\"deleteAlbum(album.albumID)\">Delete Album</button> </p>\n  \n  <div class=\"panel panel-default\" *ngFor=\"let album of album.images\">\n    <img src= {{album.image}}>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -69,16 +69,42 @@ var AlbumComponent = (function () {
     };
     AlbumComponent.prototype.getAlbum = function () {
         var _this = this;
-        this.http.get('/album').subscribe(function (res) {
-            res.json().forEach(function (album) {
+        this.http.get('/album')
+            .subscribe(function (response) {
+            response.json().forEach(function (album) {
                 console.log(album.url.split(','));
                 var obj = {
+                    albumID: album.id,
                     albumName: album.albumName,
                     images: album.url.split(',')
                 };
                 _this.albums.push(obj);
             });
-        }, function (err) { });
+        }, function (err) {
+            console.log(err);
+        });
+    };
+    AlbumComponent.prototype.deleteAlbum = function (id) {
+        this.http.delete('/deletealbum/' + id)
+            .subscribe(function (response) {
+            response.json().forEach(function (album) {
+                console.log(id);
+                console.log(album.url.split(','));
+                var obj = {
+                    albumID: album.id,
+                    albumName: album.albumName,
+                    images: album.url.split(',')
+                };
+            });
+            console.log(response),
+                function (error) {
+                    console.log(error);
+                };
+        });
+        this.albums = this.albums.filter(function (n) {
+            return n.albumID != id;
+        });
+        console.log(this.albums);
     };
     return AlbumComponent;
 }());
@@ -504,7 +530,7 @@ var LoginComponent = (function () {
     };
     LoginComponent.prototype.getPhoto = function () {
         var _this = this;
-        console.log('clciked');
+        console.log('clicked');
         this.photosService.onGetPhoto().subscribe(function (res) {
             _this.photolinks = res.json()['links'];
         }, function (err) { });

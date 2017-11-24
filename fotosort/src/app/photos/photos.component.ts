@@ -19,14 +19,23 @@ import { Http } from '@angular/http';
 })
 export class PhotosComponent implements OnInit {
   
-  @Input() photolinks
+  @Input() photolinks 
   // photolinks = [{'image': 'http://icons.iconarchive.com/icons/martz90/circle/512/camera-icon.png'}, {'image':'http://icons.iconarchive.com/icons/pelfusion/long-shadow-media/512/Camera-icon.png'}, {'image': 'https://image.freepik.com/free-icon/whatsapp-logo_318-49685.jpg'}];
+  photos
 
   term:string = '';
+
+  searchTerm:any[] = [];
+
+  searchConfirm:any[] = [];
 
   photoURLyouwanttoadd:string[] = []
 
   albumName:string = '';
+
+  loading:boolean = false;
+
+  deleted:boolean = false;
 
   constructor(private http:Http, private photosService:PhotosService/*, public dialog: MatDialog*/) { }
 
@@ -34,8 +43,56 @@ export class PhotosComponent implements OnInit {
    
   }
 
-  onSearch(e){
-    this.term = e.target.value;
+  // onSearch(e){
+  //   this.term = e.target.value;
+  // }
+
+
+  changeStyle(term){
+    if(this.searchConfirm.includes(term)){
+      this.searchConfirm = this.searchConfirm.filter((n)=>{return n != term})
+      this.searchTerm.forEach((T)=>{
+        if(T.term == term){
+          T.myStyle = {
+            background: 'red'
+          }
+        }
+      })
+    } else {
+    this.searchConfirm.push(term);
+      this.searchTerm.forEach((T)=>{
+        if(T.term == term){
+          T.myStyle = {
+            background: 'green'
+          }
+        }
+      })
+    }
+  }
+
+  addTerm(){
+    var obj:any = {
+      term: this.term,
+      myStyle: {
+        background: 'green'
+      }
+    }
+    this.searchTerm.push(obj)
+    this.searchConfirm.push(this.term)
+    this.term = '';
+  }
+
+  deleteTag(tag){
+    this.searchTerm = this.searchTerm.filter((n)=>{
+        return n.term != tag
+    })
+    this.searchConfirm = this.searchConfirm.filter((n)=>{
+      return n != tag
+    })
+    console.log(this.searchTerm)
+  }
+
+  changePhoto(){
   }
 
   createAlbum(){
@@ -54,34 +111,7 @@ export class PhotosComponent implements OnInit {
     console.log(this.photoURLyouwanttoadd)
   }
 
-  // openDialog(): void {
-  //   let dialogRef = this.dialog.open(PhotoDialog, {
-  //     width: '250px',
-  //     data: {}
-  //   });
-
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log('The dialog was closed');
-  //   });
-  // }
 
 
 
 }
-
-// @Component({
-//   selector: 'photo-dialog',
-//   templateUrl: 'photo-dialog.html',
-// })
-// export class PhotoDialog {
-
-//   constructor(
-//     public dialogRef: MatDialogRef<PhotoDialog>,
-//     @Inject(MAT_DIALOG_DATA) public data: any) { }
-
-//   onNoClick(): void {
-//     this.dialogRef.close();
-//   }
-
-// }
-

@@ -423,10 +423,24 @@ var FilterPipe = (function () {
     function FilterPipe() {
     }
     FilterPipe.prototype.transform = function (photolinks, term) {
-        console.log(Array.isArray(term));
-        if (!term)
+        var emptyArray = [{ image: 'http://www.ellagret.gr/images/no-photo.jpg', tags: [] }];
+        if (term.length == 0)
             return photolinks;
-        return photolinks.filter(function (link) { return link.tags.toString().toLowerCase().includes(term.toLowerCase()); });
+        var correctTerm = 0;
+        term.forEach(function (c) {
+            photolinks.forEach(function (n) {
+                if (n.includes(c)) {
+                    correctTerm++;
+                }
+            });
+        });
+        if (correctTerm !== 0) {
+            return photolinks;
+        }
+        else {
+            return emptyArray;
+        }
+        // return photolinks.tags.filter(link => link.tags.toString().toLowerCase().includes(term.toLowerCase()))
     };
     return FilterPipe;
 }());
@@ -647,7 +661,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "img{\n    width: 300px;\n    height: 300px\n}", ""]);
+exports.push([module.i, "img{\n    width: 300px;\n    height: 300px\n}\n\n#tagbutton{\n    background-color: lightblue;\n    transition: 0.5s;\n    -webkit-transition: 0.5s;\n}\n\n#cross {\n    height: 10px;\n    width: 10px;\n}\n\n#crossbutton{\n    opacity: 0;\n    transition: 0.5s;\n    -webkit-transition: 0.5s;\n}\n\n#crossbutton:hover{\n    opacity: 1;\n    transition: 0.5s;\n    -webkit-transition: 0.5s;\n}\n\n.strike {\n    text-decoration: line-through;\n}\n\n .switch {\n  width: 60px;\n  height: 34px;\n}\n\n.switch .taginput {display:none;}\n\n.slider {\n  cursor: pointer;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: #ffff66;\n  transition: .4s;\n}\n\n.slider:before {\n  content: \"\";\n  height: 26px;\n  width: 26px;\n  left: 4px;\n  bottom: 4px;\n  background-color: white;\n  transition: .4s;\n}\n\n.taginput:checked + .slider {\n  background-color: #2196F3;\n}\n\n.taginput:focus + .slider {\n  box-shadow: 0 0 1px #2196F3;\n}", ""]);
 
 // exports
 
@@ -660,7 +674,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/photos/photos.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <form method=\"POST\" action=\"/createalbum\" id=\"createForm\">\n  Create Album: <input type='text' placeholder=\"albumName\" name=\"albumName\" >\n  <button type=\"submit\" form=\"createForm\" value=\"Submit\">Submit</button>\n</form>   -->\n\n<input [(ngModel)]=\"albumName\" placeholder=\"Album Name\">\n<button (click)=\"createAlbum()\">Create Album</button>\n\n <form>\n  Search Box: <input type='text' placeholder=\"search\" name=\"term\" (input)=\"onSearch($event)\">\n</form> \n\n <div class=\"panel panel-default\" *ngFor=\"let link of photolinks | filter:term\" (click)=\"addLink(link.image)\">\n  <img src= {{link.image}}>\n   <p>{{link.tags}}</p> \n</div>\n <button (click)=\"openDialog()\">Click here laaa</button> "
+module.exports = "\n<input [(ngModel)]=\"albumName\" placeholder=\"Album Name\">\n<button (click)=\"createAlbum()\">Create Album</button>\n\n<input [(ngModel)]=\"term\" placeholder=\"Add Keyword\">\n<button (click)=\"addTerm()\">Enter</button>\n\n<div *ngFor='let term of searchTerm'>\n  <button [ngStyle]=\"term.myStyle\" (click)=\"changeStyle(term.term)\"> {{term.term}} <button (click)=\"deleteTag(term.term)\" id=\"crossbutton\"><img id=\"cross\" src=\"https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png\"></button></button>\n</div> \n\n <!-- <div *ngFor='let term of searchTerm' class=\"slider\">\n  <input type='checkbox' class='taginput'> {{term}} <button (click)=\"deleteTag(term)\" id=\"crossbutton\"><img id=\"cross\" src=\"https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png\"></button>\n</div>  -->\n\n\n<!-- <label *ngFor='let term of searchTerm' class=\"switch\">\n  <input type=\"checkbox\" class='taginput'> {{term}} <button (click)=\"deleteTag(term)\" id=\"crossbutton\"><img id=\"cross\" src=\"https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png\"></button>\n  <span class=\"slider\"></span>\n</label> -->\n\n<!-- <input [ngStyle]=\"myStyle\" type=\"button\" value=\"set color\" (click)=\"changeStyle()\"> -->\n<!-- <button [ngStyle]=\"myStyle\" (click)=\"changeStyle()\">SET COLOR</button> -->\n\n <!-- <form>\n  Search Box: <input type='text' placeholder=\"search\" name=\"term\" (input)=\"onSearch($event)\">\n</form>  -->\n\n <span>\n  <img *ngIf=\"loading\" src=\"https://gifimage.net/wp-content/uploads/2017/09/animated-gif-loading-12.gif\">\n</span> \n\n\n <div class=\"panel panel-default\" *ngFor=\"let link of photolinks | filter:searchConfirm\" (click)=\"addLink(link.image)\">\n  <img src= {{link.image}}>\n  <div *ngFor=\"let tag of link.tags\">\n    <span>{{tag}}</span>\n</div>\n <button (click)=\"openDialog()\">Click here laaa</button> "
 
 /***/ }),
 
@@ -694,15 +708,62 @@ var PhotosComponent = (function () {
     function PhotosComponent(http, photosService /*, public dialog: MatDialog*/) {
         this.http = http;
         this.photosService = photosService; /*, public dialog: MatDialog*/
-        // photolinks = [{'image': 'http://icons.iconarchive.com/icons/martz90/circle/512/camera-icon.png'}, {'image':'http://icons.iconarchive.com/icons/pelfusion/long-shadow-media/512/Camera-icon.png'}, {'image': 'https://image.freepik.com/free-icon/whatsapp-logo_318-49685.jpg'}];
         this.term = '';
+        this.searchTerm = [];
+        this.searchConfirm = [];
         this.photoURLyouwanttoadd = [];
         this.albumName = '';
+        this.loading = false;
+        this.deleted = false;
     }
     PhotosComponent.prototype.ngOnInit = function () {
     };
-    PhotosComponent.prototype.onSearch = function (e) {
-        this.term = e.target.value;
+    // onSearch(e){
+    //   this.term = e.target.value;
+    // }
+    PhotosComponent.prototype.changeStyle = function (term) {
+        if (this.searchConfirm.includes(term)) {
+            this.searchConfirm = this.searchConfirm.filter(function (n) { return n != term; });
+            this.searchTerm.forEach(function (T) {
+                if (T.term == term) {
+                    T.myStyle = {
+                        background: 'red'
+                    };
+                }
+            });
+        }
+        else {
+            this.searchConfirm.push(term);
+            this.searchTerm.forEach(function (T) {
+                if (T.term == term) {
+                    T.myStyle = {
+                        background: 'green'
+                    };
+                }
+            });
+        }
+    };
+    PhotosComponent.prototype.addTerm = function () {
+        var obj = {
+            term: this.term,
+            myStyle: {
+                background: 'green'
+            }
+        };
+        this.searchTerm.push(obj);
+        this.searchConfirm.push(this.term);
+        this.term = '';
+    };
+    PhotosComponent.prototype.deleteTag = function (tag) {
+        this.searchTerm = this.searchTerm.filter(function (n) {
+            return n.term != tag;
+        });
+        this.searchConfirm = this.searchConfirm.filter(function (n) {
+            return n != tag;
+        });
+        console.log(this.searchTerm);
+    };
+    PhotosComponent.prototype.changePhoto = function () {
     };
     PhotosComponent.prototype.createAlbum = function () {
         console.log(this.albumName);
@@ -735,18 +796,6 @@ PhotosComponent = __decorate([
 ], PhotosComponent);
 
 var _a, _b;
-// @Component({
-//   selector: 'photo-dialog',
-//   templateUrl: 'photo-dialog.html',
-// })
-// export class PhotoDialog {
-//   constructor(
-//     public dialogRef: MatDialogRef<PhotoDialog>,
-//     @Inject(MAT_DIALOG_DATA) public data: any) { }
-//   onNoClick(): void {
-//     this.dialogRef.close();
-//   }
-// }
 //# sourceMappingURL=photos.component.js.map
 
 /***/ }),

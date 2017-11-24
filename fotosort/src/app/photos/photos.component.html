@@ -1,17 +1,39 @@
-<!-- <form method="POST" action="/createalbum" id="createForm">
-  Create Album: <input type='text' placeholder="albumName" name="albumName" >
-  <button type="submit" form="createForm" value="Submit">Submit</button>
-</form>   -->
 
 <input [(ngModel)]="albumName" placeholder="Album Name">
 <button (click)="createAlbum()">Create Album</button>
 
- <form>
-  Search Box: <input type='text' placeholder="search" name="term" (input)="onSearch($event)">
-</form> 
+<input [(ngModel)]="term" placeholder="Add Keyword">
+<button (click)="addTerm()">Enter</button>
 
- <div class="panel panel-default" *ngFor="let link of photolinks | filter:term" (click)="addLink(link.image)">
+<div *ngFor='let term of searchTerm'>
+  <button [ngStyle]="term.myStyle" (click)="changeStyle(term.term)"> {{term.term}} <button (click)="deleteTag(term.term)" id="crossbutton"><img id="cross" src="https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png"></button></button>
+</div> 
+
+ <!-- <div *ngFor='let term of searchTerm' class="slider">
+  <input type='checkbox' class='taginput'> {{term}} <button (click)="deleteTag(term)" id="crossbutton"><img id="cross" src="https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png"></button>
+</div>  -->
+
+
+<!-- <label *ngFor='let term of searchTerm' class="switch">
+  <input type="checkbox" class='taginput'> {{term}} <button (click)="deleteTag(term)" id="crossbutton"><img id="cross" src="https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png"></button>
+  <span class="slider"></span>
+</label> -->
+
+<!-- <input [ngStyle]="myStyle" type="button" value="set color" (click)="changeStyle()"> -->
+<!-- <button [ngStyle]="myStyle" (click)="changeStyle()">SET COLOR</button> -->
+
+ <!-- <form>
+  Search Box: <input type='text' placeholder="search" name="term" (input)="onSearch($event)">
+</form>  -->
+
+ <span>
+  <img *ngIf="loading" src="https://gifimage.net/wp-content/uploads/2017/09/animated-gif-loading-12.gif">
+</span> 
+
+
+ <div class="panel panel-default" *ngFor="let link of photolinks | filter:searchConfirm" (click)="addLink(link.image)">
   <img src= {{link.image}}>
-   <p>{{link.tags}}</p> 
+  <div *ngFor="let tag of link.tags">
+    <span>{{tag}}</span>
 </div>
  <button (click)="openDialog()">Click here laaa</button> 

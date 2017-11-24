@@ -2,3 +2,67 @@ img{
     width: 300px;
     height: 300px
 }
+
+#tagbutton{
+    background-color: lightblue;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+}
+
+#cross {
+    height: 10px;
+    width: 10px;
+}
+
+#crossbutton{
+    opacity: 0;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+}
+
+#crossbutton:hover{
+    opacity: 1;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+}
+
+.strike {
+    text-decoration: line-through;
+}
+
+ .switch {
+  width: 60px;
+  height: 34px;
+}
+
+.switch .taginput {display:none;}
+
+.slider {
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ffff66;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.taginput:checked + .slider {
+  background-color: #2196F3;
+}
+
+.taginput:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}

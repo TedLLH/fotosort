@@ -16,16 +16,48 @@ export class AlbumComponent implements OnInit {
   }
 
   getAlbum(){
-    this.http.get('/album').subscribe((res)=>{
-      res.json().forEach((album)=>{
-        console.log(album.url.split(','))
-        var obj = {
-          albumName: album.albumName,
-          images: album.url.split(',')
-        }
+    this.http.get('/album')
+    .subscribe(
+      (response)=>{
+        response.json().forEach((album)=>{
+          console.log(album.url.split(','))
+            var obj = {
+              albumID:album.id,
+              albumName: album.albumName,
+              images: album.url.split(',')
+            }
         this.albums.push(obj)
       })
-    }, (err)=>{})
+    }, 
+    (err)=>{
+      console.log(err)
+    })
   }
 
-}
+  deleteAlbum(id){
+    this.http.delete('/deletealbum/'+id)
+    
+    .subscribe(
+       (response)=>{
+         response.json().forEach((album)=>{
+           console.log(id);
+           console.log(album.url.split(','));
+            let obj ={
+              albumID:album.id,
+              albumName:album.albumName,
+              images:album.url.split(',')
+              }
+          })
+          console.log(response),
+         (error)=>{
+          console.log(error)
+          }
+        }
+      )
+      this.albums = this.albums.filter((n)=>{
+      return n.albumID !=id
+      })
+    
+     console.log(this.albums)
+    }
+  }

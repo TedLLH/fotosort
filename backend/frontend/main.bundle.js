@@ -38,7 +38,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/album/album.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<button (click)=\"getAlbum()\">Get Album</button> \n\n<div class=\"panel panel-default\" *ngFor=\"let album of albums\">\n  <p>{{album.albumName}}</p>\n  <div class=\"panel panel-default\" *ngFor=\"let image of album.images\">\n    <img src= {{image}}>\n  </div>\n  <!-- <img src= {{album}}> -->\n</div>"
+module.exports = "<div> \n  <button (click)=\"getAlbum()\">Get Album</button>\n</div>\n\n<div class=\"panel panel-default\" *ngFor=\"let album of albums\">\n  <p>{{album.albumName}} <button (click)=\"deleteAlbum(album.albumID)\">Delete Album</button> </p>\n  \n  <div class=\"panel panel-default\" *ngFor=\"let album of album.images\">\n    <img src= {{album.image}}>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -69,16 +69,42 @@ var AlbumComponent = (function () {
     };
     AlbumComponent.prototype.getAlbum = function () {
         var _this = this;
-        this.http.get('/album').subscribe(function (res) {
-            res.json().forEach(function (album) {
+        this.http.get('/album')
+            .subscribe(function (response) {
+            response.json().forEach(function (album) {
                 console.log(album.url.split(','));
                 var obj = {
+                    albumID: album.id,
                     albumName: album.albumName,
                     images: album.url.split(',')
                 };
                 _this.albums.push(obj);
             });
-        }, function (err) { });
+        }, function (err) {
+            console.log(err);
+        });
+    };
+    AlbumComponent.prototype.deleteAlbum = function (id) {
+        this.http.delete('/deletealbum/' + id)
+            .subscribe(function (response) {
+            response.json().forEach(function (album) {
+                console.log(id);
+                console.log(album.url.split(','));
+                var obj = {
+                    albumID: album.id,
+                    albumName: album.albumName,
+                    images: album.url.split(',')
+                };
+            });
+            console.log(response),
+                function (error) {
+                    console.log(error);
+                };
+        });
+        this.albums = this.albums.filter(function (n) {
+            return n.albumID != id;
+        });
+        console.log(this.albums);
     };
     return AlbumComponent;
 }());
@@ -518,7 +544,7 @@ var LoginComponent = (function () {
     };
     LoginComponent.prototype.getPhoto = function () {
         var _this = this;
-        console.log('clciked');
+        console.log('clicked');
         this.photosService.onGetPhoto().subscribe(function (res) {
             _this.photolinks = res.json()['links'];
         }, function (err) { });
@@ -661,7 +687,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "img{\n    width: 300px;\n    height: 300px\n}\n\n#tagbutton{\n    background-color: lightblue;\n    transition: 0.5s;\n    -webkit-transition: 0.5s;\n}\n\n#cross {\n    height: 10px;\n    width: 10px;\n}\n\n#crossbutton{\n    opacity: 0;\n    transition: 0.5s;\n    -webkit-transition: 0.5s;\n}\n\n#crossbutton:hover{\n    opacity: 1;\n    transition: 0.5s;\n    -webkit-transition: 0.5s;\n}\n\n.strike {\n    text-decoration: line-through;\n}\n\n .switch {\n  width: 60px;\n  height: 34px;\n}\n\n.switch .taginput {display:none;}\n\n.slider {\n  cursor: pointer;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: #ffff66;\n  transition: .4s;\n}\n\n.slider:before {\n  content: \"\";\n  height: 26px;\n  width: 26px;\n  left: 4px;\n  bottom: 4px;\n  background-color: white;\n  transition: .4s;\n}\n\n.taginput:checked + .slider {\n  background-color: #2196F3;\n}\n\n.taginput:focus + .slider {\n  box-shadow: 0 0 1px #2196F3;\n}", ""]);
+exports.push([module.i, "img{\n    width: 300px;\n    height: 300px\n}\n\n#tagbutton{\n    background-color: lightblue;\n    transition: 0.5s;\n    -webkit-transition: 0.5s;\n}\n\n#cross {\n    height: 10px;\n    width: 10px;\n}\n\n#crossbutton{\n    opacity: 0;\n    transition: 0.5s;\n    -webkit-transition: 0.5s;\n}\n\n#crossbutton:hover{\n    opacity: 1;\n    transition: 0.5s;\n    -webkit-transition: 0.5s;\n}\n\n.strike {\n    text-decoration: line-through;\n}\n\n .switch {\n  width: 60px;\n  height: 34px;\n}\n\n.switch .taginput {display:none;}\n\n.slider {\n  cursor: pointer;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: #ffff66;\n  transition: .4s;\n}\n\n.slider:before {\n  content: \"\";\n  height: 26px;\n  width: 26px;\n  left: 4px;\n  bottom: 4px;\n  background-color: white;\n  transition: .4s;\n}\n\n.taginput:checked + .slider {\n  background-color: #2196F3;\n}\n\n.taginput:focus + .slider {\n  box-shadow: 0 0 1px #2196F3;\n}\n\n", ""]);
 
 // exports
 

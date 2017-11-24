@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   getPhoto(){
-    console.log('clciked')
+    console.log('clicked')
     this.photosService.onGetPhoto().subscribe((res)=>{
       this.photolinks = res.json()['links']
     }, (err)=>{});

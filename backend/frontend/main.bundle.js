@@ -174,7 +174,7 @@ var routingComponents = [__WEBPACK_IMPORTED_MODULE_3__signup_signup_component__[
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
 // imports
-exports.i(__webpack_require__("../../../../css-loader/index.js?{\"sourceMap\":false,\"importLoaders\":1}!../../../../postcss-loader/index.js?{\"ident\":\"postcss\"}!../../../material/prebuilt-themes/indigo-pink.css"), "");
+
 
 // module
 exports.push([module.i, ".appDiv{\n    background-color:rgb(233, 201, 114);\n    margin:10px 10px 10px 10px;\n}\nh1{\n    font-family: Arial, Helvetica, sans-serif\n}\n\nh4{\n    color:royalblue;\n}\n\n", ""]);
@@ -323,10 +323,6 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_10_angularfire2_database__["a" /* AngularFireDatabaseModule */],
             __WEBPACK_IMPORTED_MODULE_11_angularfire2_auth__["a" /* AngularFireAuthModule */],
             __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */]
-            // BrowserAnimationsModule,
-            // NoopAnimationsModule,
-            // MatDialogModule
-            // MatDialog, MatDialogRef
         ],
         providers: [__WEBPACK_IMPORTED_MODULE_5__photos_service__["a" /* PhotosService */], __WEBPACK_IMPORTED_MODULE_6__token_service__["a" /* TokenService */], __WEBPACK_IMPORTED_MODULE_7__username_service__["a" /* UsernameService */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* HttpModule */], __WEBPACK_IMPORTED_MODULE_8__authguard_service__["a" /* AuthGuard */]],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
@@ -386,23 +382,10 @@ var FilterPipe = (function () {
     }
     FilterPipe.prototype.transform = function (photolinks, term) {
         var emptyArray = [{ image: 'http://www.ellagret.gr/images/no-photo.jpg', tags: [] }];
-        if (term.length == 0)
+        if (!term)
             return photolinks;
-        var correctTerm = 0;
-        term.forEach(function (c) {
-            photolinks.forEach(function (n) {
-                if (n.includes(c)) {
-                    correctTerm++;
-                }
-            });
-        });
-        if (correctTerm !== 0) {
-            return photolinks;
-        }
-        else {
-            return emptyArray;
-        }
-        // return photolinks.tags.filter(link => link.tags.toString().toLowerCase().includes(term.toLowerCase()))
+        // return photolinks
+        return photolinks.filter(function (link) { return link.tags.toString().toLowerCase().includes(term.toLowerCase()); });
     };
     return FilterPipe;
 }());
@@ -437,7 +420,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div><h4>This is login component</h4>\n<h2>Welcome to your homepage, {{username}}!</h2>\n<div>\n  <button type='button' class='btn btn-primary' (click)='getPhoto()'>Get my Photos from Google</button> \n  <br>\n  <button type='button' class='btn btn-primary' (click)='clearPhoto()'>Clear Clarifai Photos</button>\n</div>\n\n</div>\n<app-album></app-album>\n\n <app-photos [photolinks]=\"photolinks\"></app-photos> \n\n <button type='button' class='btn btn-primary' (click)='logOut()'>Log Out</button> \n\n\n"
+module.exports = "<div><h4>This is login component</h4>\n<h2>Welcome to your homepage, {{username}}!</h2>\n<div>\n  <br>\n  <button type='button' class='btn btn-primary' (click)='clearPhoto()'>Clear Clarifai Photos</button>\n</div>\n\n</div>\n<app-album></app-album>\n\n<app-photos></app-photos> \n"
 
 /***/ }),
 
@@ -465,7 +448,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// import { MatSidenavModule } from '@angular/material/sidenav';
 var LoginComponent = (function () {
     function LoginComponent(userService, photosService, http, tokenService) {
         this.userService = userService;
@@ -483,16 +465,6 @@ var LoginComponent = (function () {
             console.log(res.json());
         }, function (err) { });
     };
-    LoginComponent.prototype.getPhoto = function () {
-        var _this = this;
-        //using /getphoto route
-        console.log('getPhoto from Google clicked');
-        this.photosService.onGetPhoto().subscribe(function (res) {
-            _this.photolinks = res.json()['links'];
-        }, function (err) {
-            console.log('get photo error occurs!');
-        });
-    };
     LoginComponent.prototype.getUsername = function () {
         var _this = this;
         this.userService.obtainUserName().subscribe(function (res) {
@@ -501,9 +473,6 @@ var LoginComponent = (function () {
         }, function (err) {
             console.log('error occurs');
         });
-    };
-    LoginComponent.prototype.logOut = function () {
-        this.http.get('/logout').subscribe(function (res) { }, function (err) { });
     };
     return LoginComponent;
 }());
@@ -656,7 +625,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/photos/photos.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div><h4>This is photo component</h4>\n<h3>To add photo to a new album:<br>\n1) click to select, click again to deselect<br>\n2) Enter Album name <br>\n3) Click \"Get Album\"above to retrieve your album\"</h3>\n<input [ngStyle]=\"createAlbumError\" [(ngModel)]=\"albumName\" placeholder=\"Album Name\">\n<button (click)=\"createAlbum()\">Create Album</button>\n\n<input [(ngModel)]=\"term\" placeholder=\"Add Keyword\">\n<button (click)=\"addTerm()\">Enter</button>\n\n<div *ngFor='let term of searchTerm'>\n  <button [ngStyle]=\"term.myStyle\" (click)=\"changeStyle(term.term)\"> {{term.term}} <button (click)=\"deleteTag(term.term)\" id=\"crossbutton\"><img id=\"cross\" src=\"https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png\"></button></button>\n</div> \n</div>\n <!-- <div *ngFor='let term of searchTerm' class=\"slider\">\n  <input type='checkbox' class='taginput'> {{term}} <button (click)=\"deleteTag(term)\" id=\"crossbutton\"><img id=\"cross\" src=\"https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png\"></button>\n</div>  -->\n\n\n<!-- <label *ngFor='let term of searchTerm' class=\"switch\">\n  <input type=\"checkbox\" class='taginput'> {{term}} <button (click)=\"deleteTag(term)\" id=\"crossbutton\"><img id=\"cross\" src=\"https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png\"></button>\n  <span class=\"slider\"></span>\n</label> -->\n\n<!-- <input [ngStyle]=\"myStyle\" type=\"button\" value=\"set color\" (click)=\"changeStyle()\"> -->\n<!-- <button [ngStyle]=\"myStyle\" (click)=\"changeStyle()\">SET COLOR</button> -->\n\n <!-- <form>\n  Search Box: <input type='text' placeholder=\"search\" name=\"term\" (input)=\"onSearch($event)\">\n</form>  -->\n\n <span>\n  <img *ngIf=\"loading\" src=\"https://gifimage.net/wp-content/uploads/2017/09/animated-gif-loading-12.gif\">\n</span> \n\n\n <div class=\"panel panel-default\" *ngFor=\"let link of photolinks | filter:searchConfirm\" (click)=\"addLink(link.image)\">\n    <img src= {{link.image}}>\n\n      <div class=\"tagDiv\" *ngFor=\"let tag of link.tags\">\n          <div class=\"tagDivDiv\"> \n            <button class=\"tagButton\">{{tag}}</button> \n          </div>\n      </div>\n</div>\n\n <!-- <button (click)=\"openDialog()\">Click here laaa</button>  -->"
+module.exports = "<div><h4>This is photo component</h4>\n<h3>To add photo to a new album:<br>\n1) click to select, click again to deselect<br>\n2) Enter album name <br>\n3) Click \"Get Album\"above to retrieve your album\"</h3>\n<button type='button' class='btn btn-primary' (click)='getPhoto()'>Get my Photos from Google</button>\n<input [ngStyle]=\"createAlbumError\" [(ngModel)]=\"albumName\" placeholder=\"Album Name\">\n<button (click)=\"createAlbum()\">Create Album</button>\n\n<input [(ngModel)]=\"term\" placeholder=\"Add Keyword\">\n<button (click)=\"addTerm()\">Enter</button>\n\n<div *ngFor='let term of searchTerm'>\n  <button [ngStyle]=\"term.myStyle\" (click)=\"changeStyle(term.term)\"> {{term.term}} <button (click)=\"deleteTag(term.term)\" id=\"crossbutton\"><img id=\"cross\" src=\"https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png\"></button></button>\n</div> \n</div>\n <!-- <div *ngFor='let term of searchTerm' class=\"slider\">\n  <input type='checkbox' class='taginput'> {{term}} <button (click)=\"deleteTag(term)\" id=\"crossbutton\"><img id=\"cross\" src=\"https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png\"></button>\n</div>  -->\n\n\n<!-- <label *ngFor='let term of searchTerm' class=\"switch\">\n  <input type=\"checkbox\" class='taginput'> {{term}} <button (click)=\"deleteTag(term)\" id=\"crossbutton\"><img id=\"cross\" src=\"https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png\"></button>\n  <span class=\"slider\"></span>\n</label> -->\n\n<!-- <input [ngStyle]=\"myStyle\" type=\"button\" value=\"set color\" (click)=\"changeStyle()\"> -->\n<!-- <button [ngStyle]=\"myStyle\" (click)=\"changeStyle()\">SET COLOR</button> -->\n\n <!-- <form>\n  Search Box: <input type='text' placeholder=\"search\" name=\"term\" (input)=\"onSearch($event)\">\n</form>  -->\n\n <span>\n  <img *ngIf=\"loading\" src=\"https://gifimage.net/wp-content/uploads/2017/09/animated-gif-loading-12.gif\">\n</span> \n\n\n <div class=\"panel panel-default\" *ngFor=\"let link of photos | filter:term\" (click)=\"addLink(link.image)\">\n    <img src= {{link.image}}>\n\n      <div class=\"tagDiv\" *ngFor=\"let tag of link.tags\">\n          <div class=\"tagDivDiv\"> \n            <button class=\"tagButton\">{{tag}}</button> \n          </div>\n      </div>\n</div>\n\n  "
 
 /***/ }),
 
@@ -668,6 +637,8 @@ module.exports = "<div><h4>This is photo component</h4>\n<h3>To add photo to a n
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__photos_service__ = __webpack_require__("../../../../../src/app/photos.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_underscore__ = __webpack_require__("../../../../underscore/underscore.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_underscore___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_underscore__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -677,6 +648,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -705,6 +677,17 @@ var PhotosComponent = (function () {
     // onSearch(e){
     //   this.term = e.target.value;
     // }
+    PhotosComponent.prototype.getPhoto = function () {
+        var _this = this;
+        //using /getphoto route
+        console.log('getPhoto from Google clicked');
+        this.photosService.onGetPhoto().subscribe(function (res) {
+            _this.photolinks = res.json()['links'];
+            _this.photos = _this.photolinks;
+        }, function (err) {
+            console.log('get photo error occurs!');
+        });
+    };
     PhotosComponent.prototype.changeStyle = function (term) {
         if (this.searchConfirm.includes(term)) {
             this.searchConfirm = this.searchConfirm.filter(function (n) { return n != term; });
@@ -726,6 +709,7 @@ var PhotosComponent = (function () {
                 }
             });
         }
+        this.filterPhoto();
     };
     PhotosComponent.prototype.addTerm = function () {
         var obj = {
@@ -739,6 +723,7 @@ var PhotosComponent = (function () {
             this.searchConfirm.push(this.term);
         }
         this.term = '';
+        this.filterPhoto();
     };
     PhotosComponent.prototype.deleteTag = function (tag) {
         this.searchTerm = this.searchTerm.filter(function (n) {
@@ -747,7 +732,8 @@ var PhotosComponent = (function () {
         this.searchConfirm = this.searchConfirm.filter(function (n) {
             return n != tag;
         });
-        console.log(this.searchTerm);
+        console.log(this.searchConfirm);
+        this.filterPhoto();
     };
     PhotosComponent.prototype.createAlbum = function () {
         console.log(this.albumName);
@@ -773,6 +759,15 @@ var PhotosComponent = (function () {
             });
         }
         console.log(this.photoURLyouwanttoadd);
+        this.filterPhoto();
+    };
+    PhotosComponent.prototype.filterPhoto = function () {
+        var _this = this;
+        this.photos = this.photolinks.filter(function (link) {
+            if ((__WEBPACK_IMPORTED_MODULE_3_underscore__["intersection"](link.tags, _this.searchConfirm)).length == _this.searchConfirm.length) {
+                return link;
+            }
+        });
     };
     return PhotosComponent;
 }());
@@ -1032,7 +1027,8 @@ var _a, _b;
 // The file contents for the current environment will overwrite these during build.
 var environment = {
     production: false,
-    HIHI: 'HIHI'
+    HIHI: 'HIHI',
+    host: 'localhost:8080'
 };
 //# sourceMappingURL=environment.js.map
 

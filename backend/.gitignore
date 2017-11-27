@@ -7,8 +7,6 @@
 
 # dependencies
 /node_modules
-/backend/frontend
-/backend/fotosort
 
 # IDEs and editors
 /.idea

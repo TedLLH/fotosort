@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  HIHI: 'HIHI'
+  HIHI: 'HIHI',
+  host:'localhost:8080'
 };

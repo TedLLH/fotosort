@@ -23,8 +23,6 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FilterPipe } from './filter.pipe';
 import { AlbumComponent } from './album/album.component';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,10 +48,6 @@ import { AlbumComponent } from './album/album.component';
     AngularFireDatabaseModule, 
     AngularFireAuthModule,
     FormsModule
-    // BrowserAnimationsModule,
-    // NoopAnimationsModule,
-    // MatDialogModule
-    // MatDialog, MatDialogRef
   ],
   providers: [PhotosService, TokenService, UsernameService,HttpModule, AuthGuard],
   bootstrap: [AppComponent]

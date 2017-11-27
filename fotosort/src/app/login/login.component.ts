@@ -4,9 +4,6 @@ import { Http, HttpModule } from '@angular/http';
 import { TokenService } from '../token.service';
 import { UsernameService } from '../username.service'
 
-// import { MatSidenavModule } from '@angular/material/sidenav';
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -29,16 +26,6 @@ export class LoginComponent implements OnInit {
     }, (err)=>{})
   }
 
-  getPhoto(){
-    //using /getphoto route
-    console.log('getPhoto from Google clicked')
-    this.photosService.onGetPhoto().subscribe((res)=>{
-      this.photolinks = res.json()['links']
-    }, (err)=>{
-        console.log('get photo error occurs!')
-    });
-  }
-
   getUsername(){
     this.userService.obtainUserName().subscribe((res)=>{
       console.log("This is from getUsername()"+ JSON.parse(JSON.stringify(res.json())).user );
@@ -46,11 +33,5 @@ export class LoginComponent implements OnInit {
     },(err)=>{
        console.log('error occurs');
     })
-  
   }
-
-  logOut(){
-    this.http.get('/logout').subscribe((res)=>{},(err)=>{})
-  }
-
 }

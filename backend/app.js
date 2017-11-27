@@ -358,7 +358,7 @@ watch.watchTree(__dirname + "/frontend", function (f, curr, prev) {
     reloadServer.reload();
 });
 
-app.use(express.static('frontend'));
+app.use(express.static('fotosort'));
 
 app.use(function(req, res, next) {
     res.sendFile(__dirname + "/frontend/index.html");

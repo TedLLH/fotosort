@@ -3,6 +3,7 @@
 1) click to select, click again to deselect<br>
 2) Enter album name <br>
 3) Click "Get Album"above to retrieve your album"</h3>
+<button type='button' class='btn btn-primary' (click)='getPhoto()'>Get my Photos from Google</button>
 <input [ngStyle]="createAlbumError" [(ngModel)]="albumName" placeholder="Album Name">
 <button (click)="createAlbum()">Create Album</button>
 
@@ -35,7 +36,7 @@
 </span> 
 
 
- <div class="panel panel-default" *ngFor="let link of photolinks | filter:searchConfirm" (click)="addLink(link.image)">
+ <div class="panel panel-default" *ngFor="let link of photos | filter:term" (click)="addLink(link.image)">
     <img src= {{link.image}}>
 
       <div class="tagDiv" *ngFor="let tag of link.tags">
@@ -45,4 +46,4 @@
       </div>
 </div>
 
- <!-- <button (click)="openDialog()">Click here laaa</button>  -->
+  

@@ -29,15 +29,15 @@ export class LoginComponent implements OnInit {
     }, (err)=>{})
   }
 
-  getPhoto(){
-    //using /getphoto route
-    console.log('getPhoto from Google clicked')
-    this.photosService.onGetPhoto().subscribe((res)=>{
-      this.photolinks = res.json()['links']
-    }, (err)=>{
-        console.log('get photo error occurs!')
-    });
-  }
+  // getPhoto(){
+  //   //using /getphoto route
+  //   console.log('getPhoto from Google clicked')
+  //   this.photosService.onGetPhoto().subscribe((res)=>{
+  //     this.photolinks = res.json()['links']
+  //   }, (err)=>{
+  //       console.log('get photo error occurs!')
+  //   });
+  // }
 
   getUsername(){
     this.userService.obtainUserName().subscribe((res)=>{
@@ -49,8 +49,5 @@ export class LoginComponent implements OnInit {
   
   }
 
-  logOut(){
-    this.http.get('/logout').subscribe((res)=>{},(err)=>{})
-  }
 
 }

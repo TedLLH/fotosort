@@ -1,33 +1,11 @@
 
-<!-- <mat-sidenav-container class="example-container">
-  <mat-sidenav #sidenav class="example-sidenav">
-    Jolly good!
-  </mat-sidenav>
-
-  <div class="example-sidenav-content">
-    <button type="button" mat-button (click)="sidenav.open()">
-      Open sidenav
-    </button>
-  </div>
-
-</mat-sidenav-container> -->
 <div><h4>This is login component</h4>
 <h2>Welcome to your homepage, {{username}}!</h2>
-<div>
-  <!-- <button type='button' class='btn btn-primary' (click)='getPhoto()'>Get my Photos from Google</button>  -->
-  <br>
-  <button type='button' class='btn btn-primary' (click)='clearPhoto()'>Clear Clarifai Photos</button>
+<img class="profile" src= {{image}}>
 </div>
 
-</div>
 <app-album></app-album>
 
-<!-- <input type="file" name="upload" multiple> -->
-
-<!-- <div class="panel panel-default" *ngFor="let link of photolinks">
-  <img src= {{link}}>
-</div>    -->
 
  <app-photos></app-photos> 
- <!-- <app-photos [photolinks]="photolinks"></app-photos>  -->
 

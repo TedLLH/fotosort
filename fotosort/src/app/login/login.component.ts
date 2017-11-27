@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
 
   photolinks: string[] = [];
   username:any='';
+  image:any
 
   constructor(private userService:UsernameService,private photosService:PhotosService, private http:Http, private tokenService:TokenService) { }
 
@@ -29,20 +30,11 @@ export class LoginComponent implements OnInit {
     }, (err)=>{})
   }
 
-  // getPhoto(){
-  //   //using /getphoto route
-  //   console.log('getPhoto from Google clicked')
-  //   this.photosService.onGetPhoto().subscribe((res)=>{
-  //     this.photolinks = res.json()['links']
-  //   }, (err)=>{
-  //       console.log('get photo error occurs!')
-  //   });
-  // }
-
   getUsername(){
     this.userService.obtainUserName().subscribe((res)=>{
       console.log("This is from getUsername()"+ JSON.parse(JSON.stringify(res.json())).user );
-     return this.username= JSON.parse(JSON.stringify(res.json())).user 
+     this.username= JSON.parse(JSON.stringify(res.json())).user ;
+     this.image = res.json().image;
     },(err)=>{
        console.log('error occurs');
     })

@@ -165,7 +165,6 @@ app.post('/getPhoto',authRequired, (req,res)=>{
 
     var dataArray = []
 
-<<<<<<< HEAD
     let albumsID = req.body;
     client.get(req.user.id+'_accessT', (err, token)=>{
         albumsID.map((albumid)=>{
@@ -216,61 +215,6 @@ app.post('/getPhoto',authRequired, (req,res)=>{
                             )}, 
                             (err)=>{                                
                             });
-=======
-    client.get('albums', (err, albums)=>{
-
-        if(err){
-            console.log('Error in getting code');
-        }
-
-        let albumsID = JSON.parse(albums);
-        client.get('accessT', (err, token)=>{
-            albumsID.map((albumid)=>{
-                const options = {
-                    maxResults: 10, // by default get all 
-                    albumId: albumid 
-                }
-            picasa.getPhotos(token, options, (error, photos) => {
-                if(!photos){
-                    noPhotoAlbum ++;
-                }
-                if(photos){
-                    photosArray.push(photos.map((b)=>{return b.content.src}))
-                    photos.forEach((nnn)=>{
-                        clarifaiUrl.push({url: nnn.content.src})
-                })
-                if(photosArray.length === albumsID.length-1){
-                    console.log('for clarifai')
-                    clarifai.models.predict(Clarifai.GENERAL_MODEL, clarifaiUrl)
-                    .then((response)=> {
-                                    // console.log(response.outputs[0].input.data.image.url)
-                        response.outputs.forEach((data)=>{
-                            let obj = {
-                                'image': data.input.data.image.url,
-                                'tags': data.data.concepts
-                                        .filter((scoresAll)=>{
-                                            return scoresAll.value > 0.9
-                                        })
-                                        .map((scoresFiltered)=>{
-                                            return scoresFiltered.name
-                                        })
-                                       }
-                                     dataArray.push(obj)
-                                  })
-                                },
-                                (err)=>{
-                                    console.log('fafds'+err)
-                                })
-                                .then(()=>{
-                                    res.json({
-                                        'links': dataArray
-                                    }
-                                )}, 
-                                (err)=>{
-                                    console.log('有error')
-                                });
-                        }
->>>>>>> 0957c1ca6bde3ac63c4a6922d6cafc2a88cbf170
                     }
                 }
             })
@@ -327,56 +271,6 @@ app.delete('/deletealbum/:id',(req,res)=>{
     })
 })
 
-<<<<<<< HEAD
-app.get('/logout', (req,res)=>{
-    req.logout();
-    res.sendFile('/')
-})
-
-
-// app.get('/clearClarifai', (req,res)=>{
-//     clarifai.inputs.delete().then(
-//         function(response) {
-//         console.log('Delete jor');
-//     },
-//         function(err) {
-//         console.log(err);
-//         }
-//     );
-// })
-
-app.get('/oauth2callback', (req,res)=>{
-    const config = {
-        clientId     : process.env.CLIENT_ID,
-        redirectURI  : 'http://localhost:8080/oauth2callback',
-        clientSecret : process.env.CLIENT_SECRET
-        }
-    console.log(req.user.id)
-    picasa.getAccessToken(config, req.query.code, (error, accessToken, refreshToken) => {
-        client.setex('accessToken', 60*60, accessToken, (err)=>{
-            if(err){
-                console.log('eRro')
-            }
-        })
-        const optionsAlbums = {}
-        picasa.getAlbums(accessToken, optionsAlbums,(error, albums)=>{
-
-            let albumtosave = albums.map((n)=>{
-                                return n.id
-                             })
-
-            client.setex('albums', 60*60, JSON.stringify(albumtosave),(err)=>{
-                if(err){
-                    console.log('eRR in saving code');
-                }
-            })
-        })
-    })
-    res.redirect('/login')
-})
-
-=======
->>>>>>> 0957c1ca6bde3ac63c4a6922d6cafc2a88cbf170
 function authRequired (req, res, next) {
   if (!req.user) {
     return res.redirect('/auth/google');

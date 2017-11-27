@@ -14,7 +14,6 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { MembersComponent } from './members/members.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { PhotosComponent } from './photos/photos.component';
@@ -28,7 +27,6 @@ import { AlbumComponent } from './album/album.component';
     AppComponent,
     LoginComponent,
     SignupComponent,
-    MembersComponent,
     PhotosComponent,
     FilterPipe,
     AlbumComponent

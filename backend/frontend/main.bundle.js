@@ -503,7 +503,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<!-- <mat-sidenav-container class=\"example-container\">\n  <mat-sidenav #sidenav class=\"example-sidenav\">\n    Jolly good!\n  </mat-sidenav>\n\n  <div class=\"example-sidenav-content\">\n    <button type=\"button\" mat-button (click)=\"sidenav.open()\">\n      Open sidenav\n    </button>\n  </div>\n\n</mat-sidenav-container> -->\n<div><h4>This is login component</h4>\n<h2>Welcome to your homepage, {{username}}!</h2>\n<div>\n  <button type='button' class='btn btn-primary' (click)='getPhoto()'>Get my Photos from Google</button> \n  <br>\n  <button type='button' class='btn btn-primary' (click)='clearPhoto()'>Clear Clarifai Photos</button>\n</div>\n\n</div>\n<app-album></app-album>\n\n<!-- <input type=\"file\" name=\"upload\" multiple> -->\n\n<!-- <div class=\"panel panel-default\" *ngFor=\"let link of photolinks\">\n  <img src= {{link}}>\n</div>    -->\n\n<!-- <app-photos></app-photos> -->\n <app-photos [photolinks]=\"photolinks\"></app-photos> \n\n <button type='button' class='btn btn-primary' (click)='logOut()'>Log Out</button> \n\n\n"
+module.exports = "\n<!-- <mat-sidenav-container class=\"example-container\">\n  <mat-sidenav #sidenav class=\"example-sidenav\">\n    Jolly good!\n  </mat-sidenav>\n\n  <div class=\"example-sidenav-content\">\n    <button type=\"button\" mat-button (click)=\"sidenav.open()\">\n      Open sidenav\n    </button>\n  </div>\n\n</mat-sidenav-container> -->\n<div><h4>This is login component</h4>\n<h2>Welcome to your homepage, {{username}}!</h2>\n<div>\n  <button type='button' class='btn btn-primary' (click)='getPhoto()'>Get my Photos from Google</button> \n  <br>\n  <button type='button' class='btn btn-primary' (click)='clearPhoto()'>Clear Clarifai Photos</button>\n</div>\n\n</div>\n<app-album></app-album>\n\n<!-- <input type=\"file\" name=\"upload\" multiple> -->\n\n<!-- <div class=\"panel panel-default\" *ngFor=\"let link of photolinks\">\n  <img src= {{link}}>\n</div>    -->\n\n<!-- <app-photos></app-photos> -->\n <app-photos [photolinks]=\"photolinks\"></app-photos> \n\n"
 
 /***/ }),
 
@@ -567,9 +567,6 @@ var LoginComponent = (function () {
         }, function (err) {
             console.log('error occurs');
         });
-    };
-    LoginComponent.prototype.logOut = function () {
-        this.http.get('/logout').subscribe(function (res) { }, function (err) { });
     };
     return LoginComponent;
 }());

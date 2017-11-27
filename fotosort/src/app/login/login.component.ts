@@ -49,8 +49,5 @@ export class LoginComponent implements OnInit {
   
   }
 
-  logOut(){
-    this.http.get('/logout').subscribe((res)=>{},(err)=>{})
-  }
 
 }

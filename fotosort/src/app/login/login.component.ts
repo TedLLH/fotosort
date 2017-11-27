@@ -2,6 +2,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { PhotosService } from '../photos.service';
 import { Http, HttpModule } from '@angular/http';
 import { TokenService } from '../token.service';
+import { UsernameService } from '../username.service'
+
 // import { MatSidenavModule } from '@angular/material/sidenav';
 
 
@@ -13,24 +15,38 @@ import { TokenService } from '../token.service';
 export class LoginComponent implements OnInit {
 
   photolinks: string[] = [];
+  username:any='';
 
-  constructor(private photosService:PhotosService, private http:Http, private tokenService:TokenService) { }
+  constructor(private userService:UsernameService,private photosService:PhotosService, private http:Http, private tokenService:TokenService) { }
 
   ngOnInit() {
-    
+    this.getUsername();
   }
 
   clearPhoto(){
     this.http.get('/clearClarifai').subscribe((res)=>{
-      console.log(res.json())
+      console.log(res.json());
     }, (err)=>{})
   }
 
   getPhoto(){
-    console.log('clicked')
+    //using /getphoto route
+    console.log('getPhoto from Google clicked')
     this.photosService.onGetPhoto().subscribe((res)=>{
       this.photolinks = res.json()['links']
-    }, (err)=>{});
+    }, (err)=>{
+        console.log('get photo error occurs!')
+    });
+  }
+
+  getUsername(){
+    this.userService.obtainUserName().subscribe((res)=>{
+      console.log("This is from getUsername()"+ JSON.parse(JSON.stringify(res.json())).user );
+     return this.username= JSON.parse(JSON.stringify(res.json())).user 
+    },(err)=>{
+       console.log('error occurs');
+    })
+  
   }
 
 }

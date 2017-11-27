@@ -25,7 +25,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "img{\n    width: 100px;\n    height: 100px\n}", ""]);
+exports.push([module.i, "h4{\n    color:royalblue;\n}\ndiv{\n    background-color:lightgrey;\n    margin:10px;\n}\nimg{\n    display:-webkit-box;\n    display:-ms-flexbox;\n    display:flex;\n    width: 100%;\n    height: 100%\n}\n\nbutton{\n    background-color:pink;\n    width:100px;\n    height:50px; \n}\n\n.deleteButton{\n    background-color:crimson;\n}", ""]);
 
 // exports
 
@@ -38,7 +38,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/album/album.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div> \n  <button (click)=\"getAlbum()\">Get Album</button>\n</div>\n\n<div class=\"panel panel-default\" *ngFor=\"let album of albums\">\n  <p>{{album.albumName}} <button (click)=\"deleteAlbum(album.albumID)\">Delete Album</button> </p>\n  \n  <div class=\"panel panel-default\" *ngFor=\"let album of album.images\">\n    <img src= {{album}}>\n  </div>\n</div>\n\n"
+module.exports = "<div> \n  <h4>This is album component</h4>\n  <button (click)=\"getAlbum()\">Get Album</button>\n</div>\n\n<div class=\"panel panel-default\" *ngFor=\"let album of albums\">\n  <p>Album name: {{album.albumName}} <button class=\"deleteButton\" (click)=\"deleteAlbum(album.albumID)\">Delete Album</button> </p>\n  \n  <div class=\"panel panel-default\" *ngFor=\"let album of album.images\">\n    <img src= {{album}}>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -177,7 +177,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 exports.i(__webpack_require__("../../../../css-loader/index.js?{\"sourceMap\":false,\"importLoaders\":1}!../../../../postcss-loader/index.js?{\"ident\":\"postcss\"}!../../../material/prebuilt-themes/indigo-pink.css"), "");
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".appDiv{\n    background-color:rgb(233, 201, 114);\n    margin:10px 10px 10px 10px;\n}\nh1{\n    font-family: Arial, Helvetica, sans-serif\n}\n\nh4{\n    color:royalblue;\n}\n\n", ""]);
 
 // exports
 
@@ -190,7 +190,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <h1>\n    Welcome to {{title}}!\n  </h1>\n</div>\n\n <!-- <button type='button' class='btn btn-primary' (click)='signLog()'>Start with Google</button>  -->\n\n<!-- <app-signup></app-signup> -->\n\n<!-- <nav>\n  <a routerLink=\"/\" routerLinkActive=\"inactive\">signUp</a>\n</nav> -->\n  <router-outlet ></router-outlet>   \n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div class=\"appDiv\" style=\"text-align:center\">\n  <h4>This is app component</h4>\n  <h1>\n     {{title}}\n  </h1>\n  <h3>NO MORE SHATTERED MEMORIES</h3>\n  <h3>THE SMART WAY TO ORGANIZE YOUR PHOTOS</h3>\n\n\n <!-- <button type='button' class='btn btn-primary' (click)='signLog()'>Start with Google</button>  -->\n\n<!-- <app-signup></app-signup> -->\n\n<!-- <nav>\n  <a routerLink=\"/\" routerLinkActive=\"inactive\">signUp</a>\n</nav> -->\n  <router-outlet ></router-outlet>   \n</div>"
 
 /***/ }),
 
@@ -215,7 +215,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var AppComponent = (function () {
     function AppComponent(photosService) {
         this.photosService = photosService;
-        this.title = 'FotoNize';
+        this.title = 'fotosort';
         //  firebase.initializeApp({
         //         apiKey: "AIzaSyDnwljBbcXSBNz_SgqTICaZ6B6Rg5PJr0g",
         //         authDomain: "noonewillnotice-2e8e6.firebaseapp.com",
@@ -255,24 +255,26 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__photos_service__ = __webpack_require__("../../../../../src/app/photos.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__token_service__ = __webpack_require__("../../../../../src/app/token.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__authguard_service__ = __webpack_require__("../../../../../src/app/authguard.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2__ = __webpack_require__("../../../../angularfire2/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_database__ = __webpack_require__("../../../../angularfire2/database/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_angularfire2_auth__ = __webpack_require__("../../../../angularfire2/auth/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__email_email_component__ = __webpack_require__("../../../../../src/app/email/email.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__signup_signup_component__ = __webpack_require__("../../../../../src/app/signup/signup.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__members_members_component__ = __webpack_require__("../../../../../src/app/members/members.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__app_routing_module__ = __webpack_require__("../../../../../src/app/app-routing.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__photos_photos_component__ = __webpack_require__("../../../../../src/app/photos/photos.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__filter_pipe__ = __webpack_require__("../../../../../src/app/filter.pipe.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__album_album_component__ = __webpack_require__("../../../../../src/app/album/album.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__username_service__ = __webpack_require__("../../../../../src/app/username.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__authguard_service__ = __webpack_require__("../../../../../src/app/authguard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2__ = __webpack_require__("../../../../angularfire2/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_angularfire2_database__ = __webpack_require__("../../../../angularfire2/database/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_angularfire2_auth__ = __webpack_require__("../../../../angularfire2/auth/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__email_email_component__ = __webpack_require__("../../../../../src/app/email/email.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__signup_signup_component__ = __webpack_require__("../../../../../src/app/signup/signup.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__members_members_component__ = __webpack_require__("../../../../../src/app/members/members.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__app_routing_module__ = __webpack_require__("../../../../../src/app/app-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__photos_photos_component__ = __webpack_require__("../../../../../src/app/photos/photos.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__filter_pipe__ = __webpack_require__("../../../../../src/app/filter.pipe.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__album_album_component__ = __webpack_require__("../../../../../src/app/album/album.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -303,19 +305,19 @@ AppModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["M" /* NgModule */])({
         declarations: [
             __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
-            __WEBPACK_IMPORTED_MODULE_11__login_login_component__["a" /* LoginComponent */],
-            __WEBPACK_IMPORTED_MODULE_12__email_email_component__["a" /* EmailComponent */],
-            __WEBPACK_IMPORTED_MODULE_13__signup_signup_component__["a" /* SignupComponent */],
-            __WEBPACK_IMPORTED_MODULE_14__members_members_component__["a" /* MembersComponent */],
-            __WEBPACK_IMPORTED_MODULE_16__photos_photos_component__["a" /* PhotosComponent */],
-            __WEBPACK_IMPORTED_MODULE_17__filter_pipe__["a" /* FilterPipe */],
-            __WEBPACK_IMPORTED_MODULE_18__album_album_component__["a" /* AlbumComponent */]
+            __WEBPACK_IMPORTED_MODULE_12__login_login_component__["a" /* LoginComponent */],
+            __WEBPACK_IMPORTED_MODULE_13__email_email_component__["a" /* EmailComponent */],
+            __WEBPACK_IMPORTED_MODULE_14__signup_signup_component__["a" /* SignupComponent */],
+            __WEBPACK_IMPORTED_MODULE_15__members_members_component__["a" /* MembersComponent */],
+            __WEBPACK_IMPORTED_MODULE_17__photos_photos_component__["a" /* PhotosComponent */],
+            __WEBPACK_IMPORTED_MODULE_18__filter_pipe__["a" /* FilterPipe */],
+            __WEBPACK_IMPORTED_MODULE_19__album_album_component__["a" /* AlbumComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-            __WEBPACK_IMPORTED_MODULE_15__app_routing_module__["a" /* AppRoutingModule */],
+            __WEBPACK_IMPORTED_MODULE_16__app_routing_module__["a" /* AppRoutingModule */],
             __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* HttpModule */],
-            __WEBPACK_IMPORTED_MODULE_8_angularfire2__["a" /* AngularFireModule */].initializeApp({
+            __WEBPACK_IMPORTED_MODULE_9_angularfire2__["a" /* AngularFireModule */].initializeApp({
                 apiKey: "AIzaSyDnwljBbcXSBNz_SgqTICaZ6B6Rg5PJr0g",
                 authDomain: "noonewillnotice-2e8e6.firebaseapp.com",
                 databaseURL: "https://noonewillnotice-2e8e6.firebaseio.com",
@@ -323,15 +325,15 @@ AppModule = __decorate([
                 storageBucket: "noonewillnotice-2e8e6.appspot.com",
                 messagingSenderId: "276231888981"
             }),
-            __WEBPACK_IMPORTED_MODULE_9_angularfire2_database__["a" /* AngularFireDatabaseModule */],
-            __WEBPACK_IMPORTED_MODULE_10_angularfire2_auth__["a" /* AngularFireAuthModule */],
+            __WEBPACK_IMPORTED_MODULE_10_angularfire2_database__["a" /* AngularFireDatabaseModule */],
+            __WEBPACK_IMPORTED_MODULE_11_angularfire2_auth__["a" /* AngularFireAuthModule */],
             __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */]
             // BrowserAnimationsModule,
             // NoopAnimationsModule,
             // MatDialogModule
             // MatDialog, MatDialogRef
         ],
-        providers: [__WEBPACK_IMPORTED_MODULE_5__photos_service__["a" /* PhotosService */], __WEBPACK_IMPORTED_MODULE_6__token_service__["a" /* TokenService */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* HttpModule */], __WEBPACK_IMPORTED_MODULE_7__authguard_service__["a" /* AuthGuard */] /*, Overlay ,MatDialogModule*/],
+        providers: [__WEBPACK_IMPORTED_MODULE_5__photos_service__["a" /* PhotosService */], __WEBPACK_IMPORTED_MODULE_6__token_service__["a" /* TokenService */], __WEBPACK_IMPORTED_MODULE_7__username_service__["a" /* UsernameService */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* HttpModule */], __WEBPACK_IMPORTED_MODULE_8__authguard_service__["a" /* AuthGuard */] /*, Overlay ,MatDialogModule*/],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
@@ -488,7 +490,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "button{\n    width: 300px;\n    height: 100px;\n    color: grey;\n    background-color: lightcyan; \n    margin: 0px 0px 0px 0px;\n    font-size: 40px\n}\n.example-container {\n  width: 500px;\n  height: 300px;\n  border: 1px solid rgba(0, 0, 0, 0.5);\n}\n\n.example-sidenav-content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 100%;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n\n.example-sidenav {\n  padding: 20px;\n}", ""]);
+exports.push([module.i, "div{\n  background-color:lightgreen;\n  margin:10px 10px ; \n  \n}\nh2{\n  text-align:center;\n  color:navy;\n}\n\nh4{\n  color:royalblue;\n}\n\nbutton{\n    width: 300px;\n    height: 70px;\n    background-color: lightskyblue; \n    margin: 10px 10px 10px 10px;\n    font-size: 20px\n}\n.example-container {\n  width: 500px;\n  height: 300px;\n  border: 1px solid rgba(0, 0, 0, 0.5);\n}\n\n.example-sidenav-content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 100%;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n\n.example-sidenav {\n  padding: 20px;\n}", ""]);
 
 // exports
 
@@ -501,7 +503,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<!-- <mat-sidenav-container class=\"example-container\">\n  <mat-sidenav #sidenav class=\"example-sidenav\">\n    Jolly good!\n  </mat-sidenav>\n\n  <div class=\"example-sidenav-content\">\n    <button type=\"button\" mat-button (click)=\"sidenav.open()\">\n      Open sidenav\n    </button>\n  </div>\n\n</mat-sidenav-container> -->\n\n<button type='button' class='btn btn-primary' (click)='getPhoto()'>Get Photos</button>\n<button type='button' class='btn btn-primary' (click)='clearPhoto()'>Clear Clarifai Photos</button>\n\n<app-album></app-album>\n\n<!-- <input type=\"file\" name=\"upload\" multiple> -->\n\n<!-- <div class=\"panel panel-default\" *ngFor=\"let link of photolinks\">\n  <img src= {{link}}>\n</div>    -->\n\n<!-- <app-photos></app-photos> -->\n <app-photos [photolinks]=\"photolinks\"></app-photos> \n\n"
+module.exports = "\n<!-- <mat-sidenav-container class=\"example-container\">\n  <mat-sidenav #sidenav class=\"example-sidenav\">\n    Jolly good!\n  </mat-sidenav>\n\n  <div class=\"example-sidenav-content\">\n    <button type=\"button\" mat-button (click)=\"sidenav.open()\">\n      Open sidenav\n    </button>\n  </div>\n\n</mat-sidenav-container> -->\n<div><h4>This is login component</h4>\n<h2>Welcome to your homepage, {{username}}!</h2>\n<div>\n  <button type='button' class='btn btn-primary' (click)='getPhoto()'>Get my Photos from Google</button> \n  <br>\n  <button type='button' class='btn btn-primary' (click)='clearPhoto()'>Clear Clarifai Photos</button>\n</div>\n\n</div>\n<app-album></app-album>\n\n<!-- <input type=\"file\" name=\"upload\" multiple> -->\n\n<!-- <div class=\"panel panel-default\" *ngFor=\"let link of photolinks\">\n  <img src= {{link}}>\n</div>    -->\n\n<!-- <app-photos></app-photos> -->\n <app-photos [photolinks]=\"photolinks\"></app-photos> \n\n"
 
 /***/ }),
 
@@ -514,6 +516,7 @@ module.exports = "\n<!-- <mat-sidenav-container class=\"example-container\">\n  
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__photos_service__ = __webpack_require__("../../../../../src/app/photos.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__token_service__ = __webpack_require__("../../../../../src/app/token.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__username_service__ = __webpack_require__("../../../../../src/app/username.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -527,15 +530,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 // import { MatSidenavModule } from '@angular/material/sidenav';
 var LoginComponent = (function () {
-    function LoginComponent(photosService, http, tokenService) {
+    function LoginComponent(userService, photosService, http, tokenService) {
+        this.userService = userService;
         this.photosService = photosService;
         this.http = http;
         this.tokenService = tokenService;
         this.photolinks = [];
+        this.username = '';
     }
     LoginComponent.prototype.ngOnInit = function () {
+        this.getUsername();
     };
     LoginComponent.prototype.clearPhoto = function () {
         this.http.get('/clearClarifai').subscribe(function (res) {
@@ -544,10 +551,22 @@ var LoginComponent = (function () {
     };
     LoginComponent.prototype.getPhoto = function () {
         var _this = this;
-        console.log('clicked');
+        //using /getphoto route
+        console.log('getPhoto from Google clicked');
         this.photosService.onGetPhoto().subscribe(function (res) {
             _this.photolinks = res.json()['links'];
-        }, function (err) { });
+        }, function (err) {
+            console.log('get photo error occurs!');
+        });
+    };
+    LoginComponent.prototype.getUsername = function () {
+        var _this = this;
+        this.userService.obtainUserName().subscribe(function (res) {
+            console.log("This is from getUsername()" + JSON.parse(JSON.stringify(res.json())).user);
+            return _this.username = JSON.parse(JSON.stringify(res.json())).user;
+        }, function (err) {
+            console.log('error occurs');
+        });
     };
     return LoginComponent;
 }());
@@ -557,10 +576,10 @@ LoginComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/login/login.component.html"),
         styles: [__webpack_require__("../../../../../src/app/login/login.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__photos_service__["a" /* PhotosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__photos_service__["a" /* PhotosService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__token_service__["a" /* TokenService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__token_service__["a" /* TokenService */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__username_service__["a" /* UsernameService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__username_service__["a" /* UsernameService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__photos_service__["a" /* PhotosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__photos_service__["a" /* PhotosService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__token_service__["a" /* TokenService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__token_service__["a" /* TokenService */]) === "function" && _d || Object])
 ], LoginComponent);
 
-var _a, _b, _c;
+var _a, _b, _c, _d;
 //# sourceMappingURL=login.component.js.map
 
 /***/ }),
@@ -687,7 +706,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "img{\n    width: 300px;\n    height: 300px\n}\n\n#tagbutton{\n    background-color: lightblue;\n    transition: 0.5s;\n    -webkit-transition: 0.5s;\n}\n\n#cross {\n    height: 10px;\n    width: 10px;\n}\n\n#crossbutton{\n    opacity: 0;\n    transition: 0.5s;\n    -webkit-transition: 0.5s;\n}\n\n#crossbutton:hover{\n    opacity: 1;\n    transition: 0.5s;\n    -webkit-transition: 0.5s;\n}\n\n.strike {\n    text-decoration: line-through;\n}\n\n .switch {\n  width: 60px;\n  height: 34px;\n}\n\n.switch .taginput {display:none;}\n\n.slider {\n  cursor: pointer;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: #ffff66;\n  transition: .4s;\n}\n\n.slider:before {\n  content: \"\";\n  height: 26px;\n  width: 26px;\n  left: 4px;\n  bottom: 4px;\n  background-color: white;\n  transition: .4s;\n}\n\n.taginput:checked + .slider {\n  background-color: #2196F3;\n}\n\n.taginput:focus + .slider {\n  box-shadow: 0 0 1px #2196F3;\n}\n\n", ""]);
+exports.push([module.i, "div{\n    display:block;\n    background-color:lightgoldenrodyellow;\n    margin:10px 10px 10px 10px; \n}\nbutton{\n    width:100px;\n    height:50px;\n    background-color:lightpink;\n}\nimg{\n    display:block;\n    width: 40%;\n    height: 40%;\n}\n\nh4{\n    color:royalblue;\n}\n\n.tagButton{\n    width:70px;\n    height:30px;\n    background-color: yellow;\n    text-align:center;\n    transition: 0.5s;\n    -webkit-transition: 0.5s;\n}\n\n.tagDiv{\n    display:-webkit-inline-box;\n    display:-ms-inline-flexbox;\n    display:inline-flex;\n}\n\n.tagDivDiv{\n    display:-webkit-box;\n    display:-ms-flexbox;\n    display:flex;\n}\n\n#cross {\n    height: 10px;\n    width: 10px;\n}\n\n#crossbutton{\n    opacity: 0;\n    transition: 0.5s;\n    -webkit-transition: 0.5s;\n}\n\n#crossbutton:hover{\n    opacity: 1;\n    transition: 0.5s;\n    -webkit-transition: 0.5s;\n}\n\n.strike {\n    text-decoration: line-through;\n}\n\n.switch {\n  width: 60px;\n  height: 34px;\n}\n\n.switch .taginput {display:none;}\n\n.slider {\n  cursor: pointer;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: #ffff66;\n  transition: .4s;\n}\n\n.slider:before {\n  content: \"\";\n  height: 26px;\n  width: 26px;\n  left: 4px;\n  bottom: 4px;\n  background-color: white;\n  transition: .4s;\n}\n\n.taginput:checked + .slider {\n  background-color: #2196F3;\n}\n\n.taginput:focus + .slider {\n  box-shadow: 0 0 1px #2196F3;\n}\n\n", ""]);
 
 // exports
 
@@ -700,7 +719,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/photos/photos.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<input [(ngModel)]=\"albumName\" placeholder=\"Album Name\">\n<button (click)=\"createAlbum()\">Create Album</button>\n\n<input [(ngModel)]=\"term\" placeholder=\"Add Keyword\">\n<button (click)=\"addTerm()\">Enter</button>\n\n<div *ngFor='let term of searchTerm'>\n  <button [ngStyle]=\"term.myStyle\" (click)=\"changeStyle(term.term)\"> {{term.term}} <button (click)=\"deleteTag(term.term)\" id=\"crossbutton\"><img id=\"cross\" src=\"https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png\"></button></button>\n</div> \n\n <!-- <div *ngFor='let term of searchTerm' class=\"slider\">\n  <input type='checkbox' class='taginput'> {{term}} <button (click)=\"deleteTag(term)\" id=\"crossbutton\"><img id=\"cross\" src=\"https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png\"></button>\n</div>  -->\n\n\n<!-- <label *ngFor='let term of searchTerm' class=\"switch\">\n  <input type=\"checkbox\" class='taginput'> {{term}} <button (click)=\"deleteTag(term)\" id=\"crossbutton\"><img id=\"cross\" src=\"https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png\"></button>\n  <span class=\"slider\"></span>\n</label> -->\n\n<!-- <input [ngStyle]=\"myStyle\" type=\"button\" value=\"set color\" (click)=\"changeStyle()\"> -->\n<!-- <button [ngStyle]=\"myStyle\" (click)=\"changeStyle()\">SET COLOR</button> -->\n\n <!-- <form>\n  Search Box: <input type='text' placeholder=\"search\" name=\"term\" (input)=\"onSearch($event)\">\n</form>  -->\n\n <span>\n  <img *ngIf=\"loading\" src=\"https://gifimage.net/wp-content/uploads/2017/09/animated-gif-loading-12.gif\">\n</span> \n\n\n <div class=\"panel panel-default\" *ngFor=\"let link of photolinks | filter:searchConfirm\" (click)=\"addLink(link.image)\">\n  <img src= {{link.image}}>\n  <div *ngFor=\"let tag of link.tags\">\n    <span>{{tag}}</span>\n</div>\n <button (click)=\"openDialog()\">Click here laaa</button> "
+module.exports = "<div><h4>This is photo component</h4>\n<h3>To add photo to a new album:<br>\n1) click to select, click again to deselect<br>\n2) Enter Album name <br>\n3) Click \"Get Album\"above to retrieve your album\"</h3>\n<input [(ngModel)]=\"albumName\" placeholder=\"Album Name\">\n<button (click)=\"createAlbum()\">Create Album</button>\n\n<input [(ngModel)]=\"term\" placeholder=\"Add Keyword\">\n<button (click)=\"addTerm()\">Enter</button>\n\n<div *ngFor='let term of searchTerm'>\n  <button [ngStyle]=\"term.myStyle\" (click)=\"changeStyle(term.term)\"> {{term.term}} <button (click)=\"deleteTag(term.term)\" id=\"crossbutton\"><img id=\"cross\" src=\"https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png\"></button></button>\n</div> \n</div>\n <!-- <div *ngFor='let term of searchTerm' class=\"slider\">\n  <input type='checkbox' class='taginput'> {{term}} <button (click)=\"deleteTag(term)\" id=\"crossbutton\"><img id=\"cross\" src=\"https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png\"></button>\n</div>  -->\n\n\n<!-- <label *ngFor='let term of searchTerm' class=\"switch\">\n  <input type=\"checkbox\" class='taginput'> {{term}} <button (click)=\"deleteTag(term)\" id=\"crossbutton\"><img id=\"cross\" src=\"https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png\"></button>\n  <span class=\"slider\"></span>\n</label> -->\n\n<!-- <input [ngStyle]=\"myStyle\" type=\"button\" value=\"set color\" (click)=\"changeStyle()\"> -->\n<!-- <button [ngStyle]=\"myStyle\" (click)=\"changeStyle()\">SET COLOR</button> -->\n\n <!-- <form>\n  Search Box: <input type='text' placeholder=\"search\" name=\"term\" (input)=\"onSearch($event)\">\n</form>  -->\n\n <span>\n  <img *ngIf=\"loading\" src=\"https://gifimage.net/wp-content/uploads/2017/09/animated-gif-loading-12.gif\">\n</span> \n\n\n <div class=\"panel panel-default\" *ngFor=\"let link of photolinks | filter:searchConfirm\" (click)=\"addLink(link.image)\">\n    <img src= {{link.image}}>\n\n      <div class=\"tagDiv\" *ngFor=\"let tag of link.tags\">\n          <div class=\"tagDivDiv\"> \n            <button class=\"tagButton\">{{tag}}</button> \n          </div>\n      </div>\n</div>\n\n <!-- <button (click)=\"openDialog()\">Click here laaa</button>  -->"
 
 /***/ }),
 
@@ -753,7 +772,7 @@ var PhotosComponent = (function () {
             this.searchTerm.forEach(function (T) {
                 if (T.term == term) {
                     T.myStyle = {
-                        background: 'red'
+                        background: 'lightpink'
                     };
                 }
             });
@@ -763,7 +782,7 @@ var PhotosComponent = (function () {
             this.searchTerm.forEach(function (T) {
                 if (T.term == term) {
                     T.myStyle = {
-                        background: 'green'
+                        background: 'yellow'
                     };
                 }
             });
@@ -773,7 +792,7 @@ var PhotosComponent = (function () {
         var obj = {
             term: this.term,
             myStyle: {
-                background: 'green'
+                background: 'yellow'
             }
         };
         this.searchTerm.push(obj);
@@ -834,7 +853,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "div{\n    background-color:lightblue;\n}", ""]);
 
 // exports
 
@@ -1008,6 +1027,47 @@ TokenService = __decorate([
 
 var _a, _b;
 //# sourceMappingURL=token.service.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/username.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UsernameService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__token_service__ = __webpack_require__("../../../../../src/app/token.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var UsernameService = (function () {
+    function UsernameService(http, tokenService) {
+        this.http = http;
+        this.tokenService = tokenService;
+    }
+    UsernameService.prototype.obtainUserName = function () {
+        console.log(' username service working');
+        return this.http.get('/username');
+    };
+    return UsernameService;
+}());
+UsernameService = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__token_service__["a" /* TokenService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__token_service__["a" /* TokenService */]) === "function" && _b || Object])
+], UsernameService);
+
+var _a, _b;
+//# sourceMappingURL=username.service.js.map
 
 /***/ }),
 

@@ -1,1 +1,14 @@
-@import "~@angular/material/prebuilt-themes/indigo-pink.css"
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.appDiv{
+    background-color:rgb(233, 201, 114);
+    margin:10px 10px 10px 10px;
+}
+h1{
+    font-family: Arial, Helvetica, sans-serif
+}
+
+h4{
+    color:royalblue;
+}
+

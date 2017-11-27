@@ -54,7 +54,7 @@ export class PhotosComponent implements OnInit {
       this.searchTerm.forEach((T)=>{
         if(T.term == term){
           T.myStyle = {
-            background: 'red'
+            background: 'lightpink'
           }
         }
       })
@@ -63,7 +63,7 @@ export class PhotosComponent implements OnInit {
       this.searchTerm.forEach((T)=>{
         if(T.term == term){
           T.myStyle = {
-            background: 'green'
+            background: 'yellow'
           }
         }
       })
@@ -74,7 +74,7 @@ export class PhotosComponent implements OnInit {
     var obj:any = {
       term: this.term,
       myStyle: {
-        background: 'green'
+        background: 'yellow'
       }
     }
     this.searchTerm.push(obj)

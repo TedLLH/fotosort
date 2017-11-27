@@ -11,10 +11,15 @@
   </div>
 
 </mat-sidenav-container> -->
+<div><h4>This is login component</h4>
+<h2>Welcome to your homepage, {{username}}!</h2>
+<div>
+  <button type='button' class='btn btn-primary' (click)='getPhoto()'>Get my Photos from Google</button> 
+  <br>
+  <button type='button' class='btn btn-primary' (click)='clearPhoto()'>Clear Clarifai Photos</button>
+</div>
 
-<button type='button' class='btn btn-primary' (click)='getPhoto()'>Get Photos</button>
-<button type='button' class='btn btn-primary' (click)='clearPhoto()'>Clear Clarifai Photos</button>
-
+</div>
 <app-album></app-album>
 
 <!-- <input type="file" name="upload" multiple> -->

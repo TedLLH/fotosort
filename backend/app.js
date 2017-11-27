@@ -117,8 +117,21 @@ app.get('/auth/google/callback',
 });
 
 app.get('/login', authRequired, (req,res, next)=>{
-    console.log(req.user)
+    console.log(req.user);
+
+    // return res.json({
+    //     'user':req.user
+    // })
+    // return res.json(req.user.displayName)
     next();
+    
+})
+
+app.get('/username',(req,res)=>{
+    console.log("this is from username backend route "+req.user.displayName)
+    return res.json({
+        'user':req.user.displayName
+    })
 })
 
 app.get('/checktoken', (req,res)=>{

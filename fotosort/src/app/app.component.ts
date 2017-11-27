@@ -10,7 +10,7 @@ import { PhotosService } from './photos.service'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'FotoNize';
+  title:string ='fotosort';
 
   constructor(private photosService:PhotosService){
     //  firebase.initializeApp({

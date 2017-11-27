@@ -1,4 +1,8 @@
-
+<div><h4>This is photo component</h4>
+<h3>To add photo to a new album:<br>
+1) click to select, click again to deselect<br>
+2) Enter Album name <br>
+3) Click "Get Album"above to retrieve your album"</h3>
 <input [(ngModel)]="albumName" placeholder="Album Name">
 <button (click)="createAlbum()">Create Album</button>
 
@@ -8,7 +12,7 @@
 <div *ngFor='let term of searchTerm'>
   <button [ngStyle]="term.myStyle" (click)="changeStyle(term.term)"> {{term.term}} <button (click)="deleteTag(term.term)" id="crossbutton"><img id="cross" src="https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png"></button></button>
 </div> 
-
+</div>
  <!-- <div *ngFor='let term of searchTerm' class="slider">
   <input type='checkbox' class='taginput'> {{term}} <button (click)="deleteTag(term)" id="crossbutton"><img id="cross" src="https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png"></button>
 </div>  -->
@@ -32,8 +36,13 @@
 
 
  <div class="panel panel-default" *ngFor="let link of photolinks | filter:searchConfirm" (click)="addLink(link.image)">
-  <img src= {{link.image}}>
-  <div *ngFor="let tag of link.tags">
-    <span>{{tag}}</span>
+    <img src= {{link.image}}>
+
+      <div class="tagDiv" *ngFor="let tag of link.tags">
+          <div class="tagDivDiv"> 
+            <button class="tagButton">{{tag}}</button> 
+          </div>
+      </div>
 </div>
- <button (click)="openDialog()">Click here laaa</button> 
+
+ <!-- <button (click)="openDialog()">Click here laaa</button>  -->

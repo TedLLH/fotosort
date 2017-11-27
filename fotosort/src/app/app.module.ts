@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { PhotosService } from './photos.service';
 import { TokenService } from './token.service';
+import { UsernameService } from'./username.service';
 import { AuthGuard } from './authguard.service'
 
 import { AngularFireModule } from 'angularfire2';
@@ -58,7 +59,7 @@ import { AlbumComponent } from './album/album.component';
     // MatDialogModule
     // MatDialog, MatDialogRef
   ],
-  providers: [PhotosService, TokenService, HttpModule, AuthGuard/*, Overlay ,MatDialogModule*/],
+  providers: [PhotosService, TokenService, UsernameService,HttpModule, AuthGuard/*, Overlay ,MatDialogModule*/],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

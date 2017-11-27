@@ -1,5 +1,12 @@
 webpackJsonp(["styles"],{
 
+/***/ "../../../../../src/assets/bground.jpg":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "bground.2a2efdfbaacaca92c253.jpg";
+
+/***/ }),
+
 /***/ "../../../../../src/styles.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -35,7 +42,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n/* @import \"/fotosort/node_modules/@angular/material/prebuilt-themes/indigo-pink.css\" */\n\n", ""]);
+exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n/* @import \"/fotosort/node_modules/@angular/material/prebuilt-themes/indigo-pink.css\" */\n\nbody{\n    background-image:url(" + __webpack_require__("../../../../../src/assets/bground.jpg") + ");\n    background-attachment:fixed;\n    background-position:center;\n    background-repeat:no-repeat;\n  }", ""]);
 
 // exports
 

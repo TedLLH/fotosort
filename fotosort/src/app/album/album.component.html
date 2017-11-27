@@ -1,9 +1,10 @@
 <div> 
+  <h4>This is album component</h4>
   <button (click)="getAlbum()">Get Album</button>
 </div>
 
 <div class="panel panel-default" *ngFor="let album of albums">
-  <p>{{album.albumName}} <button (click)="deleteAlbum(album.albumID)">Delete Album</button> </p>
+  <p>Album name: {{album.albumName}} <button class="deleteButton" (click)="deleteAlbum(album.albumID)">Delete Album</button> </p>
   
   <div class="panel panel-default" *ngFor="let album of album.images">
     <img src= {{album}}>

@@ -7,6 +7,8 @@
 
 # dependencies
 /node_modules
+/backend/frontend
+/backend/fotosort
 
 # IDEs and editors
 /.idea
@@ -41,4 +43,7 @@ testem.log
 .DS_Store
 Thumbs.db
 .env
+
+/fotosort
+/frontend
 

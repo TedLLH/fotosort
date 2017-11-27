@@ -3,7 +3,7 @@
 1) click to select, click again to deselect<br>
 2) Enter album name <br>
 3) Click "Get Album"above to retrieve your album"</h3>
-<input [(ngModel)]="albumName" placeholder="Album Name">
+<input [ngStyle]="createAlbumError" [(ngModel)]="albumName" placeholder="Album Name">
 <button (click)="createAlbum()">Create Album</button>
 
 <input [(ngModel)]="term" placeholder="Add Keyword">

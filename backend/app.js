@@ -23,6 +23,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json({limit: "50mb"}))
 
+app.use(express.static('public'))
+
 function extractProfile (profile) {
   let imageUrl = '';
   if (profile.photos && profile.photos.length) {
@@ -115,6 +117,11 @@ app.get('/auth/google/callback',
     })
     res.redirect('/login');
 });
+               
+
+app.get('/', (req,res)=>{
+    res.sendFile(__dirname + "/index.html")
+})
 
 app.get('/login', authRequired, (req,res, next)=>{
     console.log(req.user);
@@ -300,7 +307,12 @@ app.delete('/deletealbum/:id',(req,res)=>{
             })
         })
     })
-})
+}) 
+
+// app.get('/logout', (req,res)=>{
+//     req.logout();
+//     res.redirect('/')
+// })
 
 
 // app.get('/clearClarifai', (req,res)=>{
@@ -358,11 +370,11 @@ watch.watchTree(__dirname + "/frontend", function (f, curr, prev) {
     reloadServer.reload();
 });
 
-app.use(express.static('fotosort'));
+app.use(express.static('frontend'));
 
 app.use(function(req, res, next) {
     res.sendFile(__dirname + "/frontend/index.html");
 })
 
-
+     
 app.listen(8080);

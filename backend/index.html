@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Fotosort</title>
+  <!-- <base href="/"> -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="camera-icon.png">
+</head>
+<style>
+    .backgroundImg {
+      position: absolute;
+    }
+
+    .signUpLogInDiv {
+      padding-top:12vh; 
+      margin-left:40vw; 
+      position: relative;
+    }
+
+    .imgClass {
+      height: 100vh;
+      width: 100vw;
+    }
+
+    .signUpButton{
+      position: absolute;
+      padding-left: 15vw;
+    }
+
+    .logInButton{
+      position: absolute;
+    }
+
+    .relativeDiv{
+      position: relative;
+      padding-top: 30vh;
+      padding-left: 37vw;
+    }
+
+    h1 {
+      font-size: 55px;
+      color: white;
+    }
+
+</style>
+<body>
+
+  <div class='backgroundImg'>
+     <img class='imgClass' src="/pic1.jpg">
+  </div>
+
+  <div class='relativeDiv'>
+    <h1>FOTOSORT</h1>
+  </div>
+
+  <div class='signUpLogInDiv'>
+  
+    <div class='absoluteDiv'>
+      
+      <div class='signUpButton'>
+        <form action="/auth/google" method="GET">
+          <input type="submit" value="Sign Up" />
+        </form>
+      </div>
+
+      <div class='logInButton'>
+        <form action="/login" method="GET">
+          <input type="submit" value="Log In" />
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/reload/reload.js"></script>
+<!-- <div class="abc">haha</div> -->
+</body>
+</html>

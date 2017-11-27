@@ -3,6 +3,7 @@ import { PhotosService } from '../photos.service';
 import { FilterPipe } from '../filter.pipe'
 import { FormsModule } from '@angular/forms';
 import { Http } from '@angular/http';
+import * as _ from 'underscore'
 // import { BrowserModule } from '@angular/platform-browser';
 // import { ReactiveFormsModule } from '@angular/forms'; 
 // import { FormControl,FormGroup, Validators } from '@angular/forms';
@@ -48,7 +49,16 @@ export class PhotosComponent implements OnInit {
   // onSearch(e){
   //   this.term = e.target.value;
   // }
-
+  getPhoto(){
+    //using /getphoto route
+    console.log('getPhoto from Google clicked')
+    this.photosService.onGetPhoto().subscribe((res)=>{
+      this.photolinks = res.json()['links']
+      this.photos = this.photolinks
+    }, (err)=>{
+        console.log('get photo error occurs!')
+    });
+  }
 
   changeStyle(term){
     if(this.searchConfirm.includes(term)){
@@ -70,6 +80,7 @@ export class PhotosComponent implements OnInit {
         }
       })
     }
+    this.filterPhoto();
   }
 
   addTerm(){
@@ -84,6 +95,7 @@ export class PhotosComponent implements OnInit {
       this.searchConfirm.push(this.term)
     }
     this.term = '';
+    this.filterPhoto();
   }
 
   deleteTag(tag){
@@ -93,7 +105,8 @@ export class PhotosComponent implements OnInit {
     this.searchConfirm = this.searchConfirm.filter((n)=>{
       return n != tag
     })
-    console.log(this.searchTerm)
+    console.log(this.searchConfirm)
+    this.filterPhoto()
   }
 
   createAlbum(){
@@ -119,9 +132,16 @@ export class PhotosComponent implements OnInit {
       })
     }
     console.log(this.photoURLyouwanttoadd)
+    this.filterPhoto();
   }
 
-
+  filterPhoto(){
+    this.photos = this.photolinks.filter(link=>{
+      if((_.intersection(link.tags, this.searchConfirm)).length == this.searchConfirm.length){
+        return link
+      }
+    })
+  }
 
 
 }

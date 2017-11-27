@@ -13,9 +13,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { LoginComponent } from './login/login.component';
-import { EmailComponent } from './email/email.component';
 import { SignupComponent } from './signup/signup.component';
-import { MembersComponent } from './members/members.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { PhotosComponent } from './photos/photos.component';
@@ -23,18 +21,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FilterPipe } from './filter.pipe';
 import { AlbumComponent } from './album/album.component';
-// import { MatDialogModule } from '@angular/material/dialog';
-// import { Overlay } from '@angular/cdk/overlay'
-
-
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    EmailComponent,
     SignupComponent,
-    MembersComponent,
     PhotosComponent,
     FilterPipe,
     AlbumComponent
@@ -54,12 +46,8 @@ import { AlbumComponent } from './album/album.component';
     AngularFireDatabaseModule, 
     AngularFireAuthModule,
     FormsModule
-    // BrowserAnimationsModule,
-    // NoopAnimationsModule,
-    // MatDialogModule
-    // MatDialog, MatDialogRef
   ],
-  providers: [PhotosService, TokenService, UsernameService,HttpModule, AuthGuard/*, Overlay ,MatDialogModule*/],
+  providers: [PhotosService, TokenService, UsernameService,HttpModule, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

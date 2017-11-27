@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 // import { PhotosService } from './photos.service'
 import { SignupComponent } from './signup/signup.component'
 import { Http, HttpModule } from '@angular/http';
+import { environment } from '../environments/environment'
 import { ActivatedRoute, Router, Params, RouterModule, Routes } from "@angular/router";
 import * as Picasa from 'picasa';
 
@@ -23,9 +24,10 @@ export class TokenService {
 
   oonSignUp(){
     const picasa = new Picasa();
+    const envURL = environment.host; 
     const config = {
       clientId     : '37970128122-78lisq0ssc0i18jk2b49stl9m89d1mv5.apps.googleusercontent.com',
-      redirectURI  : 'http://localhost:8080/oauth2callback'
+      redirectURI  : 'http://'+envURL+'/oauth2callback'
     }
   
     const authURL = picasa.getAuthURL(config)

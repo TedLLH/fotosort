@@ -13,17 +13,12 @@ import * as _ from 'underscore'
 export class PhotosComponent implements OnInit {
   
   @Input() photolinks 
-<<<<<<< HEAD
   // photolinks = [{'image': 'http://icons.iconarchive.com/icons/martz90/circle/512/camera-icon.png'}, {'image':'http://icons.iconarchive.com/icons/pelfusion/long-shadow-media/512/Camera-icon.png'}, {'image': 'https://image.freepik.com/free-icon/whatsapp-logo_318-49685.jpg'}];
   photos:any;
 
   albums:any;
 
   albumsConfirm:any = []
-=======
- 
-  photos
->>>>>>> 0957c1ca6bde3ac63c4a6922d6cafc2a88cbf170
 
   term:string = '';
 
@@ -49,7 +44,6 @@ export class PhotosComponent implements OnInit {
    
   }
 
-<<<<<<< HEAD
   checkAlbum(id){
     if(this.albumsConfirm.includes(id)){
       this.albumsConfirm = this.albumsConfirm.filter((a)=>{return a != id})
@@ -71,8 +65,6 @@ export class PhotosComponent implements OnInit {
     })
   }
   
-=======
->>>>>>> 0957c1ca6bde3ac63c4a6922d6cafc2a88cbf170
   getPhoto(){
     //using /getphoto route
     console.log('getPhoto from Google clicked')

@@ -719,7 +719,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/photos/photos.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div><h4>This is photo component</h4>\n<h3>To add photo to a new album:<br>\n1) click to select, click again to deselect<br>\n2) Enter Album name <br>\n3) Click \"Get Album\"above to retrieve your album\"</h3>\n<input [(ngModel)]=\"albumName\" placeholder=\"Album Name\">\n<button (click)=\"createAlbum()\">Create Album</button>\n\n<input [(ngModel)]=\"term\" placeholder=\"Add Keyword\">\n<button (click)=\"addTerm()\">Enter</button>\n\n<div *ngFor='let term of searchTerm'>\n  <button [ngStyle]=\"term.myStyle\" (click)=\"changeStyle(term.term)\"> {{term.term}} <button (click)=\"deleteTag(term.term)\" id=\"crossbutton\"><img id=\"cross\" src=\"https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png\"></button></button>\n</div> \n</div>\n <!-- <div *ngFor='let term of searchTerm' class=\"slider\">\n  <input type='checkbox' class='taginput'> {{term}} <button (click)=\"deleteTag(term)\" id=\"crossbutton\"><img id=\"cross\" src=\"https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png\"></button>\n</div>  -->\n\n\n<!-- <label *ngFor='let term of searchTerm' class=\"switch\">\n  <input type=\"checkbox\" class='taginput'> {{term}} <button (click)=\"deleteTag(term)\" id=\"crossbutton\"><img id=\"cross\" src=\"https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png\"></button>\n  <span class=\"slider\"></span>\n</label> -->\n\n<!-- <input [ngStyle]=\"myStyle\" type=\"button\" value=\"set color\" (click)=\"changeStyle()\"> -->\n<!-- <button [ngStyle]=\"myStyle\" (click)=\"changeStyle()\">SET COLOR</button> -->\n\n <!-- <form>\n  Search Box: <input type='text' placeholder=\"search\" name=\"term\" (input)=\"onSearch($event)\">\n</form>  -->\n\n <span>\n  <img *ngIf=\"loading\" src=\"https://gifimage.net/wp-content/uploads/2017/09/animated-gif-loading-12.gif\">\n</span> \n\n\n <div class=\"panel panel-default\" *ngFor=\"let link of photolinks | filter:searchConfirm\" (click)=\"addLink(link.image)\">\n    <img src= {{link.image}}>\n\n      <div class=\"tagDiv\" *ngFor=\"let tag of link.tags\">\n          <div class=\"tagDivDiv\"> \n            <button class=\"tagButton\">{{tag}}</button> \n          </div>\n      </div>\n</div>\n\n <!-- <button (click)=\"openDialog()\">Click here laaa</button>  -->"
+module.exports = "<div><h4>This is photo component</h4>\n<h3>To add photo to a new album:<br>\n1) click to select, click again to deselect<br>\n2) Enter Album name <br>\n3) Click \"Get Album\"above to retrieve your album\"</h3>\n<input [ngStyle]=\"createAlbumError\" [(ngModel)]=\"albumName\" placeholder=\"Album Name\">\n<button (click)=\"createAlbum()\">Create Album</button>\n\n<input [(ngModel)]=\"term\" placeholder=\"Add Keyword\">\n<button (click)=\"addTerm()\">Enter</button>\n\n<div *ngFor='let term of searchTerm'>\n  <button [ngStyle]=\"term.myStyle\" (click)=\"changeStyle(term.term)\"> {{term.term}} <button (click)=\"deleteTag(term.term)\" id=\"crossbutton\"><img id=\"cross\" src=\"https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png\"></button></button>\n</div> \n</div>\n <!-- <div *ngFor='let term of searchTerm' class=\"slider\">\n  <input type='checkbox' class='taginput'> {{term}} <button (click)=\"deleteTag(term)\" id=\"crossbutton\"><img id=\"cross\" src=\"https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png\"></button>\n</div>  -->\n\n\n<!-- <label *ngFor='let term of searchTerm' class=\"switch\">\n  <input type=\"checkbox\" class='taginput'> {{term}} <button (click)=\"deleteTag(term)\" id=\"crossbutton\"><img id=\"cross\" src=\"https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png\"></button>\n  <span class=\"slider\"></span>\n</label> -->\n\n<!-- <input [ngStyle]=\"myStyle\" type=\"button\" value=\"set color\" (click)=\"changeStyle()\"> -->\n<!-- <button [ngStyle]=\"myStyle\" (click)=\"changeStyle()\">SET COLOR</button> -->\n\n <!-- <form>\n  Search Box: <input type='text' placeholder=\"search\" name=\"term\" (input)=\"onSearch($event)\">\n</form>  -->\n\n <span>\n  <img *ngIf=\"loading\" src=\"https://gifimage.net/wp-content/uploads/2017/09/animated-gif-loading-12.gif\">\n</span> \n\n\n <div class=\"panel panel-default\" *ngFor=\"let link of photolinks | filter:searchConfirm\" (click)=\"addLink(link.image)\">\n    <img src= {{link.image}}>\n\n      <div class=\"tagDiv\" *ngFor=\"let tag of link.tags\">\n          <div class=\"tagDivDiv\"> \n            <button class=\"tagButton\">{{tag}}</button> \n          </div>\n      </div>\n</div>\n\n <!-- <button (click)=\"openDialog()\">Click here laaa</button>  -->"
 
 /***/ }),
 
@@ -759,7 +759,9 @@ var PhotosComponent = (function () {
         this.photoURLyouwanttoadd = [];
         this.albumName = '';
         this.loading = false;
-        this.deleted = false;
+        this.createAlbumError = {
+            "border-color": "white"
+        };
     }
     PhotosComponent.prototype.ngOnInit = function () {
     };
@@ -810,11 +812,19 @@ var PhotosComponent = (function () {
         });
         console.log(this.searchTerm);
     };
-    PhotosComponent.prototype.changePhoto = function () {
-    };
     PhotosComponent.prototype.createAlbum = function () {
         console.log(this.albumName);
-        this.http.post('/createalbum', { albumName: this.albumName, url: this.photoURLyouwanttoadd }).subscribe(function (res) { }, function (err) { });
+        if (this.albumName) {
+            this.createAlbumError = {
+                "border-color": "white"
+            };
+            this.http.post('/createalbum', { albumName: this.albumName, url: this.photoURLyouwanttoadd }).subscribe(function (res) { }, function (err) { });
+        }
+        else {
+            this.createAlbumError = {
+                "border-color": "red"
+            };
+        }
     };
     PhotosComponent.prototype.addLink = function (link) {
         if (!this.photoURLyouwanttoadd.includes(link)) {

@@ -35,7 +35,9 @@ export class PhotosComponent implements OnInit {
 
   loading:boolean = false;
 
-  deleted:boolean = false;
+  createAlbumError = {
+    "border-color" : "white"
+  }
 
   constructor(private http:Http, private photosService:PhotosService/*, public dialog: MatDialog*/) { }
 
@@ -94,12 +96,18 @@ export class PhotosComponent implements OnInit {
     console.log(this.searchTerm)
   }
 
-  changePhoto(){
-  }
-
   createAlbum(){
     console.log(this.albumName)
-    this.http.post('/createalbum', {albumName: this.albumName, url: this.photoURLyouwanttoadd}).subscribe((res)=>{}, (err)=>{})
+    if(this.albumName){
+      this.createAlbumError = {
+        "border-color": "white"
+      }
+      this.http.post('/createalbum', {albumName: this.albumName, url: this.photoURLyouwanttoadd}).subscribe((res)=>{}, (err)=>{})
+    } else {
+      this.createAlbumError = {
+        "border-color": "red"
+      }
+    }
   }
 
   addLink(link){

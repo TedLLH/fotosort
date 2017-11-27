@@ -309,53 +309,6 @@ app.delete('/deletealbum/:id',(req,res)=>{
     })
 }) 
 
-// app.get('/logout', (req,res)=>{
-//     req.logout();
-//     res.redirect('/')
-// })
-
-
-// app.get('/clearClarifai', (req,res)=>{
-//     clarifai.inputs.delete().then(
-//         function(response) {
-//         console.log('Delete jor');
-//     },
-//         function(err) {
-//         console.log(err);
-//         }
-//     );
-// })
-
-app.get('/oauth2callback', (req,res)=>{
-    const config = {
-        clientId     : process.env.CLIENT_ID,
-        redirectURI  : 'http://localhost:8080/oauth2callback',
-        clientSecret : process.env.CLIENT_SECRET
-        }
-    console.log(req.body);
-    picasa.getAccessToken(config, req.query.code, (error, accessToken, refreshToken) => {
-        client.setex('accessToken', 60*60, accessToken, (err)=>{
-            if(err){
-                console.log('eRro')
-            }
-        })
-        const optionsAlbums = {}
-        picasa.getAlbums(accessToken, optionsAlbums,(error, albums)=>{
-
-            let albumtosave = albums.map((n)=>{
-                                return n.id
-                             })
-
-            client.setex('albums', 60*60, JSON.stringify(albumtosave),(err)=>{
-                if(err){
-                    console.log('eRR in saving code');
-                }
-            })
-        })
-    })
-    res.redirect('/login')
-})
-
 function authRequired (req, res, next) {
   if (!req.user) {
     return res.redirect('/auth/google');

@@ -4,9 +4,6 @@ import { Http, HttpModule } from '@angular/http';
 import { TokenService } from '../token.service';
 import { UsernameService } from '../username.service'
 
-// import { MatSidenavModule } from '@angular/material/sidenav';
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -38,8 +35,5 @@ export class LoginComponent implements OnInit {
     },(err)=>{
        console.log('error occurs');
     })
-  
   }
-
-
 }

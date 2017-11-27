@@ -12,9 +12,6 @@ const model = require('./models');
 const User = model.user
 require ('dotenv').config();
 
-// http://localhost:8080/oauth2callback 
-// http://139.59.120.233.nip.io/oauth2callback
-
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 // parse application/x-www-form-urlencoded
@@ -168,6 +165,7 @@ app.post('/getPhoto',authRequired, (req,res)=>{
 
     var dataArray = []
 
+<<<<<<< HEAD
     let albumsID = req.body;
     client.get(req.user.id+'_accessT', (err, token)=>{
         albumsID.map((albumid)=>{
@@ -218,6 +216,61 @@ app.post('/getPhoto',authRequired, (req,res)=>{
                             )}, 
                             (err)=>{                                
                             });
+=======
+    client.get('albums', (err, albums)=>{
+
+        if(err){
+            console.log('Error in getting code');
+        }
+
+        let albumsID = JSON.parse(albums);
+        client.get('accessT', (err, token)=>{
+            albumsID.map((albumid)=>{
+                const options = {
+                    maxResults: 10, // by default get all 
+                    albumId: albumid 
+                }
+            picasa.getPhotos(token, options, (error, photos) => {
+                if(!photos){
+                    noPhotoAlbum ++;
+                }
+                if(photos){
+                    photosArray.push(photos.map((b)=>{return b.content.src}))
+                    photos.forEach((nnn)=>{
+                        clarifaiUrl.push({url: nnn.content.src})
+                })
+                if(photosArray.length === albumsID.length-1){
+                    console.log('for clarifai')
+                    clarifai.models.predict(Clarifai.GENERAL_MODEL, clarifaiUrl)
+                    .then((response)=> {
+                                    // console.log(response.outputs[0].input.data.image.url)
+                        response.outputs.forEach((data)=>{
+                            let obj = {
+                                'image': data.input.data.image.url,
+                                'tags': data.data.concepts
+                                        .filter((scoresAll)=>{
+                                            return scoresAll.value > 0.9
+                                        })
+                                        .map((scoresFiltered)=>{
+                                            return scoresFiltered.name
+                                        })
+                                       }
+                                     dataArray.push(obj)
+                                  })
+                                },
+                                (err)=>{
+                                    console.log('fafds'+err)
+                                })
+                                .then(()=>{
+                                    res.json({
+                                        'links': dataArray
+                                    }
+                                )}, 
+                                (err)=>{
+                                    console.log('有error')
+                                });
+                        }
+>>>>>>> 0957c1ca6bde3ac63c4a6922d6cafc2a88cbf170
                     }
                 }
             })
@@ -274,6 +327,7 @@ app.delete('/deletealbum/:id',(req,res)=>{
     })
 })
 
+<<<<<<< HEAD
 app.get('/logout', (req,res)=>{
     req.logout();
     res.sendFile('/')
@@ -321,6 +375,8 @@ app.get('/oauth2callback', (req,res)=>{
     res.redirect('/login')
 })
 
+=======
+>>>>>>> 0957c1ca6bde3ac63c4a6922d6cafc2a88cbf170
 function authRequired (req, res, next) {
   if (!req.user) {
     return res.redirect('/auth/google');

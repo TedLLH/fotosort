@@ -4,14 +4,6 @@ import { FilterPipe } from '../filter.pipe'
 import { FormsModule } from '@angular/forms';
 import { Http } from '@angular/http';
 import * as _ from 'underscore'
-// import { BrowserModule } from '@angular/platform-browser';
-// import { ReactiveFormsModule } from '@angular/forms'; 
-// import { FormControl,FormGroup, Validators } from '@angular/forms';
-// import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'; 
-// import { MatDialogModule } from '@angular/material/dialog';
-// import { OverlayModule } from '@angular/cdk/overlay'
-
-
 
 @Component({
   selector: 'app-photos',
@@ -21,12 +13,17 @@ import * as _ from 'underscore'
 export class PhotosComponent implements OnInit {
   
   @Input() photolinks 
+<<<<<<< HEAD
   // photolinks = [{'image': 'http://icons.iconarchive.com/icons/martz90/circle/512/camera-icon.png'}, {'image':'http://icons.iconarchive.com/icons/pelfusion/long-shadow-media/512/Camera-icon.png'}, {'image': 'https://image.freepik.com/free-icon/whatsapp-logo_318-49685.jpg'}];
   photos:any;
 
   albums:any;
 
   albumsConfirm:any = []
+=======
+ 
+  photos
+>>>>>>> 0957c1ca6bde3ac63c4a6922d6cafc2a88cbf170
 
   term:string = '';
 
@@ -46,12 +43,13 @@ export class PhotosComponent implements OnInit {
     "border-color" : "white"
   }
 
-  constructor(private http:Http, private photosService:PhotosService/*, public dialog: MatDialog*/) { }
+  constructor(private http:Http, private photosService:PhotosService) { }
 
   ngOnInit() {
    
   }
 
+<<<<<<< HEAD
   checkAlbum(id){
     if(this.albumsConfirm.includes(id)){
       this.albumsConfirm = this.albumsConfirm.filter((a)=>{return a != id})
@@ -73,6 +71,8 @@ export class PhotosComponent implements OnInit {
     })
   }
   
+=======
+>>>>>>> 0957c1ca6bde3ac63c4a6922d6cafc2a88cbf170
   getPhoto(){
     //using /getphoto route
     console.log('getPhoto from Google clicked')

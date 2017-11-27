@@ -26,14 +26,6 @@ export class SignupComponent implements OnInit {
     }, (err)=>{
       console.log(err)  
     })
-    // this.http.get('/checktoken').subscribe((res)=>{
-    //   if(res.json()){
-    //     console.log(res.json())
-    //   } else {
-    //   }
-    // }, (err)=>{
-    //   this.tokenService.onSignUp();
-    // })
   };
 
 }

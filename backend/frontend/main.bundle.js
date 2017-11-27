@@ -38,7 +38,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/album/album.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div> \n  <button (click)=\"getAlbum()\">Get Album</button>\n</div>\n\n<div class=\"panel panel-default\" *ngFor=\"let album of albums\">\n  <p>{{album.albumName}} <button (click)=\"deleteAlbum(album.albumID)\">Delete Album</button> </p>\n  \n  <div class=\"panel panel-default\" *ngFor=\"let album of album.images\">\n    <img src= {{album.image}}>\n  </div>\n</div>\n\n"
+module.exports = "<div> \n  <button (click)=\"getAlbum()\">Get Album</button>\n</div>\n\n<div class=\"panel panel-default\" *ngFor=\"let album of albums\">\n  <p>{{album.albumName}} <button (click)=\"deleteAlbum(album.albumID)\">Delete Album</button> </p>\n  \n  <div class=\"panel panel-default\" *ngFor=\"let album of album.images\">\n    <img src= {{album}}>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -770,14 +770,23 @@ var PhotosComponent = (function () {
         }
     };
     PhotosComponent.prototype.addTerm = function () {
+        var _this = this;
         var obj = {
             term: this.term,
             myStyle: {
                 background: 'green'
             }
         };
-        this.searchTerm.push(obj);
-        this.searchConfirm.push(this.term);
+        this.searchTerm.forEach(function (T) {
+            if (T.term != _this.term) {
+                _this.searchTerm.push(obj);
+                _this.searchConfirm.push(_this.term);
+            }
+        });
+        // if(!this.searchTerm.includes(obj)){
+        //   this.searchTerm.push(obj)
+        //   this.searchConfirm.push(this.term)
+        // }
         this.term = '';
     };
     PhotosComponent.prototype.deleteTag = function (tag) {

@@ -307,12 +307,12 @@ app.delete('/deletealbum/:id',(req,res)=>{
             })
         })
     })
-}) 
+})
 
-// app.get('/logout', (req,res)=>{
-//     req.logout();
-//     res.redirect('/')
-// })
+app.get('/logout', (req,res)=>{
+    req.logout();
+    res.sendFile('/')
+})
 
 
 // app.get('/clearClarifai', (req,res)=>{

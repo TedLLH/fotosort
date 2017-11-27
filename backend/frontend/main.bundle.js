@@ -38,11 +38,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/album/album.component.html":
 /***/ (function(module, exports) {
 
-<<<<<<< HEAD
-module.exports = "<div> \n  <button (click)=\"getAlbum()\">Get Album</button>\n</div>\n\n<div class=\"panel panel-default\" *ngFor=\"let album of albums\">\n  <p>{{album.albumName}} <button (click)=\"deleteAlbum(album.albumID)\">Delete Album</button> </p>\n  \n  <div class=\"panel panel-default\" *ngFor=\"let album of album.images\">\n    <img src= {{album}}>\n  </div>\n</div>\n\n"
-=======
 module.exports = "<div> \n  <h4>This is album component</h4>\n  <button (click)=\"getAlbum()\">Get Album</button>\n</div>\n\n<div class=\"panel panel-default\" *ngFor=\"let album of albums\">\n  <p>Album name: {{album.albumName}} <button class=\"deleteButton\" (click)=\"deleteAlbum(album.albumID)\">Delete Album</button> </p>\n  \n  <div class=\"panel panel-default\" *ngFor=\"let album of album.images\">\n    <img src= {{album}}>\n  </div>\n</div>\n\n"
->>>>>>> 5294c8b086940a156cc0cd9bf4cca34a7491117b
 
 /***/ }),
 
@@ -710,7 +706,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "div{\n    display:block;\n    background-color:lightgoldenrodyellow;\n    margin:10px 10px 10px 10px; \n}\nbutton{\n    width:100px;\n    height:50px;\n    background-color:lightpink;\n}\nimg{\n    display:block;\n    width: 40%;\n    height: 40%;\n}\n\nh4{\n    color:royalblue;\n}\n\n.tagButton{\n    width:70px;\n    height:30px;\n    background-color: yellow;\n    text-align:center;\n    transition: 0.5s;\n    -webkit-transition: 0.5s;\n}\n\n.tagDiv{\n    display:-webkit-inline-box;\n    display:-ms-inline-flexbox;\n    display:inline-flex;\n}\n\n.tagDivDiv{\n    display:-webkit-box;\n    display:-ms-flexbox;\n    display:flex;\n}\n\n#cross {\n    height: 10px;\n    width: 10px;\n}\n\n#crossbutton{\n    opacity: 0;\n    transition: 0.5s;\n    -webkit-transition: 0.5s;\n}\n\n#crossbutton:hover{\n    opacity: 1;\n    transition: 0.5s;\n    -webkit-transition: 0.5s;\n}\n\n.strike {\n    text-decoration: line-through;\n}\n\n.switch {\n  width: 60px;\n  height: 34px;\n}\n\n.switch .taginput {display:none;}\n\n.slider {\n  cursor: pointer;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: #ffff66;\n  transition: .4s;\n}\n\n.slider:before {\n  content: \"\";\n  height: 26px;\n  width: 26px;\n  left: 4px;\n  bottom: 4px;\n  background-color: white;\n  transition: .4s;\n}\n\n.taginput:checked + .slider {\n  background-color: #2196F3;\n}\n\n.taginput:focus + .slider {\n  box-shadow: 0 0 1px #2196F3;\n}\n\n", ""]);
+exports.push([module.i, "div{\n    display:block;\n    background-color:lightgoldenrodyellow;\n    margin:10px 10px 10px 10px; \n}\nbutton{\n    width:100px;\n    height:50px;\n    background-color:lightpink;\n}\nimg{\n    display:block;\n    width: 40%;\n    height: 40%;\n}\n\nh4{\n    color:royalblue;\n}\n\n.tagButton{\n    width:50px;\n    height:20px;\n    background-color: yellow;\n    text-align:center;\n    transition: 0.5s;\n    -webkit-transition: 0.5s;\n}\n\n.tagDiv{\n    display:-webkit-inline-box;\n    display:-ms-inline-flexbox;\n    display:inline-flex;\n}\n\n.tagDivDiv{\n    display:-webkit-box;\n    display:-ms-flexbox;\n    display:flex;\n}\n\n#cross {\n    height: 20px;\n    width: 20px;\n}\n\n#crossbutton{\n    width: 25px;\n    height: 25px;\n    margin-right: 2.5px;\n    opacity: 0;\n    transition: 0.5s;\n    -webkit-transition: 0.5s;\n}\n\n#crossbutton:hover{\n    width: 25px;\n    height: 25px;\n    margin-right: 2.5px;\n    opacity: 1;\n    transition: 0.5s;\n    -webkit-transition: 0.5s;\n}\n\n.strike {\n    text-decoration: line-through;\n}\n\n.switch {\n  width: 60px;\n  height: 34px;\n}\n\n.switch .taginput {display:none;}\n\n.slider {\n  cursor: pointer;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: #ffff66;\n  transition: .4s;\n}\n\n.slider:before {\n  content: \"\";\n  height: 26px;\n  width: 26px;\n  left: 4px;\n  bottom: 4px;\n  background-color: white;\n  transition: .4s;\n}\n\n.taginput:checked + .slider {\n  background-color: #2196F3;\n}\n\n.taginput:focus + .slider {\n  box-shadow: 0 0 1px #2196F3;\n}\n\n", ""]);
 
 // exports
 
@@ -793,23 +789,16 @@ var PhotosComponent = (function () {
         }
     };
     PhotosComponent.prototype.addTerm = function () {
-        var _this = this;
         var obj = {
             term: this.term,
             myStyle: {
                 background: 'yellow'
             }
         };
-        this.searchTerm.forEach(function (T) {
-            if (T.term != _this.term) {
-                _this.searchTerm.push(obj);
-                _this.searchConfirm.push(_this.term);
-            }
-        });
-        // if(!this.searchTerm.includes(obj)){
-        //   this.searchTerm.push(obj)
-        //   this.searchConfirm.push(this.term)
-        // }
+        if (!this.searchTerm.map(function (term) { return term.term; }).includes(this.term)) {
+            this.searchTerm.push(obj);
+            this.searchConfirm.push(this.term);
+        }
         this.term = '';
     };
     PhotosComponent.prototype.deleteTag = function (tag) {

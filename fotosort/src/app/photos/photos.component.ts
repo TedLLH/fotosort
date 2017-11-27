@@ -77,16 +77,10 @@ export class PhotosComponent implements OnInit {
         background: 'yellow'
       }
     }
-    this.searchTerm.forEach((T)=>{
-      if(T.term != this.term){
-        this.searchTerm.push(obj)
-        this.searchConfirm.push(this.term)
-      }
-    })
-    // if(!this.searchTerm.includes(obj)){
-    //   this.searchTerm.push(obj)
-    //   this.searchConfirm.push(this.term)
-    // }
+    if(!this.searchTerm.map((term)=>{return term.term}).includes(this.term)){
+      this.searchTerm.push(obj);
+      this.searchConfirm.push(this.term)
+    }
     this.term = '';
   }
 

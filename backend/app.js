@@ -13,7 +13,7 @@ const model = require('./models');
 const User = model.user
 require ('dotenv').config();
 
-const port = process.env.PORT||8080; 
+const port = 8080 || process.env.PORT 
 
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
@@ -40,7 +40,7 @@ function extractProfile (profile) {
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: 'http://'+port+'/auth/google/callback'
+    callbackURL: 'http://localhost:8080/auth/google/callback'|| 'http://www.fotosort/auth/google/callback'
     },(accessToken, refreshToken, profile, done) => {
         console.log(profile.id + profile.emails[0].value);
      

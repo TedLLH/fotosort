@@ -13,10 +13,11 @@ export class AlbumComponent implements OnInit {
   constructor(private http:Http) { }
 
   ngOnInit() {
+    this.getAlbum();
   }
 
   getAlbum(){
-    this.http.get('/album')
+    this.http.get('/albumDB')
     .subscribe(
       (response)=>{
         response.json().forEach((album)=>{

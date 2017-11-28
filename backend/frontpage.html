@@ -13,7 +13,7 @@
       position: absolute;
     }
 
-    .signUpLogInDiv {
+    .photoAlbumDiv {
       padding-top:12vh; 
       margin-left:40vw; 
       position: relative;
@@ -24,12 +24,12 @@
       width: 100vw;
     }
 
-    .signUpButton{
+    .photoButton{
       position: absolute;
       padding-left: 15vw;
     }
 
-    .logInButton{
+    .albumButton{
       position: absolute;
     }
 
@@ -43,7 +43,6 @@
       font-size: 55px;
       color: white;
     }
-
 </style>
 <body>
 
@@ -55,21 +54,21 @@
     <h1>FOTOSORT</h1>
   </div>
 
-  <div class='signUpLogInDiv'>
+  <div class='photoAlbumDiv'>
   
     <div class='absoluteDiv'>
       
-      <div class='signUpButton'>
-        <form action="/auth/google" method="GET">
-          <input type="submit" value="Sign Up" />
+      <div class='photoButton'>
+        <form action="/photo" method="GET">
+          <input type="submit" value="Get Photo" />
         </form>
       </div>
 
-      <!-- <div class='logInButton'>
-        <form action="/login" method="GET">
-          <input type="submit" value="Log In" />
+      <div class='albumButton'>
+        <form action="/album" method="GET">
+          <input type="submit" value="Get Album" />
         </form>
-      </div> -->
+      </div>
 
     </div>
 

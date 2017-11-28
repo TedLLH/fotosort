@@ -2,16 +2,16 @@ import { NgModule }              from '@angular/core';
 import { RouterModule, Routes }  from '@angular/router';
 import { Http, HttpModule} from '@angular/http';
 
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component'
+import { PhotosComponent } from './photos/photos.component';
+import { AlbumComponent } from './album/album.component'
 
 import { AuthGuard } from './authguard.service';
 
 const routes: Routes = [
-    {path: '', redirectTo:'/signup', pathMatch:'full'},
-    {path: 'signup', component: SignupComponent },
-    {path: 'login',  component: LoginComponent},
-    {path: 'oauth2callback', redirectTo:'/login'}
+    {path: '', redirectTo:'/', pathMatch:'full'},
+    {path: 'photo', component: PhotosComponent },
+    {path: 'album',  component: AlbumComponent},
+    {path: '**', redirectTo:'/', pathMatch:'full'}
 ]
 
 @NgModule({
@@ -23,4 +23,4 @@ const routes: Routes = [
     ]
 })
 export class AppRoutingModule{}
-export const routingComponents = [SignupComponent, LoginComponent]
+export const routingComponents = [PhotosComponent, AlbumComponent]

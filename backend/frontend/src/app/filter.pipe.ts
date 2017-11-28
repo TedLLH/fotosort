@@ -5,12 +5,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(photolinks: any, term?: any): any {
+  transform(photos: any, term?: any): any {
     
-    if(!term) return photolinks;
-
+    if(!term) {return photos}
+    else{
     // return photolinks
-    return photolinks.filter(link => link.tags.toString().toLowerCase().includes(term.toLowerCase()))
+    return photos.filter(link => link.tags.toString().toLowerCase().includes(term.toLowerCase()))
+    }
   }
 
 }

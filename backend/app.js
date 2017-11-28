@@ -92,20 +92,27 @@ app.get('/auth/google',
   passport.authenticate('google', { scope: ['email', 'profile', 'https://www.googleapis.com/auth/drive.photos.readonly', 'https://picasaweb.google.com/data'] }), (req,res,next)=>{next()});
 
 app.get('/auth/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/signup' }),
+  passport.authenticate('google', { failureRedirect: '/' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/login');
+    res.redirect('/frontpage');
 });
                
 
 app.get('/', (req,res)=>{
-    res.sendFile(__dirname + "/index.html")
+    if(req.user){
+        res.redirect('/frontpage')
+    } else if (!req.user){
+        res.sendFile(__dirname + "/index.html")
+    }
 })
 
-app.get('/login', authRequired, (req,res, next)=>{
-    console.log(req.user);
-    next()
+app.get('/photo', authRequired, (req,res, next)=>{
+    next();
+})
+
+app.get('/album', authRequired, (req,res, next)=>{
+    next();
 })
 
 app.get('/username',(req,res)=>{
@@ -114,6 +121,10 @@ app.get('/username',(req,res)=>{
         'user':req.user.displayName,
         'image': req.user.image
     })
+})
+
+app.get('/frontpage', (req,res)=>{
+    res.sendFile(__dirname+ '/frontpage.html')
 })
 
 app.get('/checktoken', (req,res)=>{
@@ -142,11 +153,6 @@ app.get('/getAlbum', authRequired, (req,res)=>{
                                         }
                                         return obj
                                     })
-            // client.setex(req.user.id+'_albums', 60*60, JSON.stringify(albumtosave), (err)=>{
-            //     if(err){
-            //         console.log('error in saving code');
-            //     }
-            // })
             res.json({
                 'album': albumtosave
             })
@@ -199,11 +205,6 @@ app.post('/getPhoto',authRequired, (req,res)=>{
                                    }
                                  dataArray.push(obj)
                               })
-                                // response.outputs.forEach((each)=>{
-                                //     tags.push(each.data.concepts.filter((scoresAll)=>{
-                                //     return scoresAll.value > 0.9
-                                //     }).map((scoresFiltered)=>{return scoresFiltered.name}))
-                                // })
                             },
                             (err)=>{
                                 console.log('fafds'+err)
@@ -248,7 +249,7 @@ app.post('/createalbum', (req,res)=>{
      }) 
 })
 
-app.get('/album', (req,res)=>{
+app.get('/albumDB', (req,res)=>{
     User.findAll().then((users)=>{
         res.json(users)
     })

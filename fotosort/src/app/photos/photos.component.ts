@@ -34,6 +34,8 @@ export class PhotosComponent implements OnInit {
 
   haveAlbum:boolean = false;
 
+  photoSelected:boolean = true;
+
   createAlbumError = {
     "border-color" : "white"
   }
@@ -41,7 +43,7 @@ export class PhotosComponent implements OnInit {
   constructor(private http:Http, private photosService:PhotosService) { }
 
   ngOnInit() {
-   
+   this.getAlbums();
   }
 
   checkAlbum(id){
@@ -68,7 +70,7 @@ export class PhotosComponent implements OnInit {
   getPhoto(){
     //using /getphoto route
     console.log('getPhoto from Google clicked')
-    this.photolinks = [{image: 'https://loading.io/spinners/microsoft/lg.rotating-balls-spinner.gif'}]
+    this.photos = [{image: 'https://loading.io/spinners/microsoft/lg.rotating-balls-spinner.gif'}]
     this.photosService.onGetPhoto(this.albumsConfirm).subscribe((res)=>{
       this.photolinks = res.json()['links']
       this.photos = this.photolinks
@@ -101,13 +103,14 @@ export class PhotosComponent implements OnInit {
     this.filterPhoto();
   }
 
-  addTerm(){
+  addTerm(){ 
     var obj:any = {
       term: this.term,
       myStyle: {
         background: 'yellow'
       }
     }
+    
     if(!this.searchTerm.map((term)=>{return term.term}).includes(this.term)){
       this.searchTerm.push(obj);
       this.searchConfirm.push(this.term)
@@ -149,6 +152,11 @@ export class PhotosComponent implements OnInit {
         return n != link
       })
     }
+    if(this.photoURLyouwanttoadd.length == 0){
+      this.photoSelected = true;
+    } else {
+      this.photoSelected = false;
+    }
     console.log(this.photoURLyouwanttoadd)
     this.filterPhoto();
   }
@@ -159,9 +167,6 @@ export class PhotosComponent implements OnInit {
         return link
       }
     })
-    if(this.photos.length ==0){
-      this.photos = {image: 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg'}
-    }
   }
 
 

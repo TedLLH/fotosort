@@ -3,22 +3,24 @@
 1) click to select, click again to deselect<br>
 2) Enter album name <br>
 3) Click "Get Album"above to retrieve your album"</h3>
-<button *ngIf="!haveAlbum" type='button' class='btn btn-primary' (click)='getAlbums()'>Get my Albums from Google</button>
-<br>
+<!-- <button *ngIf="!haveAlbum" type='button' class='btn btn-primary' (click)='getAlbums()'>Get my Albums from Google</button>
+<br> -->
 <div class="albumTitle" *ngFor='let album of albums'>
   <input type='checkbox' name = "album" value= {{album.id}}  (change)="checkAlbum(album.id)" checked/> 
   {{album.title}}  
 </div>
 <button *ngIf="haveAlbum" type='button' class='btn btn-primary' (click)='getPhoto()'>Get my Photos from Google</button>
 <br>
-<input [ngStyle]="createAlbumError" [(ngModel)]="albumName" placeholder="Album Name">
+<input [disabled]="photoSelected" [ngStyle]="createAlbumError" [(ngModel)]="albumName" placeholder="Album Name">
 <button (click)="createAlbum()">Create Album</button>
 
 <input [disabled]="disabled" [(ngModel)]="term" placeholder="Add Keyword">
 <button (click)="addTerm()">Enter</button>
 
 <div *ngFor='let term of searchTerm'>
-  <button [ngStyle]="term.myStyle" (click)="changeStyle(term.term)"> {{term.term}} <button (click)="deleteTag(term.term)" id="crossbutton"><img id="cross" src="https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png"></button></button>
+   <button [ngStyle]="term.myStyle" (click)="changeStyle(term.term)"> {{term.term}} <button (click)="deleteTag(term.term)" id="crossbutton"><img id="cross" src="https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png"></button></button> 
+  <!-- <button (click)="changeStyle(term.term)"> {{term.term}} <button (click)="deleteTag(term.term)" id="crossbutton"><img id="cross" src="https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png"></button></button> -->
+
 </div> 
 </div>
 

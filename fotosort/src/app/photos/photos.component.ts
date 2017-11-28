@@ -13,8 +13,12 @@ import * as _ from 'underscore'
 export class PhotosComponent implements OnInit {
   
   @Input() photolinks 
- 
-  photos
+  // photolinks = [{'image': 'http://icons.iconarchive.com/icons/martz90/circle/512/camera-icon.png'}, {'image':'http://icons.iconarchive.com/icons/pelfusion/long-shadow-media/512/Camera-icon.png'}, {'image': 'https://image.freepik.com/free-icon/whatsapp-logo_318-49685.jpg'}];
+  photos:any;
+
+  albums:any;
+
+  albumsConfirm:any = []
 
   term:string = '';
 
@@ -26,7 +30,9 @@ export class PhotosComponent implements OnInit {
 
   albumName:string = '';
 
-  loading:boolean = false;
+  disabled:boolean = true;
+
+  haveAlbum:boolean = false;
 
   createAlbumError = {
     "border-color" : "white"
@@ -38,12 +44,35 @@ export class PhotosComponent implements OnInit {
    
   }
 
+  checkAlbum(id){
+    if(this.albumsConfirm.includes(id)){
+      this.albumsConfirm = this.albumsConfirm.filter((a)=>{return a != id})
+    } else {
+      this.albumsConfirm.push(id)
+    }
+    console.log(this.albumsConfirm)
+  }
+
+  getAlbums(){
+    console.log('get aLbum clicked')
+    this.photosService.onGetAlbum().subscribe((res)=>{
+      this.albums = res.json()['album']
+      this.albumsConfirm = this.albums.map((album)=>{return album.id})
+      this.haveAlbum = true
+      console.log(this.albums)
+    }, (err)=>{
+      console.log('get albums error')
+    })
+  }
+  
   getPhoto(){
     //using /getphoto route
     console.log('getPhoto from Google clicked')
-    this.photosService.onGetPhoto().subscribe((res)=>{
+    this.photolinks = [{image: 'https://loading.io/spinners/microsoft/lg.rotating-balls-spinner.gif'}]
+    this.photosService.onGetPhoto(this.albumsConfirm).subscribe((res)=>{
       this.photolinks = res.json()['links']
       this.photos = this.photolinks
+      this.disabled = false;
     }, (err)=>{
         console.log('get photo error occurs!')
     });
@@ -130,6 +159,9 @@ export class PhotosComponent implements OnInit {
         return link
       }
     })
+    if(this.photos.length ==0){
+      this.photos = {image: 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg'}
+    }
   }
 
 

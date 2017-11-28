@@ -6,8 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FilterPipe implements PipeTransform {
 
   transform(photolinks: any, term?: any): any {
-
-    var emptyArray = [{image:'http://www.ellagret.gr/images/no-photo.jpg', tags:[]}]
     
     if(!term) return photolinks;
 

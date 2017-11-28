@@ -19,17 +19,14 @@ export class PhotosService implements OnInit{
   ngOnInit(){
   }
 
-  onGetPhoto(){
-    return this.http.get('/getphoto')
-    // this.http.get('/getphoto').subscribe((res)=>{
-    //   this.photolinks = [];
-    //   res.json()['links'].forEach((album)=>{
-    //     album.forEach((link)=>{
-    //       this.photolinks.push(link)
-    //     })
-    //   })
-    // }, (err)=>{})
+  onGetAlbum(){
+    return this.http.get('/getAlbum')
   }
+
+  onGetPhoto(album){
+    return this.http.post('/getPhoto', album)
+  }
+
 
   
 

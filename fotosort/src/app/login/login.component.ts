@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
 
   photolinks: string[] = [];
   username:any='';
+  image:any
 
   constructor(private userService:UsernameService,private photosService:PhotosService, private http:Http, private tokenService:TokenService) { }
 
@@ -29,7 +30,8 @@ export class LoginComponent implements OnInit {
   getUsername(){
     this.userService.obtainUserName().subscribe((res)=>{
       console.log("This is from getUsername()"+ JSON.parse(JSON.stringify(res.json())).user );
-     return this.username= JSON.parse(JSON.stringify(res.json())).user 
+     this.username= JSON.parse(JSON.stringify(res.json())).user ;
+     this.image = res.json().image;
     },(err)=>{
        console.log('error occurs');
     })

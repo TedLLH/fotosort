@@ -50,8 +50,7 @@ passport.use(new GoogleStrategy({
                 console.log('can;t save email');
             }
         })
-
-        client.set('accessT', accessToken, (err)=>{
+        client.set(profile.id+'_accessT', accessToken, (err)=>{
             if(err){console.log('eerrr in saving accessToken from google auth')}
         })
         return done(null, extractProfile(profile));
@@ -99,22 +98,6 @@ app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/signup' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    client.get('accessT', (err,data)=>{
-        if(err){
-            console.log('eeeeee')
-        }
-        const optionsAlbums = {}
-        picasa.getAlbums(data, optionsAlbums,  (error, albums) => {
-            var albumtosave = albums.map((n)=>{
-                                return n.id
-                              })
-            client.setex('albums', 60*60, JSON.stringify(albumtosave), (err)=>{
-                if(err){
-                    console.log('error in saving code');
-                }
-            })
-        })
-    })
     res.redirect('/login');
 });
                
@@ -125,19 +108,14 @@ app.get('/', (req,res)=>{
 
 app.get('/login', authRequired, (req,res, next)=>{
     console.log(req.user);
-
-    // return res.json({
-    //     'user':req.user
-    // })
-    // return res.json(req.user.displayName)
-    next();
-    
+    next()
 })
 
 app.get('/username',(req,res)=>{
     console.log("this is from username backend route "+req.user.displayName)
     return res.json({
-        'user':req.user.displayName
+        'user':req.user.displayName,
+        'image': req.user.image
     })
 })
 
@@ -152,7 +130,35 @@ app.get('/checktoken', (req,res)=>{
     }
 })
 
-app.get('/getphoto',authRequired, (req,res)=>{
+app.get('/getAlbum', authRequired, (req,res)=>{
+    client.get(req.user.id+'_accessT', (err,data)=>{
+        if(err){
+            console.log('eeeeee')
+        }
+        const optionsAlbums = {}
+        picasa.getAlbums(data, optionsAlbums,  (error, albums) => {
+            var albumtosave = albums.filter((a)=>{return a.num_photos>0})
+                                    .map((n)=>{ 
+                                        var obj = {
+                                            'id': n.id,
+                                            'title': n.title
+                                        }
+                                        return obj
+                                    })
+            // client.setex(req.user.id+'_albums', 60*60, JSON.stringify(albumtosave), (err)=>{
+            //     if(err){
+            //         console.log('error in saving code');
+            //     }
+            // })
+            res.json({
+                'album': albumtosave
+            })
+        })
+    })
+})
+
+app.post('/getPhoto',authRequired, (req,res)=>{
+    console.log(req.body)
 
     var photosArray = [];
 
@@ -162,65 +168,61 @@ app.get('/getphoto',authRequired, (req,res)=>{
 
     var dataArray = []
 
-    client.get('albums', (err, albums)=>{
-
-        if(err){
-            console.log('Error in getting code');
-        }
-
-        let albumsID = JSON.parse(albums);
-        client.get('accessT', (err, token)=>{
-            albumsID.map((albumid)=>{
-                const options = {
-                    maxResults: 10, // by default get all 
-                    albumId: albumid 
-                }
-            picasa.getPhotos(token, options, (error, photos) => {
-                if(!photos){
-                    noPhotoAlbum ++;
-                }
-                if(photos){
-                    photosArray.push(photos.map((b)=>{return b.content.src}))
-                    photos.forEach((nnn)=>{
-                        clarifaiUrl.push({url: nnn.content.src})
-                })
-                if(photosArray.length === albumsID.length-1){
-                    console.log('for clarifai')
-                    clarifai.models.predict(Clarifai.GENERAL_MODEL, clarifaiUrl)
-                    .then((response)=> {
-                                    // console.log(response.outputs[0].input.data.image.url)
-                        response.outputs.forEach((data)=>{
-                            let obj = {
-                                'image': data.input.data.image.url,
-                                'tags': data.data.concepts
-                                        .filter((scoresAll)=>{
-                                            return scoresAll.value > 0.9
-                                        })
-                                        .map((scoresFiltered)=>{
-                                            return scoresFiltered.name
-                                        })
-                                       }
-                                     dataArray.push(obj)
-                                  })
-                                },
-                                (err)=>{
-                                    console.log('fafds'+err)
-                                })
-                                .then(()=>{
-                                    res.json({
-                                        'links': dataArray
-                                    }
-                                )}, 
-                                (err)=>{
-                                    console.log('有error')
-                                });
-                        }
+    let albumsID = req.body;
+    client.get(req.user.id+'_accessT', (err, token)=>{
+        albumsID.map((albumid)=>{
+            const options = {
+                maxResults: 10, // by default get all 
+                albumId: albumid 
+            }
+        picasa.getPhotos(token, options, (error, photos) => {
+            if(!photos){
+                noPhotoAlbum ++;
+            }
+            if(photos){
+                photosArray.push(photos.map((b)=>{return b.content.src}))
+                photos.forEach((nnn)=>{
+                    clarifaiUrl.push({url: nnn.content.src})
+            })
+            if(photosArray.length === albumsID.length-1){
+                console.log('for clarifai')
+                clarifai.models.predict(Clarifai.GENERAL_MODEL, clarifaiUrl)
+                .then((response)=> {
+                                // console.log(response.outputs[0].input.data.image.url)
+                    response.outputs.forEach((data)=>{
+                        let obj = {
+                            'image': data.input.data.image.url,
+                            'tags': data.data.concepts
+                                    .filter((scoresAll)=>{
+                                        return scoresAll.value > 0.9
+                                    })
+                                    .map((scoresFiltered)=>{
+                                        return scoresFiltered.name
+                                    })
+                                   }
+                                 dataArray.push(obj)
+                              })
+                                // response.outputs.forEach((each)=>{
+                                //     tags.push(each.data.concepts.filter((scoresAll)=>{
+                                //     return scoresAll.value > 0.9
+                                //     }).map((scoresFiltered)=>{return scoresFiltered.name}))
+                                // })
+                            },
+                            (err)=>{
+                                console.log('fafds'+err)
+                            })
+                            .then(()=>{
+                                res.json({
+                                    'links': dataArray
+                                }
+                            )}, 
+                            (err)=>{                                
+                            });
                     }
-                })
+                }
             })
         })
-     })
-    
+    }) 
 });
 
 app.post('/createalbum', (req,res)=>{

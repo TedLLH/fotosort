@@ -3,38 +3,24 @@
 1) click to select, click again to deselect<br>
 2) Enter album name <br>
 3) Click "Get Album"above to retrieve your album"</h3>
-<button type='button' class='btn btn-primary' (click)='getPhoto()'>Get my Photos from Google</button>
+<button *ngIf="!haveAlbum" type='button' class='btn btn-primary' (click)='getAlbums()'>Get my Albums from Google</button>
+<br>
+<div class="albumTitle" *ngFor='let album of albums'>
+  <input type='checkbox' name = "album" value= {{album.id}}  (change)="checkAlbum(album.id)" checked/> 
+  {{album.title}}  
+</div>
+<button *ngIf="haveAlbum" type='button' class='btn btn-primary' (click)='getPhoto()'>Get my Photos from Google</button>
+<br>
 <input [ngStyle]="createAlbumError" [(ngModel)]="albumName" placeholder="Album Name">
 <button (click)="createAlbum()">Create Album</button>
 
-<input [(ngModel)]="term" placeholder="Add Keyword">
+<input [disabled]="disabled" [(ngModel)]="term" placeholder="Add Keyword">
 <button (click)="addTerm()">Enter</button>
 
 <div *ngFor='let term of searchTerm'>
   <button [ngStyle]="term.myStyle" (click)="changeStyle(term.term)"> {{term.term}} <button (click)="deleteTag(term.term)" id="crossbutton"><img id="cross" src="https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png"></button></button>
 </div> 
 </div>
- <!-- <div *ngFor='let term of searchTerm' class="slider">
-  <input type='checkbox' class='taginput'> {{term}} <button (click)="deleteTag(term)" id="crossbutton"><img id="cross" src="https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png"></button>
-</div>  -->
-
-
-<!-- <label *ngFor='let term of searchTerm' class="switch">
-  <input type="checkbox" class='taginput'> {{term}} <button (click)="deleteTag(term)" id="crossbutton"><img id="cross" src="https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png"></button>
-  <span class="slider"></span>
-</label> -->
-
-<!-- <input [ngStyle]="myStyle" type="button" value="set color" (click)="changeStyle()"> -->
-<!-- <button [ngStyle]="myStyle" (click)="changeStyle()">SET COLOR</button> -->
-
- <!-- <form>
-  Search Box: <input type='text' placeholder="search" name="term" (input)="onSearch($event)">
-</form>  -->
-
- <span>
-  <img *ngIf="loading" src="https://gifimage.net/wp-content/uploads/2017/09/animated-gif-loading-12.gif">
-</span> 
-
 
  <div class="panel panel-default" *ngFor="let link of photos | filter:term" (click)="addLink(link.image)">
     <img src= {{link.image}}>

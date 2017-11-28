@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json({limit: "50mb"}))
 
+//serve images in the public folder
 app.use(express.static('public'))
 
 function extractProfile (profile) {
@@ -34,6 +35,7 @@ function extractProfile (profile) {
   };
 }
 
+//Google Strategy auth
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,

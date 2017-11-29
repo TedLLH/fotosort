@@ -1,0 +1,37 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<!-- <div class="appDiv" style="text-align:center">
+  <h4>This is app component</h4>
+  <h1>
+     {{title}}
+  </h1>
+  <h3>NO MORE SHATTERED MEMORIES</h3>
+  <h3>THE SMART WAY TO ORGANIZE YOUR PHOTOS</h3>
+
+  <div><h4>This is login component</h4>
+  <h2>Welcome to your homepage, {{username}}!</h2>
+  <img src= {{image}}> -->
+    
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Fotosort</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a routerLink="/frontpage" routerLinkActive="active">Home</a></li>
+      <li><a routerLink="/photo" routerLinkActive="active">Photo</a></li>
+      <li><a routerLink="/album" routerLinkActive="active">Album</a></li>
+    </ul>
+</nav>
+
+<!-- <div class='relative'>
+  <div class='absolute'>
+      <a routerLink="/photo" routerLinkActive="active">Photo</a>
+      <br>
+      <a routerLink="/album" routerLinkActive="active">Album</a>
+  </div>
+</div> -->
+
+<div>
+
+  <router-outlet></router-outlet>
+
+</div>

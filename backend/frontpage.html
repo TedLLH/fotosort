@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Fotosort</title>
+  <!-- <base href="/"> -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="camera-icon.png">
+</head>
+<style>
+    .backgroundImg {
+      position: absolute;
+    }
+
+    .photoAlbumDiv {
+      padding-top:12vh; 
+      margin-left:40vw; 
+      position: relative;
+    }
+
+    .imgClass {
+      height: 100vh;
+      width: 100vw;
+    }
+
+    .photoButton{
+      position: absolute;
+      padding-left: 15vw;
+    }
+
+    .albumButton{
+      position: absolute;
+    }
+
+    .relativeDiv{
+      position: relative;
+      padding-top: 30vh;
+      padding-left: 37vw;
+    }
+
+    h1 {
+      font-size: 55px;
+      color: white;
+    }
+</style>
+<body>
+
+  <div class='backgroundImg'>
+     <img class='imgClass' src="/pic1.jpg">
+  </div>
+
+  <div class='relativeDiv'>
+    <h1>FOTOSORT</h1>
+  </div>
+
+  <div class='photoAlbumDiv'>
+  
+    <div class='absoluteDiv'>
+      
+      <div class='photoButton'>
+        <form action="/photo" method="GET">
+          <input type="submit" value="Get Photo" />
+        </form>
+      </div>
+
+      <div class='albumButton'>
+        <form action="/album" method="GET">
+          <input type="submit" value="Get Album" />
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/reload/reload.js"></script>
+<!-- <div class="abc">haha</div> -->
+</body>
+</html>

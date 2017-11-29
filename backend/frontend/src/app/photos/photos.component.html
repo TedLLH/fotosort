@@ -1,0 +1,56 @@
+<!-- <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="fotosort.com">Fotosort</a>
+  </div>
+</nav> -->
+
+<div class='relative'>
+
+  <!-- <div class='absolute'>
+      <a routerLink="/photo" routerLinkActive="active">Photo</a>
+      <br>
+      <a routerLink="/album" routerLinkActive="active">Album</a>
+  </div> -->
+
+  <div class="albumTitle" *ngFor='let album of albums'>
+    <input type='checkbox' name = "album" value= {{album.id}}  (change)="checkAlbum(album.id)" checked/> 
+    {{album.title}}  
+
+    <button *ngIf="haveAlbum" type='button' class='btn btn-primary' (click)='getPhoto()'>Get my Photos from Google</button>
+  </div>
+
+  <div class='absolute createAlbum'>
+    <input [disabled]="photoSelected" [ngStyle]="createAlbumError" [(ngModel)]="albumName" placeholder="Album Name">
+    <button (click)="createAlbum()">Create Album</button>
+  </div>
+
+  <div class='absolute searchBar'>
+    <input [disabled]="disabled" [(ngModel)]="term" placeholder="Add Keyword">
+    <button (click)="addTerm()">Enter</button>
+  </div>
+
+  <div class='googlePhotos'>
+
+    <div class='googleImages'>
+      <div class='tag' *ngFor='let term of searchTerm'>
+        <button [ngStyle]="term.myStyle" (click)="changeStyle(term.term)"> {{term.term}} <button (click)="deleteTag(term.term)" id="crossbutton"><img id="cross" src="https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png"></button></button> 
+      </div>
+    </div>
+
+    <span>
+      <img *ngIf="loading" src="https://gifimage.net/wp-content/uploads/2017/09/animated-gif-loading-12.gif">
+    </span> 
+
+    <div class="googleImages" *ngFor="let link of photos | filter:term" (click)="addLink(link.image)">
+      <img src= {{link.image}}>
+
+      <div class="tagDiv" *ngFor="let tag of link.tags">
+        <div class="tagDivDiv"> 
+          <button class="tagButton">{{tag}}</button> 
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

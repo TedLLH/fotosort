@@ -51,7 +51,9 @@ export class PhotosComponent implements OnInit {
   
   imagePointerObservable: number = 0;
 
-  imagesArray: Array<Image> = [];
+  imagesArray: Array<Image> = [
+    new Image('../assets/images/gallery/img1.jpg', '../assets/images/gallery/img1.jpg', null, '../assets/images/gallery/img1.jpg')
+  ];
 
     // observable of an array of images with a delay to simulate a network request
     images: Observable<Array<Image>> = Observable.of(this.imagesArray).delay(300);
@@ -133,11 +135,11 @@ export class PhotosComponent implements OnInit {
       this.photolinks = res.json()['links']
       this.photos = this.photolinks;
       this.photos.forEach((photo)=>{
+        console.log("wait for latency");
         this.imagesArray.push(new Image(photo.image, photo.image, photo.tags, photo.image))
       })
       console.log(this.imagesArray)
       this.disabled = false;
-      console.log(this.photos)
     }, (err)=>{
         console.log('get photo error occurs!')
     });
@@ -264,7 +266,7 @@ export class PhotosComponent implements OnInit {
     console.log('action: ' + Action[event.action]);
     console.log('result:' + event.result);
 
-    console.log('ching' + JSON.stringify(event));
+    console.log('ching' + event)
   }
 
   onIsFirstImage(event: ImageModalEvent) {

@@ -8,7 +8,7 @@
   <div class='absolute leftColumn'>
 
     <input [disabled]="photoSelected" [ngStyle]="createAlbumError" [(ngModel)]="albumName" placeholder="Album Name">
-    <button (click)="createAlbum()">Create Album</button>
+    <button class='btn btn-primary' (click)="createAlbum()">Create Album</button>
 
     <br>
 
@@ -21,30 +21,29 @@
 
   </div>
 
-<div class='absolute searchBar'>
-    <input [disabled]="disabled" [(ngModel)]="term" placeholder="Add Keyword">
-    <button (click)="addTerm()">Enter</button>
-</div>
+    <div class='absolute searchBar'>
+        <input [disabled]="disabled" [(ngModel)]="term" placeholder="Add Keyword">
+        <button class='btn btn-primary'(click)="addTerm()">Enter</button>
+    </div>
 
-<div class='googlePhotos'>
+    <div class='googlePhotos'>
 
       <div class='googleImages'>
         <div class='tag' *ngFor='let term of searchTerm'>
             <button [ngStyle]="term.myStyle" (click)="changeStyle(term.term)"> {{term.term}} <button (click)="deleteTag(term.term)" id="crossbutton"><img id="cross" src="https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png"></button></button> 
         </div>
       </div>
-
-
       <span>
           <img *ngIf="loading" src="https://gifimage.net/wp-content/uploads/2017/09/animated-gif-loading-12.gif">
       </span> 
-  </div>
 
-  <div class='absolute gallery'>
-    <!-- <p>This is your gallery</p> -->
+   </div>
+
+  <div class='absoluteGallery'>
+    <p>This is your gallery</p>
 
     <section>
-       <!-- <p>is this working?</p> -->
+  
           <modal-gallery [modalImages]="images"
                           [downloadable]="false"
                           [slideConfig]="{infinite: false}"
@@ -56,7 +55,7 @@
          </modal-gallery>
                  
     </section>
-<hr>
+
 
     <div class="googleImages" *ngFor="let link of photos | filter:term" >
         <img src= {{link.image}}>
@@ -68,6 +67,6 @@
           </div>
         </div>
     </div> 
- </div>
+  </div>
 
 </div>

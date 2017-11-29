@@ -292,11 +292,7 @@ watch.watchTree(__dirname + "/frontend", function (f, curr, prev) {
 app.use(express.static('frontend/dist/app'));
 
 app.use(function(req, res, next) {
-<<<<<<< HEAD
     res.sendFile(__dirname+ "/frontend/dist/app/index.html");
-=======
-    res.sendFile(__dirname + "/frontend/dist/index.html");
->>>>>>> cfb4737d5cad695600be6634d88a928787de965e
 })
 
      

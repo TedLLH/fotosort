@@ -137,6 +137,7 @@ export class PhotosComponent implements OnInit {
       })
       console.log(this.imagesArray)
       this.disabled = false;
+      console.log(this.photos)
     }, (err)=>{
         console.log('get photo error occurs!')
     });
@@ -262,6 +263,8 @@ export class PhotosComponent implements OnInit {
     this.customFullDescription.customFullDescription = `Custom description of visible image with index= ${event.result}`;
     console.log('action: ' + Action[event.action]);
     console.log('result:' + event.result);
+
+    console.log('ching' + JSON.stringify(event));
   }
 
   onIsFirstImage(event: ImageModalEvent) {

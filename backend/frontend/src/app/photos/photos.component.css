@@ -158,7 +158,15 @@ h4{
 
 .absolute {
     position: absolute;
-    /* margin-top: 20vh; */
+    /* margin-left: 20vw; */
+}
+
+.leftColumn{
+    width: 30vw;
+}
+
+.gallery{
+    margin-left:30vw;
 }
 
 .createAlbum {
@@ -181,4 +189,8 @@ h4{
 
 .tag{
     display: inline-block;
+}
+
+.album{
+    display: block;
 }

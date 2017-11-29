@@ -1,0 +1,17 @@
+<p>This is image component</p>
+<section>
+  <modal-gallery [modalImages]="images"
+                 [downloadable]="false"
+                 [slideConfig]="{infinite: false}"
+                 (hasData)="onImageLoaded($event)"
+                 (close)="onCloseImageModal($event)"
+                 (show)="onVisibleIndex($event)"
+                 (firstImage)="onIsFirstImage($event)"
+                 (lastImage)="onIsLastImage($event)"></modal-gallery>
+</section>
+<hr>
+
+
+
+
+  

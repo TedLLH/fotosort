@@ -15,12 +15,19 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { PhotosComponent } from './photos/photos.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FilterPipe } from './filter.pipe';
 import { AlbumComponent } from './album/album.component';
+import { ImageComponent } from './image/image.component';
+
+//below three For angular-modal-gallery 
+import 'hammerjs'; 
+import 'mousetrap'; 
+import { ModalGalleryModule } from 'angular-modal-gallery'; 
 
 
 @NgModule({
@@ -30,7 +37,9 @@ import { AlbumComponent } from './album/album.component';
     SignupComponent,
     PhotosComponent,
     FilterPipe,
-    AlbumComponent
+    AlbumComponent,
+    ImageComponent,
+   
 
   ],
   imports: [
@@ -47,7 +56,8 @@ import { AlbumComponent } from './album/album.component';
     }), 
     AngularFireDatabaseModule, 
     AngularFireAuthModule,
-    FormsModule
+    FormsModule,
+    ModalGalleryModule.forRoot()
   ],
   providers: [PhotosService, TokenService, UsernameService,HttpModule, AuthGuard],
   bootstrap: [AppComponent]

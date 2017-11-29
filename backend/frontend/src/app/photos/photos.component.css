@@ -103,3 +103,50 @@ h4{
     display: inline-flex
 }
 
+
+.test{
+    display: block;
+    float: right;
+    width: 200px;
+}
+
+.app img:hover {
+    width:500px; 
+    height:200px;
+    z-index:100; 
+    position:absolute; 
+    transition:2s; 
+}
+
+.more {
+    position: absolute;
+    /* margin: 0px; */
+    /* top: 0px; */
+    margin-top: 2px;
+    /* word-break: break-word; */
+    background: rgba(0, 0, 0, 0.7);
+    height: 50px;
+    width: 50px;
+    padding-left: 0px;
+    padding-top: 2px;
+    padding-top: 2px;
+    text-align: center;
+  }
+  
+  .list-img {
+    height: 50px;
+    margin-top: 2px;
+    cursor: pointer;
+  }
+  
+  .float-left {
+    float: left;
+    margin-right: 5px;
+    color: #ffffff;
+  }
+  
+  .float-left a:hover {
+    color: red;
+    cursor: pointer;
+  }
+  

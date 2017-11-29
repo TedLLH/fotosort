@@ -22,17 +22,7 @@ export class TokenService {
     window.location.href = '/auth/google';
   }
 
-  oonSignUp(){
-    const picasa = new Picasa();
-    const envURL = environment.host; 
-    const config = {
-      clientId     : '37970128122-78lisq0ssc0i18jk2b49stl9m89d1mv5.apps.googleusercontent.com',
-      redirectURI  : 'http://'+envURL+'/oauth2callback'
-    }
   
-    const authURL = picasa.getAuthURL(config)
-    window.location.href = authURL
-    }
 
   ooonSignUp(){
     var provider = new firebase.auth.GoogleAuthProvider();

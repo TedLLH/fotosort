@@ -289,10 +289,10 @@ watch.watchTree(__dirname + "/frontend", function (f, curr, prev) {
     reloadServer.reload();
 });
 
-app.use(express.static('frontend/dist'));
+app.use(express.static('frontend/dist/app'));
 
 app.use(function(req, res, next) {
-    res.sendFile(__dirname+ "/frontend/dist/index.html");
+    res.sendFile(__dirname+ "/frontend/dist/app/index.html");
 })
 
      

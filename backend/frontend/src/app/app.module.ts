@@ -29,7 +29,6 @@ import 'hammerjs';
 import 'mousetrap'; 
 import { ModalGalleryModule } from 'angular-modal-gallery'; 
 
-
 @NgModule({
   declarations: [
     AppComponent,

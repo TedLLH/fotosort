@@ -9,11 +9,8 @@ const Clarifai = require('clarifai');
 const passport = require('passport');
 const session = require('express-session');
 const model = require('./models');
-
 const User = model.user
 require ('dotenv').config();
-
-const port = 8080 || process.env.PORT 
 
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
@@ -23,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json({limit: "50mb"}))
 
+//serve images in the public folder
 app.use(express.static('public'))
 
 function extractProfile (profile) {
@@ -37,10 +35,11 @@ function extractProfile (profile) {
   };
 }
 
+//Google Strategy auth
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: 'http://localhost:8080/auth/google/callback'|| 'http://www.fotosort/auth/google/callback'
+    callbackURL: 'http://localhost:8080/auth/google/callback'
     },(accessToken, refreshToken, profile, done) => {
         console.log(profile.id + profile.emails[0].value);
      
@@ -210,14 +209,15 @@ app.post('/getPhoto',authRequired, (req,res)=>{
                               })
                             },
                             (err)=>{
-                                console.log('fafds'+err)
+                                console.log('dataArray1'+err)
                             })
                             .then(()=>{
                                 res.json({
                                     'links': dataArray
                                 }
                             )}, 
-                            (err)=>{                                
+                            (err)=>{   
+                                console.log('dataArray2' + err)                             
                             });
                     }
                 }
@@ -292,8 +292,12 @@ watch.watchTree(__dirname + "/frontend", function (f, curr, prev) {
 app.use(express.static('frontend/dist/app'));
 
 app.use(function(req, res, next) {
+<<<<<<< HEAD
     res.sendFile(__dirname+ "/frontend/dist/app/index.html");
+=======
+    res.sendFile(__dirname + "/frontend/dist/index.html");
+>>>>>>> cfb4737d5cad695600be6634d88a928787de965e
 })
 
      
-app.listen(port);
+app.listen(8080);

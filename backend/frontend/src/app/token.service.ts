@@ -3,7 +3,6 @@ import * as firebase from 'firebase';
 // import { PhotosService } from './photos.service'
 import { SignupComponent } from './signup/signup.component'
 import { Http, HttpModule } from '@angular/http';
-import { environment } from '../environments/environment'
 import { ActivatedRoute, Router, Params, RouterModule, Routes } from "@angular/router";
 import * as Picasa from 'picasa';
 

@@ -153,9 +153,29 @@ export class PhotosComponent implements OnInit {
   getPhoto(){
     //using /getphoto route
     console.log('getPhoto from Google clicked')
-    this.photos = [{image: 'https://loading.io/spinners/microsoft/lg.rotating-balls-spinner.gif'}]
+    // this.photos = [{image: 'https://loading.io/spinners/microsoft/lg.rotating-balls-spinner.gif'}]
     this.photosService.onGetPhoto(this.albumsConfirm).subscribe((res)=>{
-      this.photolinks = res.json()['links']
+      this.photolinks = (res.json()['links']).map((link)=>{
+        var obj = {
+          image: link.image,
+          tags: link.tags,
+          photoStyle: {
+            opacity: 0,
+            display: "none",
+            position: "fixed",
+            "z-index": 1,
+            "padding-top": "100px",
+            left: "200px",
+            top: "100px",
+            width: "700px",
+            height: "600px",
+            overflow: "auto",
+            "background-color": "rgba(192,192,192,0.3)",
+            transition: 'transform .4s ease'
+          }
+        }
+        return obj;
+      })
       this.photos = this.photolinks;
       this.photosService.storePhotos(this.photolinks);
       this.photos.forEach((photo)=>{
@@ -330,6 +350,25 @@ export class PhotosComponent implements OnInit {
     if(this.imagesArraySubscription) {
       this.imagesArraySubscription.unsubscribe();
     }
+  }
+
+
+  openPic(image){
+    this.photos.forEach((photo)=>{
+      if(photo.image == image){
+        photo.photoStyle.display = "block"
+        photo.photoStyle.opacity = 1;
+      }
+    })
+  }
+
+  closeModal(image){
+    this.photos.forEach((photo)=>{
+      if(photo.image == image){
+        photo.photoStyle.display = "none"
+        photo.photoStyle.opacity = 0;
+      }
+    })
   }
 }
 

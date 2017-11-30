@@ -1,4 +1,6 @@
-
+body{
+  background-color:lightcyan;
+}
 
 .appDiv{
     /* background-color:rgb(233, 201, 114); */
@@ -18,9 +20,9 @@ h2{
   /* color:navy; */
 }
 
-h4{
-  /* color:royalblue; */
-}
+/* h4{
+   color:royalblue; 
+} */
 
 button{
     width: 300px;

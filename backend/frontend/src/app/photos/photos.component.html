@@ -23,7 +23,7 @@
 
     <div class='absolute searchBar'>
         <input [disabled]="disabled" [(ngModel)]="term" placeholder="Add Keyword">
-        <button [disabled]="disabled" class='btn btn-primary'(click)="addTerm()">Enter</button>
+        <button [disabled]="!term" class='btn btn-primary'(click)="addTerm()">Enter</button>
     </div>
 
     <div class='googlePhotos'>
@@ -44,7 +44,8 @@
 
     <section>
         
-          <modal-gallery [modalImages]="images"
+          <modal-gallery
+                          [modalImages]="images"
                           [downloadable]="true"
                           [slideConfig]="{infinite: false}"
                           (hasData)="onImageLoaded($event)"
@@ -56,25 +57,35 @@
                  
     </section>
 
-    <div>
+    <!-- <div>
       <button id="showMoreButton" (click)="showMorePhotos()">
         <div *ngIf="!showMore">Show More</div>
         <div *ngIf="showMore">Show Less</div>
       </button>
-    </div>
+    </div> -->
 
-    <div *ngIf="showMore">
+    <!-- <div *ngIf="showMore"> -->
     <div class="googleImages" *ngFor="let link of photos | filter:term" >
-        <img id="link.id" src= {{link.image}}>
-    
-        <button (click)="addLink(link.image)">Add this picture to new album</button>
-        <div class="tagDiv" *ngFor="let tag of link.tags">
+        <img (click)="openPic(link.image)" class="googleImages" src= {{link.image}}>
+        <br>
+        <button class="addPhotoButton" (click)="addLink(link.image)">Add this picture to new album</button>
+        <!-- <div class="tagDiv" *ngFor="let tag of link.tags">
           <div class="tagDivDiv"> 
                <button class="tagButton">{{tag}}</button> 
           </div>
+        </div> -->
+        <div [ngStyle]="link.photoStyle" id="myModal" class="modal">
+          <span class="close cursor" (click)="closeModal(link.image)">Close</span>
+          <img class="popUpImage" src= {{link.image}}>
+          <div class="tagDiv" *ngFor="let tag of link.tags">
+            <div class="tagDivDiv"> 
+                <button class="tagButton">{{tag}}</button> 
+            </div>
+          </div>
         </div>
     </div>
-    </div> 
+    <!-- </div>  -->
   </div>
+   
 
 </div>

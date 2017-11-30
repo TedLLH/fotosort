@@ -352,25 +352,21 @@ export class PhotosComponent implements OnInit {
 //   }
 
 
-//   openPic(image){
-//     this.photos.forEach((photo)=>{
-//       if(photo.image == image){
-//         photo.photoStyle.display = "block"
-//         photo.photoStyle.opacity = 1;
-//       }
-//     })
-//   }
+  openPic(image){
+    this.photos.forEach((photo)=>{
+      if(photo.image == image){
+        photo.photoStyle.display = "block"
+        photo.photoStyle.opacity = 1;
+      }
+    })
+  }
 
-//   closeModal(image){
-//     this.photos.forEach((photo)=>{
-//       if(photo.image == image){
-//         photo.photoStyle.display = "none"
-//         photo.photoStyle.opacity = 0;
-//       }
-//     })
-//   }
-// }
-
-
-
-
+  closeModal(image){
+    this.photos.forEach((photo)=>{
+      if(photo.image == image){
+        photo.photoStyle.display = "none"
+        photo.photoStyle.opacity = 0;
+      }
+    })
+  }
+}

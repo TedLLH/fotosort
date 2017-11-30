@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 
+import { Image, Action, ImageModalEvent, Description } from 'angular-modal-gallery';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/delay';
+
+
 @Component({
   selector: 'app-album',
   templateUrl: './album.component.html',
@@ -8,7 +15,23 @@ import { Http } from '@angular/http';
 })
 export class AlbumComponent implements OnInit {
 
-  albums = []
+  photos:any;
+
+  albums = [];
+
+  filteredAlbums =[];
+
+  imagesArray: Array<Image> = [];
+
+  loading:boolean = false;
+  
+  havePhotos:boolean = false;
+  
+  haveAlbum:boolean = false;
+  
+  photoSelected:boolean = true;
+
+  disabled:boolean = true;
 
   constructor(private http:Http) { }
 
@@ -34,6 +57,19 @@ export class AlbumComponent implements OnInit {
       console.log(err)
     })
   }
+
+
+
+checkAlbum(albumID){
+  let result = this.albums.filter(album=>(album.id ===albumID));
+    if (albumID ===result[0].id ){
+    //  this.filteredAlbums.push(albumID)
+    return this.filteredAlbums.push(albumID)
+   }else{
+    //  this.filteredAlbums =[]
+    this.filteredAlbums=[]
+   }
+}
 
   deleteAlbum(id){
     this.http.delete('/deletealbum/'+id)

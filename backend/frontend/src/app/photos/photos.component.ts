@@ -53,11 +53,7 @@ export class PhotosComponent implements OnInit {
   
   imagePointerObservable: number = 0;
 
-  imagesArray: Array<Image> = [
-    new Image('../assets/images/gallery/img1.jpg', '../assets/images/gallery/img1.jpg', null, '../assets/images/gallery/img1.jpg'),
-    new Image('../assets/images/gallery/img1.jpg', '../assets/images/gallery/img1.jpg', null, '../assets/images/gallery/img1.jpg'),
-    new Image('../assets/images/gallery/img1.jpg', '../assets/images/gallery/img1.jpg', null, '../assets/images/gallery/img1.jpg'),
-  ];
+  imagesArray: Array<Image> = [];
 
   imagesAll: Array<Image> = [];
 

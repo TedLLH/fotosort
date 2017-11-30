@@ -1,3 +1,4 @@
+
 div{
     display:block;
     margin:10px 10px 10px 10px; 
@@ -170,7 +171,7 @@ h4{
 
 .leftColumn{
     width: 30vw;
-    background-color:palegreen;
+    background-color:rgb(172, 212, 224);
 }
 
 .gallery{
@@ -194,7 +195,8 @@ h4{
 
 .googleImages {
     padding-top: 10vh;
-    background-color: lightblue;
+
+    
 }
 
 .tag{

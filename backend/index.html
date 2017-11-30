@@ -2,13 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Fotosort</title>
+  <title>fotosort</title>
   <!-- <base href="/"> -->
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="camera-icon.png">
 </head>
 <style>
+    body {
+      background-color:white;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center; 
+      height:auto; 
+      font-family: "Lato", sans-serif;
+      }
+    .mySlides {
+      display: none
+      }
     .backgroundImg {
       position: absolute;
     }
@@ -20,13 +31,14 @@
     }
 
     .imgClass {
-      height: 100vh;
-      width: 100vw;
+      height: 100%;
+      width: 100%;
     }
 
     .signUpButton{
       position: absolute;
-      padding-left: 15vw;
+      padding-top:2vw;
+      padding-left: 5vw;
     }
 
     .logInButton{
@@ -36,7 +48,11 @@
     .relativeDiv{
       position: relative;
       padding-top: 30vh;
-      padding-left: 37vw;
+      padding-left: 10vw;
+    }
+    .cover{
+      height:45%;
+      width:45%
     }
 
     h1 {
@@ -46,24 +62,27 @@
 
 </style>
 <body>
+  
 
   <div class='backgroundImg'>
-     <img class='imgClass' src="/pic1.jpg">
+     <img class='imgClass' src="/bground3.png">
   </div>
 
-  <div class='relativeDiv'>
-    <h1>FOTOSORT</h1>
-  </div>
+  <div class='signUpButton'>
+      <form action="/auth/google" method="GET">
+        <input type="submit" value="Sign Up" />
+      </form>
+    </div>
+
+  <!-- <div class='relativeDiv'>
+    <img class="cover" src ="/whitefont.png">
+  </div> -->
 
   <div class='signUpLogInDiv'>
   
     <div class='absoluteDiv'>
       
-      <div class='signUpButton'>
-        <form action="/auth/google" method="GET">
-          <input type="submit" value="Sign Up" />
-        </form>
-      </div>
+      
 
       <!-- <div class='logInButton'>
         <form action="/login" method="GET">

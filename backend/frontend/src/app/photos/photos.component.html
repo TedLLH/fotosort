@@ -7,16 +7,20 @@
 
   <div class='absolute leftColumn'>
 
-    <input [disabled]="photoSelected" [ngStyle]="createAlbumError" [(ngModel)]="albumName" placeholder="Album Name">
-    <button class='btn btn-primary' (click)="createAlbum()">Create Album</button>
+    <div class="cell-border">
+      <input [disabled]="photoSelected" [ngStyle]="createAlbumError" [(ngModel)]="albumName" placeholder="Album Name">
+      <button class='btn btn-primary' (click)="createAlbum()">Create Album</button>
+    </div>
 
-    <br>
+    <br><br><br><br><br><br>
+    
+    <div class="cell-border">
+      <button *ngIf="haveAlbum" type='button' class='btn btn-primary' (click)='getPhoto()'>Get my Photos from Google</button>
 
-    <button *ngIf="haveAlbum" type='button' class='btn btn-primary' (click)='getPhoto()'>Get my Photos from Google</button>
-
-    <div class="album" *ngFor='let album of albums'>
-    <input type='checkbox' name = "album" value= {{album.id}}  (change)="checkAlbum(album.id)" checked/> 
-      {{album.title}}  
+      <div class="album" *ngFor='let album of albums'>
+      <input type='checkbox' name = "album" value= {{album.id}}  (change)="checkAlbum(album.id)" checked/> 
+        {{album.title}}  
+      </div>
     </div>
 
   </div>
@@ -40,9 +44,9 @@
    </div>
 
   <div class='absoluteGallery'>
-    <p>This is your gallery</p>
+    <img style="width: 50vw; margin-top: 20vh; opacity: 0.1;margin-left: 7vw;position:absolute" src="font2.png">
 
-    <section>
+    <!-- <section>
         
           <modal-gallery
                           [modalImages]="images"
@@ -55,9 +59,9 @@
                           (lastImage)="onIsLastImage($event)">
          </modal-gallery>
                  
-    </section>
+    </section> -->
 
-    <!-- <div>
+   <!-- <div>
       <button id="showMoreButton" (click)="showMorePhotos()">
         <div *ngIf="!showMore">Show More</div>
         <div *ngIf="showMore">Show Less</div>
@@ -65,27 +69,27 @@
     </div> -->
 
     <!-- <div *ngIf="showMore"> -->
-    <div class="googleImages" *ngFor="let link of photos | filter:term" >
-        <img (click)="openPic(link.image)" class="googleImages" src= {{link.image}}>
-        <br>
-        <button class="addPhotoButton" (click)="addLink(link.image)">Add this picture to new album</button>
-        <!-- <div class="tagDiv" *ngFor="let tag of link.tags">
-          <div class="tagDivDiv"> 
-               <button class="tagButton">{{tag}}</button> 
-          </div>
-        </div> -->
-        <div [ngStyle]="link.photoStyle" id="myModal" class="modal">
-          <span class="close cursor" (click)="closeModal(link.image)">Close</span>
-          <img class="popUpImage" src= {{link.image}}>
-          <div class="tagDiv" *ngFor="let tag of link.tags">
-            <div class="tagDivDiv"> 
-                <button class="tagButton">{{tag}}</button> 
+        <div *ngFor="let link of photos | filter:term" >
+            <img (click)="openPic(link.image)" class="googleImages" src= {{link.image}}>
+            <br>
+            <button class="addPhotoButton" (click)="addLink(link.image)">Add this picture to new album</button>
+            <!-- <div class="tagDiv" *ngFor="let tag of link.tags">
+              <div class="tagDivDiv"> 
+                   <button class="tagButton">{{tag}}</button> 
+              </div>
+            </div> -->
+            <div [ngStyle]="link.photoStyle" id="myModal" class="modal">
+              <span class="close cursor" (click)="closeModal(link.image)">Close</span>
+              <img class="popUpImage" src= {{link.image}}>
+              <div class="tagDiv" *ngFor="let tag of link.tags">
+                <div class="tagDivDiv"> 
+                    <button class="tagButton">{{tag}}</button> 
+                </div>
+              </div>
             </div>
-          </div>
         </div>
+        <!-- </div>  -->
+      </div>
+       
+    
     </div>
-    <!-- </div>  -->
-  </div>
-   
-
-</div>

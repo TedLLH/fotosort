@@ -2,11 +2,30 @@
   <h4>This is album component</h4>
   <button (click)="getAlbum()">Get Album</button>
 </div> -->
-
-<div class="panel panel-default" *ngFor="let album of albums">
-  <p>Album name: {{album.albumName}} <button class="deleteButton" (click)="deleteAlbum(album.albumID)">Delete Album</button> </p>
-  
-  <div class="panel panel-default" *ngFor="let album of album.images">
-    <img src= {{album}}>
+<div class='albumDiv'>
+  <p> Tick the checkbox you want to get pictures from </p>
+  <div class="" *ngFor='let album of albums'>
+  <input type='checkbox' name = "album" value= {{album.albumID}}  (change)="checkAlbum(albumID)" /> 
+    {{album.albumName}}  
   </div>
+  <button type='button' class='btn btn-primary' (click)='checkAlbum(albumID)'>Get my Albums from Fotosort</button>
+
+</div>
+
+<div class="albumDiv">
+
+  <div class="albumName" *ngFor="let album of albums">
+    <p class="text-align">Album name: {{album.albumName}} <button class="deleteButton" (click)="deleteAlbum(album.albumID)">Delete Album</button> </p>
+    
+    <div class="flex-container">
+
+      <div *ngFor="let album of album.images">
+        <img class="albumPhotos" src= {{album}}>
+      </div>
+
+
+    </div>
+
+  </div>
+
 </div>

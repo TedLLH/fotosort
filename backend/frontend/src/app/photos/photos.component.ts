@@ -39,6 +39,10 @@ export class PhotosComponent implements OnInit {
 
   disabled:boolean = true;
 
+  loading:boolean = false;
+
+  havePhotos:boolean = false;
+
   haveAlbum:boolean = false;
 
   photoSelected:boolean = true;
@@ -109,7 +113,6 @@ export class PhotosComponent implements OnInit {
      this.disabled = false;
    }
    if(this.photosService.gallery.length>0){
-    // this.imagesArray = this.photosService.getGallery();
     this.photosService.gallery.forEach((g)=>{
       this.imagesArray.push(new Image(g.img, g.img, g.description, g.img))
       this.imagesAll.push(new Image(g.img, g.img, g.description, g.img))
@@ -131,6 +134,7 @@ export class PhotosComponent implements OnInit {
 
   checkAlbum(id){
     if(this.albumsConfirm.includes(id)){
+      console.log("checking")
       this.albumsConfirm = this.albumsConfirm.filter((a)=>{return a != id})
     } else {
       this.albumsConfirm.push(id)
@@ -143,7 +147,7 @@ export class PhotosComponent implements OnInit {
     this.photosService.onGetAlbum().subscribe((res)=>{
       this.albums = res.json()['album']
       this.albumsConfirm = this.albums.map((album)=>{return album.id})
-      this.haveAlbum = true
+      this.haveAlbum = true;
       console.log(this.albums)
     }, (err)=>{
       console.log('get albums error')
@@ -247,6 +251,8 @@ export class PhotosComponent implements OnInit {
         "border-color": "white"
       }
       this.http.post('/createalbum', {albumName: this.albumName, url: this.photoURLyouwanttoadd}).subscribe((res)=>{}, (err)=>{})
+      this.albumName = '';
+      this.photoURLyouwanttoadd = [];
     } else {
       this.createAlbumError = {
         "border-color": "red"
@@ -283,94 +289,87 @@ export class PhotosComponent implements OnInit {
         this.imagesArray.push(new Image(img.img, img.img, img.description, img.img))
       } 
     })
-    // this.imagesArray = this.imagesArray.filter((img)=>{
-    //     if((_.intersection(img.description, this.searchConfirm)).length == this.searchConfirm.length){
-    //       console.log(this.imagesArray)
-    //       return img
-    //     }
-    // });
   }
 
   
   
-  openImageModal(image: Image) {
-    this.imagePointer = this.imagesArray.indexOf(image);
-    this.openModalWindow = true;
-  }
+//   openImageModal(image: Image) {
+//     this.imagePointer = this.imagesArray.indexOf(image);
+//     this.openModalWindow = true;
+//   }
 
-  openImageModalObservable(image: Image) {
-    this.subscription = this.images.subscribe((val: Image[]) => {
-      this.imagePointerObservable = val.indexOf(image);
-      this.openModalWindowObservable = true;
-    });
-  }
+//   openImageModalObservable(image: Image) {
+//     this.subscription = this.images.subscribe((val: Image[]) => {
+//       this.imagePointerObservable = val.indexOf(image);
+//       this.openModalWindowObservable = true;
+//     });
+//   }
 
-  onImageLoaded(event: ImageModalEvent) {
-    // angular-modal-gallery will emit this event if it will load successfully input images
-    console.log('onImageLoaded action: ' + Action[event.action]);
-    console.log('onImageLoaded result:' + event.result);
-  }
+//   onImageLoaded(event: ImageModalEvent) {
+//     // angular-modal-gallery will emit this event if it will load successfully input images
+//     console.log('onImageLoaded action: ' + Action[event.action]);
+//     console.log('onImageLoaded result:' + event.result);
+//   }
 
-  onVisibleIndex(event: ImageModalEvent) {
-    this.customFullDescription.customFullDescription = `Custom description of visible image with index= ${event.result}`;
-    console.log('action: ' + Action[event.action]);
-    console.log('result:' + event.result);
+//   onVisibleIndex(event: ImageModalEvent) {
+//     this.customFullDescription.customFullDescription = `Custom description of visible image with index= ${event.result}`;
+//     console.log('action: ' + Action[event.action]);
+//     console.log('result:' + event.result);
     
-    var index:any = event.result;
-      this.photos.forEach((p)=>{
-        if(p.image == this.imagesArray[index-1].img){
-          // this.http.get('/photo/'+p.id).subscribe((res)=>{},(err)=>{})
-          let pop = this.photos.pop(p);
-          this.photos.unshift(pop);
-        }
-      })
-  }
+//     var index:any = event.result;
+//       this.photos.forEach((p)=>{
+//         if(p.image == this.imagesArray[index-1].img){
+//           let pop = this.photos.pop(p);
+//           this.photos.unshift(pop);
+//         }
+//       })
+//   }
 
-  onIsFirstImage(event: ImageModalEvent) {
-    console.log('onfirst action: ' + Action[event.action]);
-    console.log('onfirst result:' + event.result);
-  }
+//   onIsFirstImage(event: ImageModalEvent) {
+//     console.log('onfirst action: ' + Action[event.action]);
+//     console.log('onfirst result:' + event.result);
+//   }
 
-  onIsLastImage(event: ImageModalEvent) {
-    console.log('onlast action: ' + Action[event.action]);
-    console.log('onlast result:' + event.result);
-  }
+//   onIsLastImage(event: ImageModalEvent) {
+//     console.log('onlast action: ' + Action[event.action]);
+//     console.log('onlast result:' + event.result);
+//   }
 
-  onCloseImageModal(event: ImageModalEvent) {
-    console.log('onClose action: ' + Action[event.action]);
-    console.log('onClose result:' + event.result);
-    this.openModalWindow = false;
-    this.openModalWindowObservable = false;
-  }
+//   onCloseImageModal(event: ImageModalEvent) {
+//     console.log('onClose action: ' + Action[event.action]);
+//     console.log('onClose result:' + event.result);
+//     this.openModalWindow = false;
+//     this.openModalWindowObservable = false;
+//   }
 
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-    if(this.imagesArraySubscription) {
-      this.imagesArraySubscription.unsubscribe();
-    }
-  }
+//   ngOnDestroy() {
+//     if (this.subscription) {
+//       this.subscription.unsubscribe();
+//     }
+//     if(this.imagesArraySubscription) {
+//       this.imagesArraySubscription.unsubscribe();
+//     }
+//   }
 
 
-  openPic(image){
-    this.photos.forEach((photo)=>{
-      if(photo.image == image){
-        photo.photoStyle.display = "block"
-        photo.photoStyle.opacity = 1;
-      }
-    })
-  }
+//   openPic(image){
+//     this.photos.forEach((photo)=>{
+//       if(photo.image == image){
+//         photo.photoStyle.display = "block"
+//         photo.photoStyle.opacity = 1;
+//       }
+//     })
+//   }
 
-  closeModal(image){
-    this.photos.forEach((photo)=>{
-      if(photo.image == image){
-        photo.photoStyle.display = "none"
-        photo.photoStyle.opacity = 0;
-      }
-    })
-  }
-}
+//   closeModal(image){
+//     this.photos.forEach((photo)=>{
+//       if(photo.image == image){
+//         photo.photoStyle.display = "none"
+//         photo.photoStyle.opacity = 0;
+//       }
+//     })
+//   }
+// }
 
 
 

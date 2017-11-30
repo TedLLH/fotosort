@@ -360,6 +360,7 @@ export class PhotosComponent implements OnInit {
       }
     })
   }
+<<<<<<< HEAD
 
   closeModal(image){
     this.photos.forEach((photo)=>{
@@ -373,4 +374,15 @@ export class PhotosComponent implements OnInit {
 
 
 
+=======
+>>>>>>> b6648e625a75269b549c9c63a2708c93cf1a957e
 
+  closeModal(image){
+    this.photos.forEach((photo)=>{
+      if(photo.image == image){
+        photo.photoStyle.display = "none"
+        photo.photoStyle.opacity = 0;
+      }
+    })
+  }
+}

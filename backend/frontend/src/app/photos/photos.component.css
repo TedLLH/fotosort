@@ -3,9 +3,9 @@ div{
     margin:10px 10px 10px 10px; 
 }
 button{
-    width:100%;
-    height:50px;
-    background-color:black;
+     width:100%; 
+    /* height:50px; */
+    /* background-color:dimgray; */
     font:white;
 }
 /* img{
@@ -117,12 +117,18 @@ h4{
 
 .absoluteGallery{
     position: absolute;
-    margin-left:32vw;
-    
+    margin-left:20vw;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .leftColumn{
+<<<<<<< HEAD
     width: 30vw;
+=======
+    width: 18vw;
+    /* background-color:rgb(172, 212, 224); */
+>>>>>>> b6648e625a75269b549c9c63a2708c93cf1a957e
 }
 
 .gallery{
@@ -143,15 +149,20 @@ h4{
 .googlePhotos {
     margin-top: 15vh;
     margin-left: 30vw;
+
 }
+
+/* .flexbox-container{
+    display: flex;
+    flex-wrap: wrap;
+} */
 
 .googleImages{
     padding-top: 8vh;
     -o-object-fit: cover;
     object-fit: cover;
-    display: inline-flex;
-    flex-wrap: wrap;
-    width: 30vw;
+    width: 22vw;
+    /* height: 30vh; */
 }
 
 .tag{
@@ -208,8 +219,20 @@ img.ng-thumb[_ngcontent-c4]{
     object-fit: cover;
 }
 
+<<<<<<< HEAD
 .addButtonFont{
     color:white;
+=======
+button.addPhotoButton{
+    /* width: 150px; */
+    background-color: dimgray;
+    color: white;
+}
+
+.btn {
+    color: white;
+    background-color: #422a19;
+>>>>>>> b6648e625a75269b549c9c63a2708c93cf1a957e
 }
 
 /* The Modal (background) */

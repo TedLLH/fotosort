@@ -1,76 +1,66 @@
-<!-- <div> 
-  <h4>This is album component</h4>
-  <button (click)="getAlbum()">Get Album</button>
-</div> -->
+
+<div class="title">
+  <h4>YOUR ALBUMS</h4>
+</div>
+
+<div class=flex>
 <div class='albumDiv'>
-  <p> Tick the checkbox you want to get pictures from </p>
-  <div class="" *ngFor='let album of albums'>
-  <input type='checkbox' name = "album" value= {{album.albumID}}  (change)="checkAlbum(album.albumID)" /> 
-    {{album.albumName}}  
-  </div>
-  <br>
-  <button type='button' class='btn btn-primary' (click)='getPhotoFromFotosort()'>Get my Albums from Fotosort</button>
 
-</div>
-<br>
-<div *ngFor="let image of imagesAll">
-   <p>{{image.title}}</p>
-    <section>
-        
-          <modal-gallery [modalImages]= "image.image" 
-                          [downloadable]="false"
-                          [slideConfig]="{infinite: false}"
-                          (hasData)="onImageLoaded($event)"
-                          (close)="onCloseImageModal($event)"
-                          (show)="onVisibleIndex($event)"
-                          (firstImage)="onIsFirstImage($event)"
-                          (lastImage)="onIsLastImage($event)">
-         </modal-gallery>
-                 
-    </section>
-</div>
-<!-- <section>
-    
-      <modal-gallery [modalImages]="images1"
-                      [downloadable]="false"
-                      [slideConfig]="{infinite: false}"
-                      (hasData)="onImageLoaded($event)"
-                      (close)="onCloseImageModal($event)"
-                      (show)="onVisibleIndex($event)"
-                      (firstImage)="onIsFirstImage($event)"
-                      (lastImage)="onIsLastImage($event)">
-     </modal-gallery>
-             
-</section>
+  <div class="insideAlbumDiv">
 
-<section>
-    
-      <modal-gallery [modalImages]="images2"
-                      [downloadable]="false"
-                      [slideConfig]="{infinite: false}"
-                      (hasData)="onImageLoaded($event)"
-                      (close)="onCloseImageModal($event)"
-                      (show)="onVisibleIndex($event)"
-                      (firstImage)="onIsFirstImage($event)"
-                      (lastImage)="onIsLastImage($event)">
-     </modal-gallery>
-             
-</section> -->
-
-<div class="albumDiv">
-
-  <div class="albumName" *ngFor="let album of albums">
-    <p class="text-align">Album name: {{album.albumName}} <button class="deleteButton" (click)="deleteAlbum(album.albumID)">Delete Album</button> </p>
-    
-    <div class="flex-container">
-
-      <div *ngFor="let album of album.images">
-        <img class="albumPhotos" src= {{album}}>
-      </div>
-
-
+    <h4> SELECT FROM YOUR ALBUMS</h4>
+     <div class="checkbox" *ngFor='let album of albums'>
+        <input type='checkbox' name = "album" value= {{album.albumID}}  (change)="checkAlbum(album.albumID)" /> 
+          {{album.albumName}}  
     </div>
 
+    <br>
+    <div class="enterButton">
+      <button type='button' class='btn btn-primary' (click)='getPhotoFromFotosort()'><h5>ENTER</h5></button>
+    </div>
+  </div>
+</div>
+  
+</div>
+
+<div class="flex" *ngFor="let image of imagesAll">
+
+  <div style="display:block;">
+    <h2>{{image.title}}</h2>
+    
+    <button style="margin-top:25px; height: 25px;" (click)="deleteAlbum(image.id)">
+      <img style="width:10px;height:10px;" src="../assets/delete.png">
+    </button>
   </div>
 
+  <div style="">
+    <section>  
+      <modal-gallery [modalImages]= "image.image" 
+      [downloadable]="false"
+      [slideConfig]="{infinite: false}"
+      (hasData)="onImageLoaded($event)"
+      (close)="onCloseImageModal($event)"
+      (show)="onVisibleIndex($event)"
+      (firstImage)="onIsFirstImage($event)"
+      (lastImage)="onIsLastImage($event)">
+    </modal-gallery>          
+  </section>
 </div>
+</div>
+
+<!-- <div class="albumDetailsDiv">
+  
+   <div class="albumName" *ngFor="let album of albums">
+      <p class="text-align">
+        Album name: {{album.albumName}} 
+         <button class="deleteButton" (click)="deleteAlbum(album.albumID)">
+           Delete Album
+         </button> 
+      </p>
+     <div class="flex-container">
+       <div *ngFor="let album of album.images">
+         <img class="albumPhotos" src= {{album}}>
+       </div>
+     </div>
+   </div>
+</div> -->

@@ -72,7 +72,12 @@
         <div *ngFor="let link of photos | filter:term" >
             <img (click)="openPic(link.image)" class="googleImages" src= {{link.image}}>
             <br>
-            <button class="addPhotoButton" (click)="addLink(link.image)">Add this picture to new album</button>
+            <div *ngIf="!this.photoURLyouwanttoadd.includes(link.image)">
+              <button class="addPhotoButton" (click)="addLink(link.image)"><div class="addButtonFont">Add this picture to new album</div></button>
+            </div>
+            <div *ngIf="this.photoURLyouwanttoadd.includes(link.image)">
+              <button class="deSelect" (click)="addLink(link.image)">Deselect Photo</button>                
+            </div>
             <!-- <div class="tagDiv" *ngFor="let tag of link.tags">
               <div class="tagDivDiv"> 
                    <button class="tagButton">{{tag}}</button> 

@@ -104,57 +104,10 @@ h4{
     /* margin-top: 20vh; */
     margin-left: 70vw;
 }
-
-
-.test{
-    display: block;
-    float: right;
-    width: 200px;
-}
-
-.app img:hover {
-    width:500px; 
-    height:200px;
-    z-index:100; 
-    position:absolute; 
-    transition:2s; 
-}
-
-.more {
-    position: absolute;
-    /* margin: 0px; */
-    /* top: 0px; */
-    margin-top: 2px;
-    /* word-break: break-word; */
-    background: rgba(0, 0, 0, 0.7);
-    height: 50px;
-    width: 50px;
-    padding-left: 0px;
-    padding-top: 2px;
-    padding-top: 2px;
-    text-align: center;
-  }
-  
-  .list-img {
-    height: 500px;
-    margin-top: 2px;
-    cursor: pointer;
-  }
-  
-  .float-left {
-    float: left;
-    margin-right: 5px;
-    color: #ffffff;
-  }
-  
-  .float-left a:hover {
-    color: red;
-    cursor: pointer;
-  }
   
 .relative {
     position: relative;
-    /* background-color:pink; */
+    
 }
 
 .absolute {
@@ -170,7 +123,6 @@ h4{
 
 .leftColumn{
     width: 30vw;
-    /* background-color:rgb(172, 212, 224); */
 }
 
 .gallery{
@@ -256,8 +208,8 @@ img.ng-thumb[_ngcontent-c4]{
     object-fit: cover;
 }
 
-addPhotoButton{
-    width: 150px
+.addButtonFont{
+    color:white;
 }
 
 /* The Modal (background) */
@@ -274,7 +226,7 @@ addPhotoButton{
   background-color: black;
 } */
 
-/* Modal Content */
+
 .modal-content {
   position: relative;
   background-color: white;
@@ -284,7 +236,7 @@ addPhotoButton{
   max-width: 1200px;
 }
 
-/* The Close Button */
+
 .close {
   color: white;
   position: absolute;
@@ -379,4 +331,8 @@ img.hover-shadow {
 .cell-border{
     border: peru;
     border-style: groove;
+}
+
+.deSelect{
+    background-color: red;
 }

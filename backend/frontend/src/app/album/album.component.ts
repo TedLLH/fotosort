@@ -120,13 +120,18 @@ checkAlbum(albumID){
             return new Image(image,image,null,image)
           })
           let newInstance = Observable.of(newArray).delay(300)
-          this.imagesAll.push({title: album.albumName, image: newInstance})
+          this.imagesAll.push({id: album.albumID, title: album.albumName, image: newInstance})
            }
         })
       })
    }
 
   deleteAlbum(id){
+    this.imagesAll= this.imagesAll.filter((album=>{
+      if(album.id !=id){
+        return album
+      }
+    }))
     this.http.delete('/deletealbum/'+id)
     .subscribe(
        (response)=>{

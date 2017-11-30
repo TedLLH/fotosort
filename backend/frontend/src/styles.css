@@ -1,9 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 /* @import "/fotosort/node_modules/@angular/material/prebuilt-themes/indigo-pink.css" */
-@import '~bootstrap/dist/css/bootstrap.min.css';
-
+/* @import '~bootstrap/dist/css/bootstrap.min.css'; */
+/* this is useless file 
 body{
-    
+    background-color:blue;
     background-attachment:fixed;
     background-position:center;
     background-repeat:no-repeat;

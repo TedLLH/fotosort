@@ -1,16 +1,24 @@
 .title{
-    margin-top: 10.5vw;
+    margin-top: 4vw;
     margin-left:9px;
+    margin-bottom:9px;
     display:block;
     color:rgb(31, 26, 26);
     font-family: Arial, Helvetica, sans-serif;
 }
+.imageResize{
+    width:30%;
+}
 .flex{
     display:flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
 }
-.albumDiv{
+.block{
+    display:block;
+}
+.leftDiv{
     /* margin-top: 10vw; */
+    
     margin-left:9px;
     padding:0.5vw;
     width:30%;
@@ -22,32 +30,40 @@
     align-items:center;
 }
 
-.buttonDelete{
-   margin-left:20px;
+.buttonDeleteDiv{
+   margin-left:1.5vw;
    background-color:none;
 }
 .deleteButton{
     background-color:none;
-    width:20px;
+    width:17px;
 }
 
 h5{
     text-align:center;
 }
 
-.insideAlbumDiv{
+.insideLeftDiv{
     margin:20px;
     margin-top:40px;
 }
 
 .galleryDiv{
     width:70%; 
-    background-color:lightgray;
+    background-color:rgb(31, 26, 26);
     /* margin-top: 10vw; */
     margin-left:9px;
+    padding:0.8vw;
     margin-right:10px;
-    padding:0.5vw;
-    color:rgb(31, 26, 26);
+    color:lightgray;
+}
+
+.insideGallery{
+    margin:20px;
+    margin-top:40px;
+}
+.titleInGallery{
+    margin:10px;
 }
 .checkbox{
     font-size:16px;

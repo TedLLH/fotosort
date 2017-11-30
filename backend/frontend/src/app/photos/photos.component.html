@@ -4,23 +4,26 @@
 <!-- <button *ngIf="!haveAlbum" type='button' class='btn btn-primary' (click)='getAlbums()'>Get my Albums from Google</button>
 <br> -->
 <div class ="relative">
-
-  <div class='absolute leftColumn'>
-
-    <div class="cell-border">
-      <input [disabled]="photoSelected" [ngStyle]="createAlbumError" [(ngModel)]="albumName" placeholder="Album Name">
-      <button class='btn btn-primary' (click)="createAlbum()">Create Album</button>
+    
+    <div class="title">
+        <img class="imageResize" src ="../assets/fotosblack.png">
     </div>
 
-    <br><br><br><br><br><br>
+  <div class='absolute leftColumn'>
+    <div class="cell-border">
+       <input [disabled]="photoSelected" [ngStyle]="createAlbumError" [(ngModel)]="albumName" placeholder="Album Name">
+        <button class='btn btn-primary' (click)="createAlbum()">Create Album</button>
+     </div>
+
+    <br><br><br><br>
     
     <div class="cell-border">
       <button *ngIf="haveAlbum" type='button' class='btn btn-primary' (click)='getPhoto()'>Get my Photos from Google</button>
 
-      <div class="album" *ngFor='let album of albums'>
-      <input type='checkbox' name = "album" value= {{album.id}}  (change)="checkAlbum(album.id)" checked/> 
-        {{album.title}}  
-      </div>
+        <div class="album" *ngFor='let album of albums'>
+         <input type='checkbox' name = "album" value= {{album.id}}  (change)="checkAlbum(album.id)" checked/> 
+           {{album.title}}  
+        </div>
     </div>
 
   </div>

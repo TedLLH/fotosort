@@ -3,13 +3,12 @@
   <button (click)="getAlbum()">Get Album</button>
 </div> -->
 <div class='albumDiv'>
-
-  <button type='button' class='btn btn-primary' (click)='getPhoto()'>Get my Albums from Fotosort</button>
-
+  <p> Tick the checkbox you want to get pictures from </p>
   <div class="" *ngFor='let album of albums'>
-  <input type='checkbox' name = "album" value= {{album.id}}  (change)="checkAlbum(album.name)" checked/> 
+  <input type='checkbox' name = "album" value= {{album.albumID}}  (change)="checkAlbum(albumID)" /> 
     {{album.albumName}}  
   </div>
+  <button type='button' class='btn btn-primary' (click)='checkAlbum(albumID)'>Get my Albums from Fotosort</button>
 
 </div>
 
@@ -23,6 +22,7 @@
       <div *ngFor="let album of album.images">
         <img class="albumPhotos" src= {{album}}>
       </div>
+
 
     </div>
 

@@ -39,6 +39,10 @@ export class PhotosComponent implements OnInit {
 
   disabled:boolean = true;
 
+  loading:boolean = false;
+
+  havePhotos:boolean = false;
+
   haveAlbum:boolean = false;
 
   photoSelected:boolean = true;
@@ -109,7 +113,6 @@ export class PhotosComponent implements OnInit {
      this.disabled = false;
    }
    if(this.photosService.gallery.length>0){
-    // this.imagesArray = this.photosService.getGallery();
     this.photosService.gallery.forEach((g)=>{
       this.imagesArray.push(new Image(g.img, g.img, g.description, g.img))
       this.imagesAll.push(new Image(g.img, g.img, g.description, g.img))
@@ -131,6 +134,7 @@ export class PhotosComponent implements OnInit {
 
   checkAlbum(id){
     if(this.albumsConfirm.includes(id)){
+      console.log("checking")
       this.albumsConfirm = this.albumsConfirm.filter((a)=>{return a != id})
     } else {
       this.albumsConfirm.push(id)
@@ -143,7 +147,7 @@ export class PhotosComponent implements OnInit {
     this.photosService.onGetAlbum().subscribe((res)=>{
       this.albums = res.json()['album']
       this.albumsConfirm = this.albums.map((album)=>{return album.id})
-      this.haveAlbum = true
+      this.haveAlbum = true;
       console.log(this.albums)
     }, (err)=>{
       console.log('get albums error')
@@ -153,9 +157,29 @@ export class PhotosComponent implements OnInit {
   getPhoto(){
     //using /getphoto route
     console.log('getPhoto from Google clicked')
-    this.photos = [{image: 'https://loading.io/spinners/microsoft/lg.rotating-balls-spinner.gif'}]
+    // this.photos = [{image: 'https://loading.io/spinners/microsoft/lg.rotating-balls-spinner.gif'}]
     this.photosService.onGetPhoto(this.albumsConfirm).subscribe((res)=>{
-      this.photolinks = res.json()['links']
+      this.photolinks = (res.json()['links']).map((link)=>{
+        var obj = {
+          image: link.image,
+          tags: link.tags,
+          photoStyle: {
+            opacity: 0,
+            display: "none",
+            position: "fixed",
+            "z-index": 1,
+            "padding-top": "100px",
+            left: "200px",
+            top: "100px",
+            width: "700px",
+            height: "600px",
+            overflow: "auto",
+            "background-color": "rgba(192,192,192,0.3)",
+            transition: 'transform .4s ease'
+          }
+        }
+        return obj;
+      })
       this.photos = this.photolinks;
       this.photosService.storePhotos(this.photolinks);
       this.photos.forEach((photo)=>{
@@ -227,6 +251,8 @@ export class PhotosComponent implements OnInit {
         "border-color": "white"
       }
       this.http.post('/createalbum', {albumName: this.albumName, url: this.photoURLyouwanttoadd}).subscribe((res)=>{}, (err)=>{})
+      this.albumName = '';
+      this.photoURLyouwanttoadd = [];
     } else {
       this.createAlbumError = {
         "border-color": "red"
@@ -263,12 +289,6 @@ export class PhotosComponent implements OnInit {
         this.imagesArray.push(new Image(img.img, img.img, img.description, img.img))
       } 
     })
-    // this.imagesArray = this.imagesArray.filter((img)=>{
-    //     if((_.intersection(img.description, this.searchConfirm)).length == this.searchConfirm.length){
-    //       console.log(this.imagesArray)
-    //       return img
-    //     }
-    // });
   }
 
   
@@ -299,7 +319,6 @@ export class PhotosComponent implements OnInit {
     var index:any = event.result;
       this.photos.forEach((p)=>{
         if(p.image == this.imagesArray[index-1].img){
-          // this.http.get('/photo/'+p.id).subscribe((res)=>{},(err)=>{})
           let pop = this.photos.pop(p);
           this.photos.unshift(pop);
         }
@@ -330,6 +349,24 @@ export class PhotosComponent implements OnInit {
     if(this.imagesArraySubscription) {
       this.imagesArraySubscription.unsubscribe();
     }
+  }
+
+  openPic(image){
+    this.photos.forEach((photo)=>{
+      if(photo.image == image){
+        photo.photoStyle.display = "block"
+        photo.photoStyle.opacity = 1;
+      }
+    })
+  }
+
+  closeModal(image){
+    this.photos.forEach((photo)=>{
+      if(photo.image == image){
+        photo.photoStyle.display = "none"
+        photo.photoStyle.opacity = 0;
+      }
+    })
   }
 }
 

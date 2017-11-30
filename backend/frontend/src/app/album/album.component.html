@@ -2,13 +2,16 @@
   <h4>This is album component</h4>
   <button (click)="getAlbum()">Get Album</button>
 </div> -->
+<div class='albumDiv'>
 
-<button *ngIf="haveAlbum" type='button' class='btn btn-primary' (click)='getPhoto()'>Get my Photos from Google</button>
+  <button type='button' class='btn btn-primary' (click)='getPhoto()'>Get my Albums from Fotosort</button>
 
-    <div class="album" *ngFor='let album of albums'>
-    <input type='checkbox' name = "album" value= {{album.id}}  (change)="checkAlbum(album.id)" checked/> 
-      {{album.title}}  
-    </div>
+  <div class="" *ngFor='let album of albums'>
+  <input type='checkbox' name = "album" value= {{album.id}}  (change)="checkAlbum(album.name)" checked/> 
+    {{album.albumName}}  
+  </div>
+
+</div>
 
 <div class="albumDiv">
 

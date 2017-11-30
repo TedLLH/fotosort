@@ -5,12 +5,57 @@
 <div class='albumDiv'>
   <p> Tick the checkbox you want to get pictures from </p>
   <div class="" *ngFor='let album of albums'>
-  <input type='checkbox' name = "album" value= {{album.albumID}}  (change)="checkAlbum(albumID)" /> 
+  <input type='checkbox' name = "album" value= {{album.albumID}}  (change)="checkAlbum(album.albumID)" /> 
     {{album.albumName}}  
   </div>
-  <button type='button' class='btn btn-primary' (click)='checkAlbum(albumID)'>Get my Albums from Fotosort</button>
+  <br>
+  <button type='button' class='btn btn-primary' (click)='getPhotoFromFotosort()'>Get my Albums from Fotosort</button>
 
 </div>
+<br>
+<div *ngFor="let image of imagesAll">
+   <p>{{image.title}}</p>
+    <section>
+        
+          <modal-gallery [modalImages]= "image.image" 
+                          [downloadable]="false"
+                          [slideConfig]="{infinite: false}"
+                          (hasData)="onImageLoaded($event)"
+                          (close)="onCloseImageModal($event)"
+                          (show)="onVisibleIndex($event)"
+                          (firstImage)="onIsFirstImage($event)"
+                          (lastImage)="onIsLastImage($event)">
+         </modal-gallery>
+                 
+    </section>
+</div>
+<!-- <section>
+    
+      <modal-gallery [modalImages]="images1"
+                      [downloadable]="false"
+                      [slideConfig]="{infinite: false}"
+                      (hasData)="onImageLoaded($event)"
+                      (close)="onCloseImageModal($event)"
+                      (show)="onVisibleIndex($event)"
+                      (firstImage)="onIsFirstImage($event)"
+                      (lastImage)="onIsLastImage($event)">
+     </modal-gallery>
+             
+</section>
+
+<section>
+    
+      <modal-gallery [modalImages]="images2"
+                      [downloadable]="false"
+                      [slideConfig]="{infinite: false}"
+                      (hasData)="onImageLoaded($event)"
+                      (close)="onCloseImageModal($event)"
+                      (show)="onVisibleIndex($event)"
+                      (firstImage)="onIsFirstImage($event)"
+                      (lastImage)="onIsLastImage($event)">
+     </modal-gallery>
+             
+</section> -->
 
 <div class="albumDiv">
 

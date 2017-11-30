@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Fotosort</title>
+  <title>fotosort</title>
   <!-- <base href="/"> -->
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,32 +11,55 @@
 <style>
     .backgroundImg {
       position: absolute;
+      background-attachment:fixed; 
+      overflow:hidden; 
+      text-align:center;
     }
 
-    .photoAlbumDiv {
-      padding-top:12vh; 
-      margin-left:40vw; 
-      position: relative;
+    .secondLine {
+      /* padding-top:20%; 
+      margin-left:20%;  */
+      display:inline-flex;
     }
 
     .imgClass {
-      height: 100vh;
-      width: 100vw;
+      
+      height: 100%;
+      width: 100%;
     }
 
+    .cover{
+      height:33%;
+      width:33%
+    }
+
+    .photoPic{
+      width:50%;
+      
+    }
     .photoButton{
+      display:block;
       position: absolute;
-      padding-left: 15vw;
+      margin-left:55vw;
+      margin-top:20vw;
+      height:200px;
+      width:300px;
     }
 
     .albumButton{
+      display:block;
       position: absolute;
+      height:200px;
+      width:300px;
+      margin-left:33vw;
+      margin-top:20vw;
     }
 
     .relativeDiv{
+      display:block;
       position: relative;
-      padding-top: 30vh;
-      padding-left: 37vw;
+      margin-left:5px;
+      
     }
 
     h1 {
@@ -47,32 +70,36 @@
 <body>
 
   <div class='backgroundImg'>
-     <img class='imgClass' src="/pic1.jpg">
+     <img class='imgClass' src="/pic2.jpg">
   </div>
 
   <div class='relativeDiv'>
-    <h1>FOTOSORT</h1>
+    <img class="cover" src ="/font2.png">
   </div>
 
-  <div class='photoAlbumDiv'>
+  <div class='secondLine'>
   
-    <div class='absoluteDiv'>
-      
+    <!-- <div class='absoluteDiv'> -->
+    <div class="relativeDiv">
       <div class='photoButton'>
-        <form action="/photo" method="GET">
-          <input type="submit" value="Get Photo" />
-        </form>
+          <img class= "photoPic" src = "/photobutton.png">
+          <form action="/photo" method="GET">
+            <input type="submit" value="Get photo" />
+          </form>
+        
       </div>
 
       <div class='albumButton'>
+        <img class="photoPic" src="/albumbutton.png">
         <form action="/album" method="GET">
-          <input type="submit" value="Get Album" />
+          <input type="submit" value="Get album" />
         </form>
       </div>
-
     </div>
+    <!-- </div> -->
 
   </div>
+  
   <script src="/reload/reload.js"></script>
 <!-- <div class="abc">haha</div> -->
 </body>

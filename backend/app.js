@@ -190,7 +190,7 @@ app.post('/getPhoto',authRequired, (req,res)=>{
                     clarifaiUrl.push({url: nnn.content.src})
             })
             if(photosArray.length === albumsID.length-1){
-                console.log('for clarifai')
+                console.log('Get photo console log for clarifai')
                 clarifai.models.predict(Clarifai.GENERAL_MODEL, clarifaiUrl)
                 .then((response)=> {
                                 // console.log(response.outputs[0].input.data.image.url)

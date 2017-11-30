@@ -51,9 +51,7 @@ export class PhotosComponent implements OnInit {
   
   imagePointerObservable: number = 0;
 
-  imagesArray: Array<Image> = [
-    new Image('../assets/images/gallery/img1.jpg', '../assets/images/gallery/img1.jpg', null, '../assets/images/gallery/img1.jpg')
-  ];
+  imagesArray: Array<Image> = [];
 
     // observable of an array of images with a delay to simulate a network request
     images: Observable<Array<Image>> = Observable.of(this.imagesArray).delay(300);
@@ -131,14 +129,15 @@ export class PhotosComponent implements OnInit {
     //using /getphoto route
     console.log('getPhoto from Google clicked')
     this.photos = [{image: 'https://loading.io/spinners/microsoft/lg.rotating-balls-spinner.gif'}]
-    this.photosService.onGetPhoto(this.albumsConfirm).subscribe((res)=>{
-      this.photolinks = res.json()['links']
-      this.photos = this.photolinks;
-      this.photos.forEach((photo)=>{
+    this.photosService.onGetPhoto(this.albumsConfirm)
+      .subscribe((res)=>{
+        this.photolinks = res.json()['links']
+        this.photos = this.photolinks;
+        this.photos.forEach((photo)=>{
         console.log("wait for latency");
         this.imagesArray.push(new Image(photo.image, photo.image, photo.tags, photo.image))
       })
-      console.log(this.imagesArray)
+      console.log(JSON.stringify(this.imagesArray))
       this.disabled = false;
     }, (err)=>{
         console.log('get photo error occurs!')

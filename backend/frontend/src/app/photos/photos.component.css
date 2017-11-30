@@ -123,12 +123,7 @@ h4{
 }
 
 .leftColumn{
-<<<<<<< HEAD
-    width: 30vw;
-=======
     width: 18vw;
-    /* background-color:rgb(172, 212, 224); */
->>>>>>> b6648e625a75269b549c9c63a2708c93cf1a957e
 }
 
 .gallery{
@@ -219,10 +214,6 @@ img.ng-thumb[_ngcontent-c4]{
     object-fit: cover;
 }
 
-<<<<<<< HEAD
-.addButtonFont{
-    color:white;
-=======
 button.addPhotoButton{
     /* width: 150px; */
     background-color: dimgray;
@@ -232,7 +223,6 @@ button.addPhotoButton{
 .btn {
     color: white;
     background-color: #422a19;
->>>>>>> b6648e625a75269b549c9c63a2708c93cf1a957e
 }
 
 /* The Modal (background) */

@@ -21,10 +21,9 @@
   </div>
 </div>
   
-</div>
 
 <div class="flex" *ngFor="let image of imagesAll">
-
+  
   <div style="display:block;">
     <h2>{{image.title}}</h2>
     
@@ -32,7 +31,7 @@
       <img style="width:10px;height:10px;" src="../assets/delete.png">
     </button>
   </div>
-
+  
   <div style="">
     <section>  
       <modal-gallery [modalImages]= "image.image" 
@@ -47,10 +46,11 @@
   </section>
 </div>
 </div>
+</div>
 
 <!-- <div class="albumDetailsDiv">
   
-   <div class="albumName" *ngFor="let album of albums">
+  <div class="albumName" *ngFor="let album of albums">
       <p class="text-align">
         Album name: {{album.albumName}} 
          <button class="deleteButton" (click)="deleteAlbum(album.albumID)">

@@ -136,7 +136,7 @@ h4{
   }
   
   .list-img {
-    height: 50px;
+    height: 500px;
     margin-top: 2px;
     cursor: pointer;
   }
@@ -203,4 +203,8 @@ h4{
 
 .album{
     display: block;
+}
+
+#showMoreButton{
+    color: white;
 }

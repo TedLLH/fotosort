@@ -187,8 +187,10 @@ app.post('/getPhoto', authRequired, (req,res)=>{
                         console.log('Clarifai time'+ clarifaiUrl[0].url)
                         clarifai.models.predict(Clarifai.GENERAL_MODEL, clarifaiUrl)
                                         .then((response)=>{
+                                            var id = 1;
                                             response.outputs.forEach((data)=>{
                                                 let obj = {
+                                                    'id': id,
                                                     'image': data.input.data.image.url,
                                                     'tags': data.data.concepts
                                                             .filter((scoresAll)=>{
@@ -199,6 +201,7 @@ app.post('/getPhoto', authRequired, (req,res)=>{
                                                             })
                                                 }
                                                 dataArray.push(obj)
+                                                id ++
                                                 if(dataArray.length == clarifaiUrl.length){
                                                     res.json({
                                                         'links': dataArray
@@ -213,6 +216,11 @@ app.post('/getPhoto', authRequired, (req,res)=>{
             })
         })
     })
+})
+
+app.post('/photo/:id', (req,res)=>{
+    let id = req.params
+    console.log(id);
 })
 
 

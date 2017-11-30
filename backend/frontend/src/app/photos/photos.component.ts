@@ -43,6 +43,8 @@ export class PhotosComponent implements OnInit {
 
   photoSelected:boolean = true;
 
+  showMore:boolean = false;
+
   openModalWindow:boolean = false; 
 
   imagePointer: number = 0;
@@ -51,9 +53,9 @@ export class PhotosComponent implements OnInit {
   
   imagePointerObservable: number = 0;
 
-  imagesArray: Array<Image> = [
-    new Image('../assets/images/gallery/img1.jpg', '../assets/images/gallery/img1.jpg', null, '../assets/images/gallery/img1.jpg')
-  ];
+  imagesArray: Array<Image> = [];
+
+  imagesAll: Array<Image> = [];
 
     // observable of an array of images with a delay to simulate a network request
     images: Observable<Array<Image>> = Observable.of(this.imagesArray).delay(300);
@@ -101,9 +103,30 @@ export class PhotosComponent implements OnInit {
 
   ngOnInit() {
    this.getAlbums();
+   this.photolinks = this.photosService.getPhotos();
+   this.photos = this.photolinks;
+   if(this.photos.length>0){
+     this.disabled = false;
+   }
+   if(this.photosService.gallery.length>0){
+    // this.imagesArray = this.photosService.getGallery();
+    this.photosService.gallery.forEach((g)=>{
+      this.imagesArray.push(new Image(g.img, g.img, g.description, g.img))
+      this.imagesAll.push(new Image(g.img, g.img, g.description, g.img))
+    })
+    console.log(this.imagesArray);
+   }
    this.imagesArraySubscription = Observable.of(null).delay(500).subscribe(() => {
     this.imagesArraySubscribed = this.imagesArray;
   });
+  }
+
+  showMorePhotos(){
+    if(this.showMore == false){
+      this.showMore = true;
+    } else {
+      this.showMore = false;
+    }
   }
 
   checkAlbum(id){
@@ -134,11 +157,13 @@ export class PhotosComponent implements OnInit {
     this.photosService.onGetPhoto(this.albumsConfirm).subscribe((res)=>{
       this.photolinks = res.json()['links']
       this.photos = this.photolinks;
+      this.photosService.storePhotos(this.photolinks);
       this.photos.forEach((photo)=>{
         console.log("wait for latency");
         this.imagesArray.push(new Image(photo.image, photo.image, photo.tags, photo.image))
       })
-      console.log(this.imagesArray)
+      // console.log(this.imagesArray)
+      this.photosService.storeGallery(this.imagesArray);
       this.disabled = false;
     }, (err)=>{
         console.log('get photo error occurs!')
@@ -232,16 +257,21 @@ export class PhotosComponent implements OnInit {
         return link
       }
     })
+    this.imagesArray.length = 0;
+    this.imagesAll.forEach((img)=>{
+      if((_.intersection(img.description, this.searchConfirm)).length == this.searchConfirm.length){
+        this.imagesArray.push(new Image(img.img, img.img, img.description, img.img))
+      } 
+    })
+    // this.imagesArray = this.imagesArray.filter((img)=>{
+    //     if((_.intersection(img.description, this.searchConfirm)).length == this.searchConfirm.length){
+    //       console.log(this.imagesArray)
+    //       return img
+    //     }
+    // });
   }
 
   
-
- 
-
-
-
- 
-
   
   openImageModal(image: Image) {
     this.imagePointer = this.imagesArray.indexOf(image);
@@ -265,8 +295,15 @@ export class PhotosComponent implements OnInit {
     this.customFullDescription.customFullDescription = `Custom description of visible image with index= ${event.result}`;
     console.log('action: ' + Action[event.action]);
     console.log('result:' + event.result);
-
-    console.log('ching' + event)
+    
+    var index:any = event.result;
+      this.photos.forEach((p)=>{
+        if(p.image == this.imagesArray[index-1].img){
+          // this.http.get('/photo/'+p.id).subscribe((res)=>{},(err)=>{})
+          let pop = this.photos.pop(p);
+          this.photos.unshift(pop);
+        }
+      })
   }
 
   onIsFirstImage(event: ImageModalEvent) {

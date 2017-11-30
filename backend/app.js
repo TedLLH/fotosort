@@ -162,69 +162,67 @@ app.get('/getAlbum', authRequired, (req,res)=>{
     })
 })
 
-app.post('/getPhoto',authRequired, (req,res)=>{
-    console.log(req.body)
-
+app.post('/getPhoto', authRequired, (req,res)=>{
     var photosArray = [];
+
+    var dataArray = [];
 
     var clarifaiUrl = [];
 
-    var noPhotoAlbum = 0;
+    let albumID = req.body;
 
-    var dataArray = []
-
-    let albumsID = req.body;
-    client.get(req.user.id+'_accessT', (err, token)=>{
-        albumsID.map((albumid)=>{
+    client.get(req.user.id+"_accessT", (err,token)=>{
+        albumID.forEach((id)=>{
             const options = {
-                maxResults: 10, // by default get all 
-                albumId: albumid 
+                maxResults: 10,
+                albumId: id
             }
-        picasa.getPhotos(token, options, (error, photos) => {
-            if(!photos){
-                noPhotoAlbum ++;
-            }
-            if(photos){
-                photosArray.push(photos.map((b)=>{return b.content.src}))
-                photos.forEach((nnn)=>{
-                    clarifaiUrl.push({url: nnn.content.src})
-            })
-            if(photosArray.length === albumsID.length-1){
-                console.log('for clarifai')
-                clarifai.models.predict(Clarifai.GENERAL_MODEL, clarifaiUrl)
-                .then((response)=> {
-                                // console.log(response.outputs[0].input.data.image.url)
-                    response.outputs.forEach((data)=>{
-                        let obj = {
-                            'image': data.input.data.image.url,
-                            'tags': data.data.concepts
-                                    .filter((scoresAll)=>{
-                                        return scoresAll.value > 0.9
-                                    })
-                                    .map((scoresFiltered)=>{
-                                        return scoresFiltered.name
-                                    })
-                                   }
-                                 dataArray.push(obj)
-                              })
-                            },
-                            (err)=>{
-                                console.log('dataArray1'+ JSON.stringify(err));
-                            })
-                            .then(()=>{
-                                res.json({
-                                    'links': dataArray
-                                }
-                            )}, 
-                            (err)=>{   
-                                console.log('dataArray2' + err);                             
-                            });
+            picasa.getPhotos(token, options, (error,photos)=>{
+                if(photos != undefined){
+                    photosArray.push(photos.map((b)=>{return b.content.src}))
+                    photos.forEach((b)=>{
+                        clarifaiUrl.push({url: b.content.src})
+                    })
+                    if(photosArray.length == albumID.length){
+                        console.log('Clarifai time'+ clarifaiUrl[0].url)
+                        clarifai.models.predict(Clarifai.GENERAL_MODEL, clarifaiUrl)
+                                        .then((response)=>{
+                                            var id = 1;
+                                            response.outputs.forEach((data)=>{
+                                                let obj = {
+                                                    'id': id,
+                                                    'image': data.input.data.image.url,
+                                                    'tags': data.data.concepts
+                                                            .filter((scoresAll)=>{
+                                                                return scoresAll.value > 0.9
+                                                            })
+                                                            .map((scoresFiltered)=>{
+                                                                return scoresFiltered.name
+                                                            })
+                                                }
+                                                dataArray.push(obj)
+                                                id ++
+                                                if(dataArray.length == clarifaiUrl.length){
+                                                    res.json({
+                                                        'links': dataArray
+                                                    })
+                                                }
+                                            })
+                                        },(err)=>{
+                                            console.log('just suck')
+                                        })
                     }
                 }
             })
         })
-    }) 
-});
+    })
+})
+
+app.post('/photo/:id', (req,res)=>{
+    let id = req.params
+    console.log(id);
+})
+
 
 app.post('/createalbum', (req,res)=>{
     console.log(req.body)

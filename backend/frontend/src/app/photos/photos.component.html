@@ -23,7 +23,7 @@
 
     <div class='absolute searchBar'>
         <input [disabled]="disabled" [(ngModel)]="term" placeholder="Add Keyword">
-        <button class='btn btn-primary'(click)="addTerm()">Enter</button>
+        <button [disabled]="disabled" class='btn btn-primary'(click)="addTerm()">Enter</button>
     </div>
 
     <div class='googlePhotos'>
@@ -43,22 +43,29 @@
     <p>This is your gallery</p>
 
     <section>
-  
+        
           <modal-gallery [modalImages]="images"
-                          [downloadable]="false"
+                          [downloadable]="true"
                           [slideConfig]="{infinite: false}"
                           (hasData)="onImageLoaded($event)"
                           (close)="onCloseImageModal($event)"
                           (show)="onVisibleIndex($event)"
                           (firstImage)="onIsFirstImage($event)"
-                          (lastImage)="onIsLastImage($event)"> 
+                          (lastImage)="onIsLastImage($event)">
          </modal-gallery>
                  
     </section>
 
+    <div>
+      <button id="showMoreButton" (click)="showMorePhotos()">
+        <div *ngIf="!showMore">Show More</div>
+        <div *ngIf="showMore">Show Less</div>
+      </button>
+    </div>
 
+    <div *ngIf="showMore">
     <div class="googleImages" *ngFor="let link of photos | filter:term" >
-        <img src= {{link.image}}>
+        <img id="link.id" src= {{link.image}}>
     
         <button (click)="addLink(link.image)">Add this picture to new album</button>
         <div class="tagDiv" *ngFor="let tag of link.tags">
@@ -66,6 +73,7 @@
                <button class="tagButton">{{tag}}</button> 
           </div>
         </div>
+    </div>
     </div> 
   </div>
 

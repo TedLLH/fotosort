@@ -209,7 +209,7 @@ app.post('/getPhoto',authRequired, (req,res)=>{
                               })
                             },
                             (err)=>{
-                                console.log('dataArray1'+err)
+                                console.log('dataArray1'+ JSON.stringify(err));
                             })
                             .then(()=>{
                                 res.json({
@@ -217,7 +217,7 @@ app.post('/getPhoto',authRequired, (req,res)=>{
                                 }
                             )}, 
                             (err)=>{   
-                                console.log('dataArray2' + err)                             
+                                console.log('dataArray2' + err);                             
                             });
                     }
                 }

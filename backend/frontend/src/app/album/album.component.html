@@ -3,10 +3,26 @@
   <button (click)="getAlbum()">Get Album</button>
 </div> -->
 
-<div class="panel panel-default" *ngFor="let album of albums">
-  <p>Album name: {{album.albumName}} <button class="deleteButton" (click)="deleteAlbum(album.albumID)">Delete Album</button> </p>
-  
-  <div class="panel panel-default" *ngFor="let album of album.images">
-    <img src= {{album}}>
+<button *ngIf="haveAlbum" type='button' class='btn btn-primary' (click)='getPhoto()'>Get my Photos from Google</button>
+
+    <div class="album" *ngFor='let album of albums'>
+    <input type='checkbox' name = "album" value= {{album.id}}  (change)="checkAlbum(album.id)" checked/> 
+      {{album.title}}  
+    </div>
+
+<div class="albumDiv">
+
+  <div class="albumName" *ngFor="let album of albums">
+    <p class="text-align">Album name: {{album.albumName}} <button class="deleteButton" (click)="deleteAlbum(album.albumID)">Delete Album</button> </p>
+    
+    <div class="flex-container">
+
+      <div *ngFor="let album of album.images">
+        <img class="albumPhotos" src= {{album}}>
+      </div>
+
+    </div>
+
   </div>
+
 </div>

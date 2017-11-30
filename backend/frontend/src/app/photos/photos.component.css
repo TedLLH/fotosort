@@ -210,3 +210,7 @@ h4{
 #showMoreButton{
     color: white;
 }
+
+#deSelect{
+    background-color: red;
+}

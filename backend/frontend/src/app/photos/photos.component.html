@@ -56,7 +56,7 @@
                  
     </section>
 
-    <div>
+    <div *ngIf="havePhotos">
       <button id="showMoreButton" (click)="showMorePhotos()">
         <div *ngIf="!showMore">Show More</div>
         <div *ngIf="showMore">Show Less</div>
@@ -66,8 +66,12 @@
     <div *ngIf="showMore">
     <div class="googleImages" *ngFor="let link of photos | filter:term" >
         <img id="link.id" src= {{link.image}}>
-    
-        <button (click)="addLink(link.image)">Add this picture to new album</button>
+        <div *ngIf="!photoURLyouwanttoadd.includes(link.image)">
+          <button (click)="addLink(link.image)">Add this picture to new album</button>
+        </div>
+        <div *ngIf="photoURLyouwanttoadd.includes(link.image)">
+          <button id="deSelect" (click)="addLink(link.image)">Deselect</button>            
+        </div>
         <div class="tagDiv" *ngFor="let tag of link.tags">
           <div class="tagDivDiv"> 
                <button class="tagButton">{{tag}}</button> 

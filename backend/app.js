@@ -39,7 +39,8 @@ function extractProfile (profile) {
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: 'http://localhost:8080/auth/google/callback'
+    callbackURL: 'http://www.fotosort.com/auth/google/callback'
+    // callbackURL: 'http://localhost:8080/auth/google/callback'
     },(accessToken, refreshToken, profile, done) => {
         console.log(profile.id + profile.emails[0].value);
      

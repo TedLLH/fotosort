@@ -155,26 +155,27 @@ export class PhotosComponent implements OnInit {
   }
   
   getPhoto(){
-    //using /getphoto route
+ 
+    this.loading = true;
     console.log('getPhoto from Google clicked')
-    // this.photos = [{image: 'https://loading.io/spinners/microsoft/lg.rotating-balls-spinner.gif'}]
     this.photosService.onGetPhoto(this.albumsConfirm).subscribe((res)=>{
+      this.loading = false;
       this.photolinks = (res.json()['links']).map((link)=>{
         var obj = {
           image: link.image,
           tags: link.tags,
           photoStyle: {
-            opacity: 0,
+            opacity: 1,
             display: "none",
             position: "fixed",
             "z-index": 1,
             "padding-top": "100px",
-            left: "200px",
+            left: "140px",
             top: "100px",
-            width: "700px",
-            height: "600px",
+            width: "800px",
+            height: "560px",
             overflow: "auto",
-            "background-color": "rgba(192,192,192,0.3)",
+            "background-color": "rgba(31, 26, 26, 0.7)",
             transition: 'transform .4s ease'
           }
         }
@@ -356,7 +357,7 @@ export class PhotosComponent implements OnInit {
     this.photos.forEach((photo)=>{
       if(photo.image == image){
         photo.photoStyle.display = "block"
-        photo.photoStyle.opacity = 1;
+        // photo.photoStyle.opacity = 0.5;
       }
     })
   }
@@ -365,7 +366,7 @@ export class PhotosComponent implements OnInit {
     this.photos.forEach((photo)=>{
       if(photo.image == image){
         photo.photoStyle.display = "none"
-        photo.photoStyle.opacity = 0;
+       
       }
     })
   }

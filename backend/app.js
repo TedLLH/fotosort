@@ -273,6 +273,11 @@ app.delete('/deletealbum/:id',(req,res)=>{
     })
 })
 
+app.get('/logout', (req,res)=>{
+    req.logout();
+    res.redirect('/')
+})
+
 function authRequired (req, res, next) {
   if (!req.user) {
     return res.redirect('/auth/google');

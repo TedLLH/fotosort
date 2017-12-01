@@ -1,103 +1,89 @@
 
- 
 
-<!-- <button *ngIf="!haveAlbum" type='button' class='btn btn-primary' (click)='getAlbums()'>Get my Albums from Google</button>
-<br> -->
-<div class ="relative">
-    
-    <div class="title">
-        <img class="imageResize" src ="../assets/fotosblack.png">
-    </div>
-
-  <div class='absolute leftColumn'>
-    <div class="cell-border">
-       <input [disabled]="photoSelected" [ngStyle]="createAlbumError" [(ngModel)]="albumName" placeholder="Album Name">
-        <button class='btn btn-primary' (click)="createAlbum()">Create Album</button>
-     </div>
-
-    <br><br><br><br>
-    
-    <div class="cell-border">
-      <button *ngIf="haveAlbum" type='button' class='btn btn-primary' (click)='getPhoto()'>Get my Photos from Google</button>
-
-        <div class="album" *ngFor='let album of albums'>
-         <input type='checkbox' name = "album" value= {{album.id}}  (change)="checkAlbum(album.id)" checked/> 
-           {{album.title}}  
+<div class="title">
+    <img class="imageResize" src ="../assets/fotosblack.png">
+    <div class='searchBar'>
+        <input [disabled]="disabled" [(ngModel)]="term" placeholder="Search for Tags"> 
+        <div>
+          <button [disabled]="!term" class='btn btn-primary'(click)="addTerm()"><h5>Enter</h5></button>
         </div>
     </div>
-
-  </div>
-
-    <div class='absolute searchBar'>
-        <input [disabled]="disabled" [(ngModel)]="term" placeholder="Add Keyword">
-        <button [disabled]="!term" class='btn btn-primary'(click)="addTerm()">Enter</button>
-    </div>
-
-    <div class='googlePhotos'>
-
-      <div class='googleImages'>
+    <div class='searchTags'>
         <div class='tag' *ngFor='let term of searchTerm'>
             <button [ngStyle]="term.myStyle" (click)="changeStyle(term.term)"> {{term.term}} <button (click)="deleteTag(term.term)" id="crossbutton"><img id="cross" src="https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/cross-24-512.png"></button></button> 
         </div>
       </div>
-      <span>
-          <img *ngIf="loading" src="https://gifimage.net/wp-content/uploads/2017/09/animated-gif-loading-12.gif">
-      </span> 
+</div>
 
-   </div>
+<div class ="flex">
 
-  <div class='absoluteGallery'>
-    <img style="width: 50vw; margin-top: 20vh; opacity: 0.1;margin-left: 7vw;position:absolute;z-index:-1;" src="font2.png">
+   <div class='leftDiv'>
 
-    <!-- <section>
-        
-          <modal-gallery
-                          [modalImages]="images"
-                          [downloadable]="true"
-                          [slideConfig]="{infinite: false}"
-                          (hasData)="onImageLoaded($event)"
-                          (close)="onCloseImageModal($event)"
-                          (show)="onVisibleIndex($event)"
-                          (firstImage)="onIsFirstImage($event)"
-                          (lastImage)="onIsLastImage($event)">
-         </modal-gallery>
-                 
-    </section> -->
+      <div class="insideLeftDiv">
 
-   <!-- <div>
-      <button id="showMoreButton" (click)="showMorePhotos()">
-        <div *ngIf="!showMore">Show More</div>
-        <div *ngIf="showMore">Show Less</div>
-      </button>
-    </div> -->
+          <h4>GET PHOTOS FROM GOOGLE</h4>
 
-    <!-- <div *ngIf="showMore"> -->
-        <div class="" *ngFor="let link of photos | filter:term" >
-            <img (click)="openPic(link.image)" class="googleImages" src= {{link.image}}>
-            <br>
-            <div *ngIf="!this.photoURLyouwanttoadd.includes(link.image)">
-              <button class="addPhotoButton" (click)="addLink(link.image)"><div class="addButtonFont">Add this picture to new album</div></button>
+          <div class="checkbox" *ngFor='let album of albums'>
+            <input type='checkbox' name = "album" value= {{album.id}}  (change)="checkAlbum(album.id)" checked/> 
+               {{album.title}}  
+          </div>
+
+          <div class="enterButton">
+            <button *ngIf="haveAlbum" type='button' class='btn btn-primary' (click)='getPhoto()'><h5>ENTER</h5></button>
+          </div>
+
+          
+            <h4>NAME YOUR ALBUM</h4>
+
+            <div class="nameYourAlbum">
+              <input [disabled]="photoSelected" [ngStyle]="createAlbumError" [(ngModel)]="albumName" placeholder="Album Name">
             </div>
-            <div *ngIf="this.photoURLyouwanttoadd.includes(link.image)">
-              <button class="deSelect" (click)="addLink(link.image)">Deselect Photo</button>                
+           
+            <div class="enterButton">
+               <button type='button' class='btn btn-primary' (click)="createAlbum()"><h5>ENTER</h5></button>
             </div>
-            <!-- <div class="tagDiv" *ngFor="let tag of link.tags">
-              <div class="tagDivDiv"> 
-                   <button class="tagButton">{{tag}}</button> 
-              </div>
-            </div> -->
-            <div [ngStyle]="link.photoStyle" id="myModal" class="modal">
-              <span class="close cursor" (click)="closeModal(link.image)">Close</span>
-              <img class="popUpImage" src= {{link.image}}>
-              <div class="tagDiv" *ngFor="let tag of link.tags">
-                <div class="tagDivDiv"> 
-                    <button class="tagButton">{{tag}}</button> 
-                </div>
-              </div>
-            </div>
-        </div>
-        <!-- </div>  -->
       </div>
-       
-    
     </div>
+   
+   
+
+    <div class='googlePhotos'>
+        
+              
+              <span>
+                  <img id="loading" *ngIf="loading" src="../assets/loading.gif">
+              </span> 
+        
+    </div>
+
+    <div class='absoluteGallery'>
+        <img style="width: 50vw; margin-top: 10vh; opacity: 0.1;margin-left: 7vw;position:fixed;z-index:-1;" src="font2.png">
+    
+            <div class="" *ngFor="let link of photos | filter:term" >
+                <img (click)="openPic(link.image)" class="googleImages" src= {{link.image}}>
+                <br>
+                <div *ngIf="!photoURLyouwanttoadd.includes(link.image)">
+                  <button class="addPhotoButton" (click)="addLink(link.image)">Add this picture to new album</button>
+                </div>
+                <div *ngIf="photoURLyouwanttoadd.includes(link.image)">
+                  <button class="deselectPhotoButton" (click)="addLink(link.image)">Deselect this picture</button>                    
+                </div>
+              
+                <br>
+                <div [ngStyle]="link.photoStyle" id="myModal" class="modal">
+                  <span class="close cursor" (click)="closeModal(link.image)"><img style="width:60px" src ="../assets/close.png"></span>
+                  <img class="popUpImage" src= {{link.image}}>
+                  <br>
+                  <div class="tagDiv">
+                  <div *ngFor="let tag of link.tags">
+                    <div class="tagDivDiv"> 
+                        <button class="tagButton">{{tag}}</button> 
+                    </div>
+                  </div>
+                  </div>
+                </div>
+            </div>
+           
+          </div>
+       
+  </div>

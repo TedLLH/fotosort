@@ -38,6 +38,10 @@
 .enterButton{
     align-items:center;
 }
+.linkButton{
+
+    align-items:center;
+}
 
 .buttonDeleteDiv{
    margin-left:1.5vw;

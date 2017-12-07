@@ -252,8 +252,11 @@ app.post('/createalbum', (req,res)=>{
 })
 
 app.get('/albumDB', (req,res)=>{
-    User.findAll().then((users)=>{
-        res.json(users)
+    client.get(req.user.id, (err,data)=>{
+        User.findAll().then((users)=>{
+            res.json({users}
+            )
+        })
     })
 })
 

@@ -11,7 +11,7 @@ const session = require('express-session');
 const model = require('./models');
 const User = model.user
 require ('dotenv').config();
-const port = process.env.PORT ||8080;
+
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 // parse application/x-www-form-urlencoded
@@ -303,4 +303,4 @@ app.use(function(req, res, next) {
 })
 
      
-app.listen(port);
+app.listen(8080);

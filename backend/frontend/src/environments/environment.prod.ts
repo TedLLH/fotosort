@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  url: "http://www.fotosort.com"
+  url: "http://localhost:8080"
 };
